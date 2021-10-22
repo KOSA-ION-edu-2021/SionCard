@@ -2,7 +2,6 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <div> 수정되는지 확인!! </div>
   </div>
 </template>
 
