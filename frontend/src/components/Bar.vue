@@ -1,17 +1,17 @@
 <template>
   <v-app-bar app dark height="100px">
     <!-- SION Card logo image -->
-
-    <v-img
-      max-height="48px"
-      max-width="60px"
-      contain
-      src="../../../images/logo_transparent.png"
-    />
-    <v-nav-bar-title>
+    <router-link to="/">
+      <v-img
+        max-height="48px"
+        max-width="60px"
+        contain
+        src="@/assets/logo_transparent.png"
+      />
+    </router-link>
+    <v-app-bar-title>
       Sion Card
-    </v-nav-bar-title>
-
+    </v-app-bar-title>
     <v-spacer></v-spacer>
 
     <!-- My menu -->
@@ -51,11 +51,16 @@
     </v-menu>
 
     <!-- Log In -->
-    <v-btn
-      plain
-    > 
-    Log In
-    </v-btn>
+    <router-link
+      to="/login"
+      tag="div"
+    >
+      <v-btn
+        plain
+      > 
+      Log In
+      </v-btn>
+    </router-link>
     <!-- Sign In -->
     <!-- <v-btn> Sign In </v-btn> -->
 

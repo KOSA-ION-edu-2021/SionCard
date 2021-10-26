@@ -7,6 +7,7 @@
     <v-main>
         <router-view/>
     </v-main>
+
     <Footer/>
   </v-app>
 </template>
@@ -15,6 +16,7 @@
 import Bar from './Bar.vue';
 import SideBar from './SideBar.vue';
 import Footer from './Footer.vue';
+
 export default {
     components:{
         Bar,
