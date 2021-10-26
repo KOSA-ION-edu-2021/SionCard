@@ -21,7 +21,5 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped >
-$parallax-padding:100 100rem;
-
+<style lang="scss" scoped>
 </style>

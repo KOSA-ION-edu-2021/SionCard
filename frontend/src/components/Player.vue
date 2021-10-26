@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex align-center mx-auto video1">
+    <div class="d-flex">
         <video muted autoplay loop :style="`height:${height}; width:${width};`">
             <source type="video/mp4" :src="src"/>
         </video>
@@ -17,5 +17,4 @@ export default {
 </script>
 
 <style>
-
 </style>
