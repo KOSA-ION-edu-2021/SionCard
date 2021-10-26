@@ -1,35 +1,27 @@
 <template>
-  <v-app>
-    <v-system-bar app></v-system-bar>
-    <Bar :changeDraw="changeDraw"/>
-    <SideBar app :drawer="drawer"></SideBar>
-    <v-main app>
-      <v-container> HelloWorld </v-container>
-    </v-main>
-    <v-footer app/>
-  </v-app>
+    <!-- main page video 출력 -->
+    <v-container class="pa-0 ma-0" fluid>
+        <Player 
+            height="auto"
+            width="100%"
+            :src="require('@/assets/main-bg-crad.mp4')"
+        />
+        <v-parallax src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"></v-parallax>
+    </v-container>
 </template>
 
 <script>
-import Bar from './Bar.vue';
-import SideBar from './SideBar.vue';
+import Player from "./Player.vue"
+
 
 export default {
     components:{
-        Bar,
-        SideBar
-    },
-    data:()=>({
-        drawer: false,
-
-    }),
-    methods:{
-        changeDraw(){
-            this.drawer=!this.drawer
-        }
-    },
-};
+        Player,
+    }
+}
 </script>
 
-<style>
+<style lang="scss" scoped >
+$parallax-padding:100 100rem;
+
 </style>
