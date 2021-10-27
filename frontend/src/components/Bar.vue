@@ -9,9 +9,12 @@
         src="@/assets/logo_transparent.png"
       />
     </router-link>
+    <router-link to="/" tag="button">
     <v-app-bar-title>
-      Sion Card
+      SionCard
     </v-app-bar-title>
+    </router-link>
+    
     <v-spacer></v-spacer>
 
     <!-- My menu -->
