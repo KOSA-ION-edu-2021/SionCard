@@ -43,12 +43,16 @@
           v-bind="attrs"
           v-on="on"
         >
-          Card
+          Card 
         </v-btn>
       </template>
       <v-list>
         <v-list-item v-for="(item, index) in carditems" :key="index">
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <v-list-item-title>
+            <router-link to="/cardrecommend">
+              {{ item.title }}
+            </router-link>
+            </v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -88,6 +92,9 @@ export default {
       { title: "카드 신청" },
       { title: "~~~~~" },
     ],
+    cardlink: [
+      {link: "/cardrecommend"},
+    ]
   }),
   props:{
     changeDraw:Function,
