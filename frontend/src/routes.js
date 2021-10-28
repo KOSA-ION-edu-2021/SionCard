@@ -1,7 +1,7 @@
 import NotFoundPage from "./components/NotFoundPage.vue"
-import Layouts from "./components/Layouts.vue"
-import Main from "./components/Main.vue"
-import Login from "./components/Login.vue"
+import Layouts from "./components/FoundPage/Layouts.vue"
+import Main from "./components/FoundPage/Main/Main.vue"
+import Login from "./components/FoundPage/Login/Login.vue"
 
 const routes=[
     {
