@@ -16,11 +16,13 @@
       </v-container>
     </div>
     <!-- <Cardmodal /> -->
-
+    <v-btn @click="nameSort()"> 이름순 정렬 </v-btn>
+    <v-btn :cards="this.cardInfo" @click="cards.check = cards.check">  정렬 </v-btn>
     <!-- 카드 이미지 출력 -->
     <v-container class="mt-10">
       <v-row justify="space-around">
-        <v-col class="mt-10" v-for="card in cardInfo" :key="card" cols="4">
+        <!-- <v-col class="mt-10" v-for="card in cardInfo" :key="card" cols="4"> -->
+          <v-col class="mt-10" v-for="card in cardInfo" :key="card" cols="4" v-show="card.credit">
           <v-card class="pa-3 mt-5 text-center" dense outlined>
             <v-img
               aspect-ratio="2"
@@ -53,11 +55,17 @@ import cardInfo from '@/assets/cardInfo.js'
 export default {
   components: { Card_Modal },
   data: () => ({
-    card: [{ title: "신한카드" }], /* V-SHOW / V-IF */
+    /* V-SHOW / V-IF */
     cardInfo: cardInfo,
-    title: "시온카드",
-    dialog: false,
+    
   }),
+  methods: {
+    nameSort(){
+        this.cardInfo.sort(function(a,b){
+          return a.card_type < b.card_type ? -1 : a.card_type > b.card_type ? 1 : 0;
+        });
+      },
+  }
 };
 </script>
 

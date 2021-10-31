@@ -37,14 +37,23 @@
               <v-list-item-title><b>카드 종류</b></v-list-item-title>
             </v-list-item-content>
             <v-row justify="start">
-              <v-col cols="5" dense v-for="num in 2" :key="num" >
+              <v-col cols="5" dense >
                 <v-list-item-content>
                   <v-list-item-title  >
                         <v-list-item-action class="ma-0">
                         <v-checkbox v-model="notifications"></v-checkbox>
                         </v-list-item-action>
-
                     신용카드
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-col>
+              <v-col cols="5" dense>
+                <v-list-item-content>
+                  <v-list-item-title  >
+                        <v-list-item-action class="ma-0">
+                        <v-checkbox v-model="notifications"></v-checkbox>
+                        </v-list-item-action>
+                    체크카드
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
@@ -57,14 +66,23 @@
               <v-list-item-title ><b>카드 유형</b></v-list-item-title>
             </v-list-item-content>
             <v-row justify="start">
-              <v-col cols="5" dense v-for="num in 2" :key="num" >
+              <v-col cols="5" dense>
                 <v-list-item-content>
                   <v-list-item-title  >
                         <v-list-item-action class="ma-0">
                         <v-checkbox v-model="notifications"></v-checkbox>
                         </v-list-item-action>
-
-                    대중교통 할인
+                    point
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-col>
+              <v-col cols="5" dense>
+                <v-list-item-content>
+                  <v-list-item-title  >
+                        <v-list-item-action class="ma-0">
+                        <v-checkbox v-model="notifications"></v-checkbox>
+                        </v-list-item-action>
+                    mileage
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
@@ -77,14 +95,23 @@
               <v-list-item-title ><b>카드 혜택</b></v-list-item-title>
             </v-list-item-content>
             <v-row justify="start">
-              <v-col cols="4" dense v-for="num in 3" :key="num" >
+              <v-col cols="5" dense>
                 <v-list-item-content>
                   <v-list-item-title  >
                         <v-list-item-action class="ma-0">
                         <v-checkbox v-model="notifications"></v-checkbox>
                         </v-list-item-action>
-
-                    할인
+                    즉시 할인
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-col>
+              <v-col cols="6" dense>
+                <v-list-item-content>
+                  <v-list-item-title  >
+                        <v-list-item-action class="ma-0">
+                        <v-checkbox v-model="notifications"></v-checkbox>
+                        </v-list-item-action>
+                    point / mileage 적립
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
