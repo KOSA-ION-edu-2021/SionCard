@@ -14,6 +14,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import kosa.ion.sion.config.security.JwtEntryPoint;
 import kosa.ion.sion.security.JwtAuthenticationFilter;
+import kosa.ion.sion.service.CustomUserDetailService;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -31,7 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// TODO Auto-generated method stub
 		http.csrf().disable()
 		
 		.authorizeRequests()
@@ -58,6 +58,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		}
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();} }
+		return new BCryptPasswordEncoder();
 	}
 }

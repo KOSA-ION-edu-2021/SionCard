@@ -18,6 +18,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import kosa.ion.sion.service.CustomUserDetailService;
+
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	@Autowired
@@ -31,7 +33,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		try {
-			String jwt = getToken(request);
+			String token = getToken(request);
 			if (token != null && jwtProvider.validateJwtToken(token)) {
 				String username = jwtProvider.getUserNameFromJwtToken(token);
 				UserDetails userDetails = userDetailsService.loadUserByUsername(username);
