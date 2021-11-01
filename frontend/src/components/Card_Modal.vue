@@ -41,7 +41,7 @@
                 <v-list-item-content>
                   <v-list-item-title  >
                         <v-list-item-action class="ma-0">
-                        <v-checkbox v-model="notifications"></v-checkbox>
+                        <v-checkbox v-model="credit" @click="emitCheck1"></v-checkbox>
                         </v-list-item-action>
                     신용카드
                   </v-list-item-title>
@@ -51,7 +51,7 @@
                 <v-list-item-content>
                   <v-list-item-title  >
                         <v-list-item-action class="ma-0">
-                        <v-checkbox v-model="notifications"></v-checkbox>
+                        <v-checkbox v-model="check" @click="emitCheck1"></v-checkbox>
                         </v-list-item-action>
                     체크카드
                   </v-list-item-title>
@@ -70,7 +70,7 @@
                 <v-list-item-content>
                   <v-list-item-title  >
                         <v-list-item-action class="ma-0">
-                        <v-checkbox v-model="notifications"></v-checkbox>
+                        <v-checkbox v-model="point" @click="emitCheck2"></v-checkbox>
                         </v-list-item-action>
                     point
                   </v-list-item-title>
@@ -80,7 +80,7 @@
                 <v-list-item-content>
                   <v-list-item-title  >
                         <v-list-item-action class="ma-0">
-                        <v-checkbox v-model="notifications"></v-checkbox>
+                        <v-checkbox v-model="mileage" @click="emitCheck2"></v-checkbox>
                         </v-list-item-action>
                     mileage
                   </v-list-item-title>
@@ -99,7 +99,7 @@
                 <v-list-item-content>
                   <v-list-item-title  >
                         <v-list-item-action class="ma-0">
-                        <v-checkbox v-model="notifications"></v-checkbox>
+                        <v-checkbox v-model="discount" @click="emitCheck3"></v-checkbox>
                         </v-list-item-action>
                     즉시 할인
                   </v-list-item-title>
@@ -109,7 +109,7 @@
                 <v-list-item-content>
                   <v-list-item-title  >
                         <v-list-item-action class="ma-0">
-                        <v-checkbox v-model="notifications"></v-checkbox>
+                        <v-checkbox v-model="stack" @click="emitCheck3"></v-checkbox>
                         </v-list-item-action>
                     point / mileage 적립
                   </v-list-item-title>
@@ -129,10 +129,53 @@ export default {
   name: "Card_modal",
   data: () => ({
     dialog: true,
-    notifications: false,
-    sound: true,
-    widgets: false,
+    check: false,
+    credit: false,
+    point: false,
+    mileages: false,
+    discount: false,
+    stack: false
   }),
+  props:{
+    /* check1 : String,
+    check2 : String, */
+    /* check3 : String */
+  },
+  methods: {
+      emitCheck1(){
+        if(!!this.credit && !this.check){
+          this.$emit("changeCheck1",new RegExp("credit"))
+        }
+        else if(!!this.check&& !this.credit){
+          this.$emit("changeCheck1",new RegExp("check"))
+        }
+        else{
+          this.$emit("changeCheck1", new RegExp(""))
+        }
+      },
+     emitCheck2(){
+        if(!!this.point&& !this.mileage){
+          this.$emit("changeCheck2",new RegExp("point"))
+        }
+        else if(!!this.mileage && !this.point){
+          this.$emit("changeCheck2",new RegExp("mileage"))
+        }
+        else{
+          this.$emit("changeCheck2", new RegExp(""))
+        }
+      },
+      emitCheck3(){
+        if(!!this.discount && !this.stack){
+          this.$emit("changeCheck3",new RegExp("discount"))
+        }
+        else if(!!this.stack && !this.discount){
+          this.$emit("changeCheck3",new RegExp("stack"))
+        }
+        else{
+          this.$emit("changeCheck3", new RegExp(""))
+        }
+      },
+  }
 };
 </script>
 

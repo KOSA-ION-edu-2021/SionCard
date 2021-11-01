@@ -49,7 +49,7 @@
       <v-list>
         <v-list-item v-for="(item, index) in carditems" :key="index">
           <v-list-item-title>
-            <router-link to="/cardrecommend">
+            <router-link  to="/cardrecommend" class="text-decoration-none">
               {{ item.title }}
             </router-link>
             </v-list-item-title>
@@ -57,6 +57,16 @@
       </v-list>
     </v-menu>
 
+    <router-link
+      to="/card_main"
+      tag="div"
+    >
+      <v-btn
+        plain
+      > 
+      card_main
+      </v-btn>
+    </router-link>
     <!-- Log In -->
     <router-link
       to="/login"

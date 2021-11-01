@@ -8,7 +8,7 @@ export default[
     check: true,
     credit: false,
     benefit_type: "point",
-    benefit_content: "point_stack",
+    benefit_content: "stack",
     },
     {
     id : 2,
@@ -19,7 +19,7 @@ export default[
     credit: false,
     card_type: "check",
     benefit_type: "point",
-    benefit_content: "point_stack",
+    benefit_content: "stack",
     },
     {
     id : 3,
@@ -30,7 +30,7 @@ export default[
     credit: true,
     card_type: "credit",
     benefit_type: "mileage",
-    benefit_content: "point_stack",
+    benefit_content: "stack",
     },
     {
         id : 4,
@@ -51,7 +51,7 @@ export default[
         check: true,
         credit: false,
         card_type: "check",
-        benefit_type: "point",
+        benefit_type: "mileage",
         benefit_content: "discount", 
     },
     {
@@ -63,7 +63,7 @@ export default[
         credit: true,
         card_type: "credit",
         benefit_type: "point",
-        benefit_content: "point_stack", 
+        benefit_content: "discount", 
     },
     {
         id : 7,
@@ -74,6 +74,6 @@ export default[
         credit: true,
         card_type: "credit",
         benefit_type: "point",
-        benefit_content: "point_stack", 
+        benefit_content: "stack", 
     },
 ]

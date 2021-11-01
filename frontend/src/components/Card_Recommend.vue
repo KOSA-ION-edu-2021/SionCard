@@ -10,19 +10,21 @@
         <v-row justify="end">
             <!-- 모달 -->
             <v-col cols="auto" class="yellow " dense>
-                <Card_Modal/>
+                <Card_Modal 
+                @changeCheck1="changeCheck1"
+                @changeCheck2="changeCheck2"
+                @changeCheck3="changeCheck3"
+                />
             </v-col>
         </v-row>
       </v-container>
     </div>
-    <!-- <Cardmodal /> -->
-    <v-btn @click="nameSort()"> 이름순 정렬 </v-btn>
-    <v-btn :cards="this.cardInfo" @click="cards.check = cards.check">  정렬 </v-btn>
+
     <!-- 카드 이미지 출력 -->
     <v-container class="mt-10">
       <v-row justify="space-around">
-        <!-- <v-col class="mt-10" v-for="card in cardInfo" :key="card" cols="4"> -->
-          <v-col class="mt-10" v-for="card in cardInfo" :key="card" cols="4" v-show="card.credit">
+          <v-col class="mt-10" v-for="(card, index) in typeFilter(check1, check2, check3)" :key="index" cols="4" > 
+          <!-- <v-col class="mt-10" v-for="card in cardInfo" :key="card" cols="4" v-show="card_check(card,check1,check2,check3)">  -->
           <v-card class="pa-3 mt-5 text-center" dense outlined>
             <v-img
               aspect-ratio="2"
@@ -57,13 +59,30 @@ export default {
   data: () => ({
     /* V-SHOW / V-IF */
     cardInfo: cardInfo,
-    
+    check1: new RegExp('.+'),
+    check2: new RegExp('.+'),
+    check3: new RegExp('.+'),
   }),
   methods: {
-    nameSort(){
-        this.cardInfo.sort(function(a,b){
-          return a.card_type < b.card_type ? -1 : a.card_type > b.card_type ? 1 : 0;
-        });
+    card_check(card,a,b,c){
+          return !!a.exec(card.card_type) && !!b.exec(card.benefit_type) && !!c.exec(card.benefit_content) ;
+      },
+      typeBy: function(type) {
+        return this.cardInfo.filter(function(card) {
+          return card.card_type === type })
+      },
+      typeFilter: function(a, b, c){
+        return this.cardInfo.filter(function(card) {
+          return !!a.exec(card.card_type) && !!b.exec(card.benefit_type) && !!c.exec(card.benefit_content) })
+      },
+      changeCheck1(modal_data){
+        this.check1 = modal_data;
+      },
+      changeCheck2(modal_data){
+        this.check2 = modal_data;
+      },
+      changeCheck3(modal_data){
+        this.check3 = modal_data;
       },
   }
 };
@@ -73,8 +92,5 @@ export default {
 .card-rec-top {
   border-bottom: rgb(214, 209, 209) 2px solid;
   padding-bottom: 10px;
-}
-v-card {
-  text-align: center;
 }
 </style>
