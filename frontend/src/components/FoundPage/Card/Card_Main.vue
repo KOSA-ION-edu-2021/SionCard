@@ -8,13 +8,6 @@
       hide-delimiter-background
       class="mt-10 mb-10"
     >
-        <!-- 화살표 -->
-      <!-- <template v-slot:prev="{ on, attrs }">
-        <v-btn color="success" v-bind="attrs" v-on="on">Previous slide</v-btn>
-      </template>
-      <template v-slot:next="{ on, attrs }">
-        <v-btn color="info" v-bind="attrs" v-on="on">Next slide</v-btn>
-      </template> -->
 
       <!-- 이미지 -->
       <v-carousel-item v-for="(card, i) in cardInfo" :key="i">
@@ -35,7 +28,6 @@
           </v-row>
         </v-card>
       </v-carousel-item>
-
     </v-carousel>
 
     <!-- 카드 추천 링크 -->
