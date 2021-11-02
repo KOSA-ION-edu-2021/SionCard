@@ -12,20 +12,20 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import kosa.ion.sion.dto.UsersDto;
-import kosa.ion.sion.repository.UserRepository;
+import kosa.ion.sion.dto.MembersDto;
+import kosa.ion.sion.repository.MembersRepository;
 
 @Service
 public class CustomUserDetailService implements UserDetailsService {
 	@Autowired
-	private UserRepository userRepository;
+	private MembersRepository membersRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Collection<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
-		roles.add(new SimpleGrantedAuthority("ROLE_USER"));
-		UsersDto userDto = userRepository.findById(username).orElseThrow(() -> new NoSuchElementException());
-		return new User(userDto.getId(), userDto.getPassword(), roles);
+		roles.add(new SimpleGrantedAuthority("ROLE_USER"));		
+		MembersDto membersDto = membersRepository.findByMemberId(username).orElseThrow(() -> new NoSuchElementException());
+		return new User(membersDto.getMemberId(), membersDto.getPassword(), roles);
 
 	}
 }

@@ -1,6 +1,8 @@
 package kosa.ion.sion.dto;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,13 +13,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@NoArgsConstructor
-@Table(name = "users")
+@Table(name = "members")
 @Data
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class UsersDto {
+public class MembersDto {
 	@Id
-	private String id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	private String memberId;
 	private String name;
 	private String password;
 	private String email;

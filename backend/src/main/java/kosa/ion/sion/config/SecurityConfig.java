@@ -2,7 +2,9 @@ package kosa.ion.sion.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,6 +18,7 @@ import kosa.ion.sion.config.security.JwtEntryPoint;
 import kosa.ion.sion.security.JwtAuthenticationFilter;
 import kosa.ion.sion.service.CustomUserDetailService;
 
+@Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
@@ -25,37 +28,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private JwtEntryPoint jwtPoint;
 	
-	@Bean
+	@Bean(name = BeanIds.AUTHENTICATION_MANAGER)
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception{
 		return super.authenticationManagerBean();
 		}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable()
 		
+		http.csrf().disable()
 		.authorizeRequests()
 			.antMatchers("/api").permitAll()
-			.anyRequest().authenticated()
-			
+			.antMatchers("/").authenticated()
 		.and()
-		
 		.exceptionHandling()
 		.authenticationEntryPoint(jwtPoint)
-			
 		.and()
-		
-		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-			
-		.and()
-		
-		.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class );
+		.sessionManagement()
+		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
 	}
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		// TODO Auto-generated method stub
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-		}
+	}
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

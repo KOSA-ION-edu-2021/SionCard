@@ -1,5 +1,7 @@
 package kosa.ion.sion.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import kosa.ion.sion.dto.MembersDto;
+import kosa.ion.sion.repository.MembersRepository;
 import kosa.ion.sion.security.JwtProvider;
 
 @RestController
@@ -26,6 +31,11 @@ public class ApiController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
+	private BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+	@Autowired
+	private MembersRepository membersRepository;
+	
+	
 	@GetMapping("/test")
 	public String Test() {
 		return "success";
@@ -33,12 +43,17 @@ public class ApiController {
 	
 	@PostMapping("/login")
 	@ResponseBody
-	public ResponseEntity<String> login(HttpServletResponse response, @RequestBody String id, @RequestBody String password) {
+	public ResponseEntity<String> login(HttpServletResponse response, @RequestBody HashMap<String,String> auth) {
 		Authentication authentication = authenticationManager
-				.authenticate(new UsernamePasswordAuthenticationToken(id, password));
+				.authenticate(new UsernamePasswordAuthenticationToken(auth.get("id"),auth.get("password")));
 		String jwt = jwtProvider.generateJwtToken(authentication); 
-		 
+		
 		return ResponseEntity.ok(jwt);
 	}
-
+	@PostMapping("/signup")
+	@ResponseBody
+	public ResponseEntity<MembersDto> signup(HttpServletResponse response, @RequestBody MembersDto member) {
+		member.setPassword(passwordEncoder.encode(member.getPassword()));
+		return ResponseEntity.ok(membersRepository.save(member));
+	}
 }
