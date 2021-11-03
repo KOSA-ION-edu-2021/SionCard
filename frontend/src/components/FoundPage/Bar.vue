@@ -113,10 +113,18 @@ export default {
     ],
     cardlink: [
       {link: "/cardrecommend"},
-    ]
+    ],
+    auth:null
   }),
   props:{
     changeDraw:Function,
+  },
+  methods:{
+  },
+  mounted(){
+    
+    this.$cookies.set("test","test");
+    this.$session.set("testsession","testsession");
   }
 };
 </script>
