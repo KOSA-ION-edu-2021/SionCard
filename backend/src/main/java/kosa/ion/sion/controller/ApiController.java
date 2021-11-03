@@ -1,6 +1,7 @@
 package kosa.ion.sion.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import kosa.ion.sion.dto.CardsDto;
 import kosa.ion.sion.dto.MembersDto;
+import kosa.ion.sion.repository.CardsRepository;
 import kosa.ion.sion.repository.MembersRepository;
 import kosa.ion.sion.security.JwtProvider;
 
@@ -40,7 +43,7 @@ public class ApiController {
 	public String Test() {
 		return "success";
 	}
-	
+	//jwt 부분
 	@PostMapping("/login")
 	@ResponseBody
 	public ResponseEntity<String> login(HttpServletResponse response, @RequestBody HashMap<String,String> auth) {
@@ -55,5 +58,14 @@ public class ApiController {
 	public ResponseEntity<MembersDto> signup(HttpServletResponse response, @RequestBody MembersDto member) {
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
 		return ResponseEntity.ok(membersRepository.save(member));
+	}
+	
+	@Autowired
+	CardsRepository cardsRepository;
+	
+	@GetMapping("/card_info")
+	public List<CardsDto> CardInfo() {
+		
+		return cardsRepository.findAll();
 	}
 }

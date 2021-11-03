@@ -6,7 +6,7 @@
     >
         <div class="d-flex flex-column">
             <div class="text-h4">
-                <pre>{{introduce.title}}</pre>
+                <div v-html="title"></div>
             </div>
             <div class="text-body-2">
                 <pre>{{introduce.sub}}</pre>
