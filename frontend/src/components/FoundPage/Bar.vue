@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="grey darken-4" app  height="100px">
+  <v-app-bar app dark height="100px">
     <!-- SION Card logo image -->
     <router-link to="/">
       <v-img
@@ -36,7 +36,7 @@
     </v-menu>
 
     <!-- Card menu -->
-    <v-menu offset-y>
+    <v-menu  offset-y>
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           plain
@@ -47,12 +47,21 @@
         </v-btn>
       </template>
       <v-list>
-        <v-list-item v-for="(item, index) in carditems" :key="index">
+        <v-list-item >
           <v-list-item-title>
-            <router-link  to="/cardrecommend" class="text-decoration-none">
-              {{ item.title }}
+            <router-link  to="/cardinfor" class="text-decoration-none">
+              카드 안내
             </router-link>
             </v-list-item-title>
+        </v-list-item>
+        <v-list-item>
+          <router-link  to="/cardrecommend" class="text-decoration-none">
+          <v-list-item-title>
+            
+              카드 추천
+            
+            </v-list-item-title>
+            </router-link>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -113,4 +122,5 @@ export default {
 </script>
 
 <style>
+
 </style>

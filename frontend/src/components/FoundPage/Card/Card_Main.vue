@@ -1,5 +1,7 @@
 <template>
-  <v-container class="font">
+  <v-container >
+    <v-container class="">
+      
     <!-- 신상 카드 이미지 슬라이드 -->
     <v-carousel
       cycle
@@ -119,6 +121,7 @@
         </v-col>
       </v-row>
     </v-row>
+    </v-container>
   </v-container>
 </template>
 

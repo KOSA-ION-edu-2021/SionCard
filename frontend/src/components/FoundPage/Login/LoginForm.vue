@@ -1,10 +1,10 @@
 <template>
     <v-card
-        class="d-flex flex-column ma-auto" 
+        class="   ma-auto" 
         width="330"
         height="300" 
-        tile flat>
-        <div class="pt-5">
+        tile flat> <!-- d-flex -->
+        <v-container class="align-center pt-5">
             <div class="text-h5">
                 SionCard 로그인
             </div>
@@ -31,7 +31,7 @@
                 flat
                 tile
             >
-                <router-link class="mr-auto" to="/find_id" tag="button">
+                <router-link class="mr-auto" to="/signin" tag="button">
                     <v-btn
                         class="px-1"
                         text
@@ -59,7 +59,7 @@
                 <router-link class="ma-auto" to="/find_password" tag="button">| 비밀번호 찾기 </router-link>
                 <v-spacer/>
             </v-card>
-        </div>
+        </v-container>
     </v-card>
 </template>
 
