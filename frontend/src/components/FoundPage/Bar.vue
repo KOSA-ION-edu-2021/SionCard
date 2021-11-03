@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app dark height="100px">
+  <v-app-bar color="grey darken-4" app  height="100px">
     <!-- SION Card logo image -->
     <router-link to="/">
       <v-img

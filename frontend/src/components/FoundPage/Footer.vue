@@ -1,5 +1,5 @@
 <template>
-  <v-footer color="primary lighten-1" padless>
+  <v-footer color="grey darken-4" padless>
     <v-row justify="center" no-gutters>
       <v-btn
         v-for="link in links"
@@ -11,7 +11,7 @@
       >
         {{ link }}
       </v-btn>
-      <v-col class="primary lighten-2 py-4 text-center white--text" cols="12">
+      <v-col color="" class="grey darken-3 py-4 text-center white--text" cols="12">
         {{ new Date().getFullYear() }} — <strong>SION-TEAM</strong>
       </v-col>
     </v-row>

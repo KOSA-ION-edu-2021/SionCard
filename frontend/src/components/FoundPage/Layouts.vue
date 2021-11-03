@@ -4,7 +4,7 @@
     <Bar :changeDraw="changeDraw"/>
     <SideBar :drawer="drawer"></SideBar>
     
-    <v-main>
+    <v-main class="grey -3">
         <router-view/>
     </v-main>
 
