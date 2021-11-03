@@ -22,6 +22,17 @@
               </v-data-table>
             </v-expansion-panel-content>
           </v-expansion-panel>
+          <v-expansion-panel v-if="cardInfo[a].bank">
+            <v-expansion-panel-header class="font-weight-black">결제은행</v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <ul>
+              <!-- <ul class="text-body-2" v-for="(bank, r) in cardInfo[a].bank" :key="r" style=" margin-top:10px">
+                {{ bank }} -->
+              <ul class="text-body-2" v-text="cardInfo[a].bank">
+              </ul>
+              </ul>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
           <v-expansion-panel>
             <v-expansion-panel-header class="font-weight-black">유의사항</v-expansion-panel-header>
             <v-expansion-panel-content>
@@ -139,11 +150,11 @@
 </template>
 
 <script>
-import cardInfo from '@/assets/card.js'
+import cardInfo from '@/assets/carddetail.js'
 export default {
   data:() => ({
       cardInfo : cardInfo,
-      a:0,
+      a:6,
       model: 1,
       headers: [  // 연회비 분류 기준 data
         {
@@ -159,18 +170,18 @@ export default {
       ],
       brands: [ // 연회비 정보 data
         {
-          card_Brand: cardInfo[0].card_Brand[0],
-          card_option: cardInfo[0].card_option[0],
-          card_basic: cardInfo[0].card_basic[0],
-          card_service: cardInfo[0].card_service[0],
-          card_tprice: cardInfo[0].card_tprice[0],
+          card_Brand: cardInfo[6].card_Brand[0],
+          card_option: cardInfo[6].card_option[0],
+          card_basic: cardInfo[6].card_basic[0],
+          card_service: cardInfo[6].card_service[0],
+          card_tprice: cardInfo[6].card_tprice[0],
         },
         {
-          card_Brand: cardInfo[0].card_Brand[1],
-          card_option: cardInfo[0].card_option[1],
-          card_basic: cardInfo[0].card_basic[1],
-          card_service: cardInfo[0].card_service[1],
-          card_tprice: cardInfo[0].card_tprice[1],
+          card_Brand: cardInfo[6].card_Brand[1],
+          card_option: cardInfo[6].card_option[1],
+          card_basic: cardInfo[6].card_basic[1],
+          card_service: cardInfo[6].card_service[1],
+          card_tprice: cardInfo[6].card_tprice[1],
         },
       ],
       // notice: [ "가족카드 발급 불가" , "후불교통 가능"],

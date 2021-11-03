@@ -1,6 +1,7 @@
 export default[
     {
     id : 1,
+    cid : 1,
     title: "아모레퍼시픽 시온카드 체크",
     date : "2021.09.01",
     img: "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCheckBOACPOs.png",

@@ -18,12 +18,11 @@
         <div class="d-flex flex-column">
             
             <div class="text-h4 mx-5">
-                <!-- <pre>{{card0.name}} 카드</pre> -->
-                <pre>{{cardInfo[a].title}}</pre>
+                <v-pre>{{cardInfo[a].title}}</v-pre>
             </div>
             
             <div class="text-h6 mx-8" style="margin-top:10px">
-                <pre>{{cardInfo[a].content}}</pre>
+                <v-pre>{{cardInfo[a].content}}</v-pre>
             </div>  
            
             <div class="text-body-2">
@@ -70,13 +69,13 @@
 </template>
 
 <script>
-import cardInfo from '@/assets/card.js'
+import cardInfo from '@/assets/carddetail.js'
 
 export default {
     
     data:()=>({
         cardInfo : cardInfo,
-        a:0,
+        a:6,
         // card0:{
         //     name : "요기요",
         //     title : "맛있는 생활의 필수 혜택 카드",
