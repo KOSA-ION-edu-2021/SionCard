@@ -29,18 +29,26 @@
         </v-btn>
       </template>
       <v-list>
-        <v-list-item >
+        <v-list-item color="white" to="/my_main">
           <v-list-item-title >
-              <router-link class="text-decoration-none" to="/my">
-                메인(임시 테스트용)
-              </router-link>
+              <!-- <router-link class="text-decoration-none" to="/my_main"> -->
+                <div style="color:black">메인(임시 테스트용)</div>
+              <!-- </router-link> -->
             </v-list-item-title>
         </v-list-item>
-        <v-list-item class="text-decoration-none">
-          <v-list-item-title>내 정보</v-list-item-title>
+        <v-list-item class="" to="/myinfo">
+          <v-list-item-title>
+              <!-- <router-link class="text-decoration-none" to="/myinfo"> -->
+                내 정보
+              <!-- </router-link> -->
+            </v-list-item-title>
         </v-list-item>
-        <v-list-item class="text-decoration-none">
-          <v-list-item-title>카드 정보</v-list-item-title>
+        <v-list-item class="" to="/mycard">
+          <v-list-item-title>
+              <!-- <router-link class="text-decoration-none" to="/mycard"> -->
+                내 카드
+              <!-- </router-link> -->
+            </v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -57,21 +65,19 @@
         </v-btn>
       </template>
       <v-list>
-        <v-list-item >
+        <v-list-item class="" to="/cardinfor">
           <v-list-item-title>
-            <router-link  to="/cardinfor" class="text-decoration-none">
+            <!-- <router-link  to="/cardinfor" class="text-decoration-none"> -->
               카드 안내
-            </router-link>
+            <!-- </router-link> -->
             </v-list-item-title>
         </v-list-item>
-        <v-list-item>
-          <router-link  to="/cardrecommend" class="text-decoration-none">
+        <v-list-item class="" to="/cardrecommend">
+          <!-- <router-link  to="/cardrecommend" class="text-decoration-none"> -->
           <v-list-item-title>
-            
               카드 추천
-            
             </v-list-item-title>
-            </router-link>
+            <!-- </router-link> -->
         </v-list-item>
       </v-list>
     </v-menu>
