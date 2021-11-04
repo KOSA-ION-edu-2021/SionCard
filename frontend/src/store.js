@@ -9,8 +9,8 @@ export default new Vuex.Store({
     },
     getters: {
         updateAuth(state) {
-            axios.get("http://si-on.net:8080/member/get_auth",
-            {Authorization:"Bearer "+sessionStorage.getItem('JSESSIONID')})
+            axios.defaults.headers.common["Authorization"] = `Bearer ${sessionStorage.getItem('JSESSIONID')}`;
+            axios.get("http://si-on.net:8080/member/get_auth")
             .then(res=>{
                 state.auth=res.data;
                 console.log("로그온이 되어 있습니다.")
