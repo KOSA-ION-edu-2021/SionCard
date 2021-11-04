@@ -37,7 +37,8 @@ export default {
 
     },
     updated(){
-        this.$store.getters.updateAuth;
+        console.log("update")
+        this.$store.commit('updateAuth');
     }
 };
 </script>
