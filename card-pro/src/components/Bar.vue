@@ -16,7 +16,7 @@
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn class="menu-item" color="primary" dark v-bind="attrs" v-on="on">
-              My
+              <router-link to="/my"> My </router-link>
             </v-btn>
           </template>
           <v-list>
@@ -47,9 +47,11 @@
 
       <v-spacer></v-spacer>
       <!-- Log In -->
+      <router-link to="/login" tag="div"> 
       <v-btn>
         Log In
       </v-btn>
+       </router-link>
       <!-- Sign In -->
       <v-btn>
         Sign In

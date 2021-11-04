@@ -4,6 +4,7 @@ import Router from 'vue-router'
 // 연결할 컴포넌트 import
 // import App from '../App.vue'
 import CardImf from '../CardImf.vue'
+import Main from '../components/Main.vue'
 
 // 필수
 Vue.use(Router)
@@ -19,6 +20,10 @@ export default new Router({
             path: "/about", // 경로
             name: "CardImf", // 해당 경로의 이름 
             component: CardImf // 이동할 컴포넌트
-        },    
+        },
+        {
+            path: "",
+            component: Main
+        },
     ]
 })
