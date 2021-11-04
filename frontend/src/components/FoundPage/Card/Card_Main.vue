@@ -9,6 +9,7 @@
       hide-delimiters
       hide-delimiter-background
       class="mt-10 mb-10"
+      width="1000px"
     >
 
       <!-- 이미지 -->

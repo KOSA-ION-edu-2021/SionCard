@@ -29,8 +29,18 @@
         </v-btn>
       </template>
       <v-list>
-        <v-list-item v-for="(item, index) in myitems" :key="index">
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        <v-list-item >
+          <v-list-item-title >
+              <router-link class="text-decoration-none" to="/my">
+                메인(임시 테스트용)
+              </router-link>
+            </v-list-item-title>
+        </v-list-item>
+        <v-list-item class="text-decoration-none">
+          <v-list-item-title>내 정보</v-list-item-title>
+        </v-list-item>
+        <v-list-item class="text-decoration-none">
+          <v-list-item-title>카드 정보</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>

@@ -4,7 +4,7 @@
         width="330"
         height="300" 
         tile flat> <!-- d-flex -->
-        <v-container class="align-center pt-5">
+        <v-container class="mt-7">
             <div class="text-h5">
                 SionCard 로그인
             </div>
@@ -49,22 +49,38 @@
                 </v-btn>
 
             </v-card>
-            <v-card
+            <!-- <v-card
                 class="d-flex align-center mt-16"
                 width="100%"
                 flat tile
-            >
-                <v-spacer/>
-                <router-link class="ma-auto mr-1" to="/find_id" tag="button"> 아이디 찾기</router-link>
-                <router-link class="ma-auto" to="/find_password" tag="button">| 비밀번호 찾기 </router-link>
-                <v-spacer/>
-            </v-card>
+            > -->
+                <!-- <v-spacer/> -->
+<!--                 <router-link class="ma-auto mr-1" to="/find_id" tag="button"> 아이디 찾기</router-link>
+                <router-link class="ma-auto" to="/find_password" tag="button">| 비밀번호 찾기 </router-link> -->
+            <v-row class="mt-7 justify-center">
+                <v-col cols="auto">
+                    <Find_ID/>
+                </v-col>
+                <v-col cols="auto">
+                    <Find_PW/>    
+                </v-col>
+            </v-row>
+                
+                
+                <!-- <v-spacer/> -->
+            <!-- </v-card> -->
         </v-container>
     </v-card>
 </template>
 
 <script>
-export default {
+import Find_ID from "./Findid.vue";
+import Find_PW from "./Findpassword.vue";
 
+export default {
+    components: {
+        Find_ID,
+        Find_PW,
+    }
 }
 </script>

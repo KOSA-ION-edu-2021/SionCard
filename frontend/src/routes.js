@@ -3,6 +3,7 @@ import Layouts from "./components/FoundPage/Layouts.vue"
 import Main from "./components/FoundPage/Main/Main.vue"
 import Login from "./components/FoundPage/Login/Login.vue"
 import Signin from "./components/FoundPage/Signin/Signin.vue"
+import My from "./components/FoundPage/My/My.vue"
 import Cardrecommend from "./components/FoundPage/Card/Card_Recommend.vue"
 import CardMain from "./components/FoundPage/Card/Card_Main.vue"
 import CardInfor from "./components/FoundPage/Card/CardInfor.vue"
@@ -27,6 +28,11 @@ const routes=[
                 path: "signin",
                 name: "signin",
                 component: Signin
+            },
+            {
+                path: "my",
+                name: "my",
+                component: My
             },
             {
                 path: "cardrecommend",

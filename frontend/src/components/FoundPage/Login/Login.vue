@@ -19,6 +19,7 @@
 import LoginForm from "./LoginForm.vue";
 import LoginDeco from "./LoginDeco.vue";
 
+
 export default {
   components: {
     LoginForm,
