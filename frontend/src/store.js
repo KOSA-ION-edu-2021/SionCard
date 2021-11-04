@@ -26,8 +26,6 @@ export default new Vuex.Store({
             sessionStorage.setItem('JSESSIONID',data);
         },
         updateAuth(state) {
-            //axios.defaults.headers.common.Authorization = "Bearer "+sessionStorage.getItem('JSESSIONID');
-            //axios.defaults.withCredentials = true;
             axios.get("http://si-on.net:8080/api/test")
             .then(res=>{
                 console.log(res.data)
@@ -37,7 +35,11 @@ export default new Vuex.Store({
                 console.log(err);
                 state.auth=null;
             })
-            axios.get("http://si-on.net:8080/member/get_auth")
+            axios.get("http://si-on.net:8080/member/get_auth",{
+                headers:{
+                    Authorization :"Bearer "+sessionStorage.getItem('JSESSIONID')
+                }
+            })
             .then(res=>{
                 state.auth=res.data;
                 console.log("로그온이 되어 있습니다.")
