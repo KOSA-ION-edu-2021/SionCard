@@ -37,7 +37,11 @@ export default new Vuex.Store({
             })
             axios.get("http://si-on.net:8080/member/get_auth",{
                 headers:{
-                    Authorization :"Bearer "+sessionStorage.getItem('JSESSIONID')
+                    "Authorization" :"Bearer "+sessionStorage.getItem('JSESSIONID'),
+                    "Accept":	"*/*",
+                    "Cookie":"_xsrf=2|46f93d73|0da6b496abcc8b1c6a20313515af633c|1636005201",
+                    "Accept-Encoding":	"gzip, deflate",
+                    "Accept-Language":	"ko,en-US;q=0.9,en;q=0.8"
                 }
             })
             .then(res=>{
