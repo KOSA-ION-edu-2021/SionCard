@@ -67,26 +67,48 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 export default {
     data:()=>({
         id:"",
         pw:""
     }),
     methods:{
+
+
         submit(){
-            axios.post("http://si-on.net:8080/api/login",{
-                id:this.id,
-                password:this.pw
-            })
-            .then(res=>{
-                this.$store.commit("setJwt",res.data);
-                this.$router.push('/');
-            })
-            .catch(err=>{
-                console.log(err);
-                alert('로그인에 실패하였습니다.');
-            })
+            fetch('http://si-on.net:8080/api/login',{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id: this.id,
+                password: this.pw,
+            }),
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+            this.$store.commit("setJwt",data);
+            this.$router.push('/');
+        })
+        .catch(err=>{
+            console.log(err);
+            alert('로그인에 실패하였습니다.');
+        })
+        //     axios.post("http://si-on.net:8080/api/login",{
+        //         id:this.id,
+        //         password:this.pw
+        //     })
+        //     .then(res=>{
+        //         this.$store.commit("setJwt",res.data);
+        //         this.$router.push('/');
+        //     })
+        //     .catch(err=>{
+        //         console.log(err);
+        //         alert('로그인에 실패하였습니다.');
+        //     })
         },
     }
 }

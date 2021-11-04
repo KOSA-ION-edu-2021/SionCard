@@ -46,12 +46,12 @@ public class ApiController {
 	//jwt 부분
 	@PostMapping("/login")
 	@ResponseBody
-	public ResponseEntity<String> login(HttpServletResponse response, @RequestBody HashMap<String,String> auth) {
+	public ResponseEntity<HashMap<String, String>> login(HttpServletResponse response, @RequestBody HashMap<String,String> auth) {
 		Authentication authentication = authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(auth.get("id"),auth.get("password")));
-		String jwt = jwtProvider.generateJwtToken(authentication);
-		
-		return ResponseEntity.ok(jwt);
+		auth.put("token",jwtProvider.generateJwtToken(authentication));
+		auth.put("password",null);
+		return ResponseEntity.ok(auth);
 	}
 	@PostMapping("/signup")
 	@ResponseBody
