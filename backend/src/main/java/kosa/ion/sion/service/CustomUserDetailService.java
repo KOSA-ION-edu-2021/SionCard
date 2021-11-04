@@ -23,9 +23,12 @@ public class CustomUserDetailService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Collection<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
-		roles.add(new SimpleGrantedAuthority("ROLE_USER"));		
+		roles.add(new SimpleGrantedAuthority("MEMBER"));
+		if(username.equals("지훈")) {
+			System.out.println(username);
+			roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		}
 		MembersDto membersDto = membersRepository.findByMemberId(username).orElseThrow(() -> new NoSuchElementException());
 		return new User(membersDto.getMemberId(), membersDto.getPassword(), roles);
-
 	}
 }

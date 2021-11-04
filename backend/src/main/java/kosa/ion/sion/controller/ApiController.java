@@ -49,7 +49,7 @@ public class ApiController {
 	public ResponseEntity<String> login(HttpServletResponse response, @RequestBody HashMap<String,String> auth) {
 		Authentication authentication = authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(auth.get("id"),auth.get("password")));
-		String jwt = jwtProvider.generateJwtToken(authentication); 
+		String jwt = jwtProvider.generateJwtToken(authentication);
 		
 		return ResponseEntity.ok(jwt);
 	}
@@ -65,7 +65,6 @@ public class ApiController {
 	
 	@GetMapping("/card_info")
 	public List<CardsDto> CardInfo() {
-		
 		return cardsRepository.findAll();
 	}
 }
