@@ -1,4 +1,4 @@
-package kosa.ion.sion.config.security;
+package kosa.ion.sion.security;
 
 import java.io.IOException;
 

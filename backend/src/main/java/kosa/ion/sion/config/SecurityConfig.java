@@ -14,8 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import kosa.ion.sion.config.security.JwtEntryPoint;
 import kosa.ion.sion.security.JwtAuthenticationFilter;
+import kosa.ion.sion.security.JwtEntryPoint;
 import kosa.ion.sion.service.CustomUserDetailService;
 
 @Configuration
