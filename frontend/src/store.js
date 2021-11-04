@@ -26,7 +26,8 @@ export default new Vuex.Store({
             sessionStorage.setItem('JSESSIONID',data);
         },
         updateAuth(state) {
-            axios.defaults.headers.common.Authorization = "Bearer "+sessionStorage.getItem('JSESSIONID');
+            //axios.defaults.headers.common.Authorization = "Bearer "+sessionStorage.getItem('JSESSIONID');
+            //axios.defaults.withCredentials = true;
             axios.get("http://si-on.net:8080/api/test")
             .then(res=>{
                 console.log(res.data)
