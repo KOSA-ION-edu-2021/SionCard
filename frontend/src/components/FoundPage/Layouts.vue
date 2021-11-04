@@ -28,14 +28,17 @@ export default {
     },
     data:()=>({
         drawer: false,
-
     }),
     methods:{
         changeDraw(){
             if(this.drawer) this.drawer=!this.drawer
             this.drawer=!this.drawer
-        }
+        },
+
     },
+    updated(){
+        this.$store.getters.updateAuth;
+    }
 };
 </script>
 

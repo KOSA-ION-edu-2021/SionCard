@@ -5,8 +5,7 @@ import vuetify from './plugins/vuetify'
 import VueRouter from 'vue-router'
 import routes from './routes'
 
-import VueCookies from "vue-cookies"
-import VueSession from "vue-session"
+import store from './store'
 
 Vue.use(VueRouter);
 const router=new VueRouter({
@@ -14,16 +13,12 @@ const router=new VueRouter({
   routes
 })
 
-Vue.use(VueCookies);
-Vue.$cookies.config("7d");
-
-Vue.use(VueSession);
-
 Vue.config.productionTip = false
 
 
 new Vue({
   vuetify,
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')

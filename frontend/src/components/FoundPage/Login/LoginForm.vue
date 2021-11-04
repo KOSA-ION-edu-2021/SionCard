@@ -80,11 +80,10 @@ export default {
                 password:this.pw
             })
             .then(res=>{
-                this.$session.set('JSESSIONID',res.data);
+                this.$store.commit("setJwt",res.data);
                 this.$router.push('/');
             })
             .catch(err=>{
-                this.$session.remove('JSESSIONID');
                 console.log(err);
                 alert('로그인에 실패하였습니다.');
             })
