@@ -1,4 +1,4 @@
-<template >
+<template>
   <v-card class="d-flex align-center " tile flat height="330">
     <div class="d-flex flex-column">
       <div class="text-h4">
