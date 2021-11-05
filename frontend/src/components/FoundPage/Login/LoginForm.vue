@@ -77,7 +77,7 @@ export default {
 
 
         submit(){
-            fetch('http://si-on.net:8080/api/login',{
+            fetch('http://localhost:8080/api/login',{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
