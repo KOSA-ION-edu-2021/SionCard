@@ -49,8 +49,9 @@ public class ApiController {
 	public ResponseEntity<HashMap<String, String>> login(HttpServletResponse response, @RequestBody HashMap<String,String> auth) {
 		Authentication authentication = authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(auth.get("id"),auth.get("password")));
-		auth.put("token",jwtProvider.generateJwtToken(authentication));
-		auth.put("password",null);
+		auth.put("jwt",jwtProvider.generateJwtToken(authentication));
+		auth.remove("password");
+		auth.remove("id");
 		return ResponseEntity.ok(auth);
 	}
 	@PostMapping("/signup")
