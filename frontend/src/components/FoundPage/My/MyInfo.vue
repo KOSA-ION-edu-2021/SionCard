@@ -17,7 +17,7 @@
               <v-tab>웹 비밀번호 변경</v-tab>
               <v-tab>웹 회원 탈퇴</v-tab>
 
-              <!-- 웹 계정 정보 -->
+              <!-- 기본 정보 변경 -->
               <v-tab-item>
                 <v-container fluid>
                   <v-row>
@@ -28,12 +28,23 @@
                 </v-container>
               </v-tab-item>
 
-              <!-- 개인 정보 -->
+              <!-- 비밀번호 변경 -->
               <v-tab-item>
                 <v-container fluid>
                   <v-row>
                     <v-col class="grey lighten-3"> 
-                      <myinfo_card/>
+                      <myinfo_webpw/>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-tab-item>
+              
+              <!-- 회원 탈퇴 -->
+              <v-tab-item>
+                <v-container fluid>
+                  <v-row>
+                    <v-col class="grey lighten-3"> 
+                      <myinfo_delete/>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -51,7 +62,8 @@
 
 <script>
 import myinfo_account from './MyInfo_account.vue'
-import myinfo_card from './MyInfo_user.vue'
+import myinfo_webpw from './MyInfo_webpw.vue'
+import myinfo_delete from './MyInfo_delete.vue'
 
 export default {
   name: "myinfo",
@@ -60,7 +72,8 @@ export default {
   }),
   components:{
       myinfo_account,
-      myinfo_card
+      myinfo_webpw,
+      myinfo_delete
   },
   
 }

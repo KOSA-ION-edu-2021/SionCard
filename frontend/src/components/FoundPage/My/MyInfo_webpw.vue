@@ -30,13 +30,65 @@
                                   color="black"
                                 ></v-radio>
                             </v-radio-group>
-                            {{radioValues}}
+                            <!-- {{radioValues}} -->
                         </td>
                     </tr>
                 </table>
             </v-col>
         </v-row>
         
+        <!-- 인증 정보 입력 -->
+
+        <!-- 이메일 인증 정보 -->
+        <v-row class="mt-10">
+          <v-col class="text-h4 font-weight-bold">
+            인증 정보 입력
+          </v-col>
+        </v-row>
+
+        <v-row class="text-h6 font-weight-regular">
+            <v-col cols="">
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <td>
+                          <v-text-field
+                            style="width: 30%"
+                            label="ID"
+                            required
+                            dense
+                            hide-details="auto"
+                            outlined
+                          ></v-text-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>이메일</th>
+                        <td>
+                            03470@naver.com
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>-</th>
+                        <td>
+                            -
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                          <v-row justify="center">
+                            <v-col>
+                              <v-btn>다음</v-btn>
+                            </v-col>
+                          </v-row>
+                        </td>
+                    </tr>
+                </table>
+
+            </v-col> 
+        </v-row>
+
+        <!-- SI-ON Card 인증 정보 -->
         <v-row class="mt-10">
           <v-col class="text-h4 font-weight-bold">
             인증 정보 입력
@@ -89,7 +141,7 @@
 
 <script>
 export default {
-    name: "myinfo_card",
+    name: "myinfo_webpw",
     data: () => ({
       radioValues: '',
     }),
