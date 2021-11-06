@@ -64,7 +64,8 @@
 
   
     <!-- 한눈에 보기 -->
-     <v-row>
+    <div>
+     
         <v-col cols="3" />
           <v-row
             align="center"
@@ -75,82 +76,27 @@
           </v-row>
         <v-col cols="4" />
         
-    <v-row justify="center">
-    <v-col cols="6">
-    <v-card tile flat>
+    
       
-      <v-list flat>
-        <v-list-item-group
-          v-model="model"
-          color="indigo"
-          
-        >
-          <v-list-item v-for="(one_icon, i) in cardInfo[num].one_icon" :key="i">
-            <v-list-item-icon style="margin-left:50px">
-              <v-icon v-text="one_icon"></v-icon>
-            </v-list-item-icon>
-
-            <v-list-item-content style="margin-left:50px">
-              <v-list-item-title v-text="cardInfo[num].benefit[i]"></v-list-item-title>
-              <!-- v-for="(one_icon, i) in cardInfo[a].one_icon" :key="i"  -->
-              <ul v-if="i===0" style="font-size:x-small; margin-top:10px">
-                  <li v-for="(one_list1, k) in cardInfo[num].one_list1" :key="k"
-                      :v-if="cardInfo[num].one_list1[k]" 
-                      v-text="one_list1"
-                      style="margin-top:5px"
-                    ></li>
-                  <ul v-for="(one_ul1, k) in cardInfo[num].one_ul1" :key="k"
-                    :v-if="cardInfo[num].one_ul1[k]" 
-                    v-text="cardInfo[num].one_ul1[k]" 
-                    style="margin-top:5px"
-                    ></ul>
-              </ul>
-              <ul v-if="i===1" style="font-size:x-small; margin-top:10px">
-                  <li v-for="(one_list2, k) in cardInfo[num].one_list2" :key="k"
-                      :v-if="cardInfo[num].one_list2[k]" 
-                      v-text="one_list2"
-                      style="margin-top:5px"
-                    ></li>
-                  <ul v-for="(one_ul2, k) in cardInfo[num].one_ul2" :key="k"
-                    :v-if="cardInfo[num].one_ul2[k]" 
-                    v-text="cardInfo[num].one_ul2[k]" 
-                    style="margin-top:5px"
-                    ></ul>
-              </ul>
-              <ul v-if="i===2" style="font-size:x-small; margin-top:10px">
-                  <li v-for="(one_list3, k) in cardInfo[num].one_list3" :key="k"
-                      :v-if="cardInfo[num].one_list3[k]" 
-                      v-text="one_list3"
-                      style="margin-top:5px"
-                    ></li>
-                  <ul v-for="(one_ul3, k) in cardInfo[num].one_ul3" :key="k"
-                    :v-if="cardInfo[num].one_ul3[k]" 
-                    v-text="cardInfo[num].one_ul3[k]" 
-                    style="margin-top:5px"
-                    ></ul>
-              </ul>
-              <ul v-if="i===3" style="font-size:x-small; margin-top:10px">
-                  <li v-for="(one_list4, k) in cardInfo[num].one_list4" :key="k"
-                      :v-if="cardInfo[num].one_list4[k]" 
-                      v-text="one_list4"
-                      style="margin-top:5px"
-                    ></li>
-                  <ul v-for="(one_ul4, k) in cardInfo[num].one_ul4" :key="k"
-                    :v-if="cardInfo[num].one_ul4[k]" 
-                    v-text="cardInfo[num].one_ul4[k]" 
-                    style="margin-top:5px"
-                    ></ul>
-              </ul>
-            </v-list-item-content>
-          </v-list-item>    
-         
-        </v-list-item-group>
-      </v-list>
-    </v-card>
-    </v-col>
-    </v-row>
-     </v-row>
-
+      <v-expansion-panels
+      v-model="panel"
+      multiple
+    >
+    <v-expansion-panel
+        v-for="(item, i) in items"
+        :key="i"
+      >
+      <v-expansion-panel-header>header{{ item }}</v-expansion-panel-header>
+      
+      <v-expansion-panel-content>
+      asdadasd
+     </v-expansion-panel-content>
+      </v-expansion-panel>
+        </v-expansion-panels>
+        
+  
+     
+    </div>
     <!-- 카드 안내 사항 -->
     <v-row justify="center">
     <v-card tile flat style="font-size:xx-small; margin-top:50px; margin-bottom:50px">
@@ -182,10 +128,17 @@
 <script>
 import cardInfo from '@/assets/carddetail.js'
 export default {
+  props: {
+    num : Number,
+  },
   data:() => ({
       
       cardInfo : cardInfo,
-      
+      // cardInfo[this.num].benefit
+      return : ({ panel: [], 
+                  items: 3, 
+               }),
+
       model: 1,
       headers: [  // 연회비 분류 기준 data
         {
@@ -200,9 +153,15 @@ export default {
         { text: "총연회비", value: "card_tprice" },
       ],
     }),
-    props: {
-    num : Number,
-  },
+    
+   methods: {
+      // Create an array the length of our items
+      // with all values as true
+      all: () => {
+        // this.panel = [...Array(this.items).keys()].map((k, i) => i)
+          this.panel = []
+      },
+   }
 };
 </script>
 

@@ -307,7 +307,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
 .agreebox {
   height: 100px;
 }
