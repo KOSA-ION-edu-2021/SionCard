@@ -67,7 +67,7 @@
 </template>
 
 <script>
-// import axios from "axios";
+import axios from "axios";
 export default {
     data:()=>({
         id:"",
@@ -75,20 +75,13 @@ export default {
     }),
     methods:{
         submit(){
-            fetch('http://localhost:8080/api/login',{
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
+            axios.post('http://si-on:8080/api/login',{
                     id: this.id,
                     password: this.pw,
-                }),
             })
-            .then(res=>res.json())
-            .then(data=>{
-                console.log(data);
-                this.$store.commit("setJwt",data.jwt);
+            .then(res=>{
+                console.log(res);
+                this.$store.commit("setJwt",res.data.jwt);
                 this.$router.push('/');
             })
             .catch(err=>{

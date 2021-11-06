@@ -1,5 +1,6 @@
 import Vuex from "vuex";
 import Vue from 'vue';
+import axios from 'axios';
 
 Vue.use(Vuex);
 export default new Vuex.Store({
@@ -18,23 +19,16 @@ export default new Vuex.Store({
             sessionStorage.setItem('JSESSIONID',data);
         },
         updateAuth(state) {
-            /*axios.get("http://si-on.net:8080/api/test")
+            axios.get("http://si-on.net:8080/member/get_auth",
+                {
+                    headers:{
+                        Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`
+                    },
+                }
+            )
             .then(res=>{
                 console.log(res.data)
-            })
-            .catch(err=>{
-                console.log("로그인이 되어 있지 않습니다.");
-                console.log(err);
-                state.auth=null;
-            })*/
-            fetch("http://si-on.net:8080/member/get_auth",{
-                headers:{
-                    "Authorization" :"Bearer "+sessionStorage.getItem('JSESSIONID'),
-                }
-            })
-            .then(res=>{
                 state.auth=res.data;
-                console.log("로그온이 되어 있습니다.")
             })
             .catch(err=>{
                 console.log("로그인이 되어 있지 않습니다.");

@@ -6,7 +6,9 @@
             <router-link to="/signin" class="white--text text-caption mr-2" tag="button">회원가입</router-link>
         </div>
         <div v-else>
-
+            <button class="white--text text-caption mr-2">{{this.$store.state.auth.id}}</button>
+            <div  class="white--text text-caption mr-2"> 님 반갑습니다. </div>
+            <router-link to="/logout" class="white--text text-caption mr-2" tag="button">로그아웃</router-link>
         </div>
     </v-system-bar>
 </template>
