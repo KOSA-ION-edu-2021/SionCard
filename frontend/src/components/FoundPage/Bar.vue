@@ -29,14 +29,32 @@
         </v-btn>
       </template>
       <v-list>
-        <v-list-item v-for="(item, index) in myitems" :key="index">
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        <v-list-item color="white" to="/my_main">
+          <v-list-item-title >
+              <!-- <router-link class="text-decoration-none" to="/my_main"> -->
+                <div style="color:black">메인(임시 테스트용)</div>
+              <!-- </router-link> -->
+            </v-list-item-title>
+        </v-list-item>
+        <v-list-item class="" to="/myinfo">
+          <v-list-item-title>
+              <!-- <router-link class="text-decoration-none" to="/myinfo"> -->
+                내 정보
+              <!-- </router-link> -->
+            </v-list-item-title>
+        </v-list-item>
+        <v-list-item class="" to="/mycard">
+          <v-list-item-title>
+              <!-- <router-link class="text-decoration-none" to="/mycard"> -->
+                내 카드
+              <!-- </router-link> -->
+            </v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
 
     <!-- Card menu -->
-    <v-menu offset-y>
+    <v-menu  offset-y>
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           plain
@@ -47,12 +65,19 @@
         </v-btn>
       </template>
       <v-list>
-        <v-list-item v-for="(item, index) in carditems" :key="index">
+        <v-list-item class="" to="/cardinfor">
           <v-list-item-title>
-            <router-link  to="/cardrecommend" class="text-decoration-none">
-              {{ item.title }}
-            </router-link>
+            <!-- <router-link  to="/cardinfor" class="text-decoration-none"> -->
+              카드 안내
+            <!-- </router-link> -->
             </v-list-item-title>
+        </v-list-item>
+        <v-list-item class="" to="/cardrecommend">
+          <!-- <router-link  to="/cardrecommend" class="text-decoration-none"> -->
+          <v-list-item-title>
+              카드 추천
+            </v-list-item-title>
+            <!-- </router-link> -->
         </v-list-item>
       </v-list>
     </v-menu>
@@ -113,4 +138,5 @@ export default {
 </script>
 
 <style>
+
 </style>

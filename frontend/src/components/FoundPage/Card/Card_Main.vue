@@ -1,5 +1,7 @@
 <template>
-  <v-container>
+  <v-container >
+    <v-container class="">
+      
     <!-- 신상 카드 이미지 슬라이드 -->
     <v-carousel
       cycle
@@ -7,6 +9,7 @@
       hide-delimiters
       hide-delimiter-background
       class="mt-10 mb-10"
+      width="1000px"
     >
 
       <!-- 이미지 -->
@@ -119,6 +122,7 @@
         </v-col>
       </v-row>
     </v-row>
+    </v-container>
   </v-container>
 </template>
 
@@ -132,4 +136,8 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
+.font{
+  /* font-family: 'Noto Sans KR', sans-serif; */
+}
 </style>
