@@ -62,26 +62,31 @@
       </v-col>
     </v-row>
 
-
+  
     <!-- 한눈에 보기 -->
-     <v-row
-    align="center"
-    justify="space-around"
-    >
-      <v-btn text>
-        혜택 한눈에 보기
-      </v-btn>
-    </v-row>
+     <v-row>
+        <v-col cols="3" />
+          <v-row
+            align="center"
+            justify="space-around">
+            <v-btn text @click="all">
+              혜택 한눈에 보기
+            </v-btn>
+          </v-row>
+        <v-col cols="4" />
+        
     <v-row justify="center">
     <v-col cols="6">
     <v-card tile flat>
+      
       <v-list flat>
         <v-list-item-group
           v-model="model"
           color="indigo"
+          
         >
           <v-list-item v-for="(one_icon, i) in cardInfo[num].one_icon" :key="i">
-            <v-list-item-icon>
+            <v-list-item-icon style="margin-left:50px">
               <v-icon v-text="one_icon"></v-icon>
             </v-list-item-icon>
 
@@ -144,6 +149,7 @@
     </v-card>
     </v-col>
     </v-row>
+     </v-row>
 
     <!-- 카드 안내 사항 -->
     <v-row justify="center">
