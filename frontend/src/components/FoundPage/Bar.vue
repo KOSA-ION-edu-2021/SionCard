@@ -10,9 +10,9 @@
       />
     </router-link>
     <router-link to="/" tag="button">
-    <v-app-bar-title>
+    <v-col cols="auto" class="text-h5">
       SionCard
-    </v-app-bar-title>
+    </v-col>
     </router-link>
     
     <v-spacer></v-spacer>
