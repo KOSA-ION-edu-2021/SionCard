@@ -73,16 +73,19 @@ export default {
         id:"",
         pw:""
     }),
-    methods:{
+    props:{
+        go_page:String,
+    }
+    ,methods:{
         submit(){
-            axios.post('http://si-on:8080/api/login',{
+            axios.post(this.$store.state.apihost+'/api/login',{
                     id: this.id,
                     password: this.pw,
             })
             .then(res=>{
                 console.log(res);
                 this.$store.commit("setJwt",res.data.jwt);
-                this.$router.push('/');
+                this.$router.push(this.go_page||'/' ); //go_page에 값이 없으면 루트페이지로 간다.
             })
             .catch(err=>{
                 console.log(err);

@@ -37,7 +37,9 @@ export default {
 
     },
     updated(){
-        console.log("update")
+        this.$store.commit('updateAuth');
+    },
+    mounted(){
         this.$store.commit('updateAuth');
     }
 };

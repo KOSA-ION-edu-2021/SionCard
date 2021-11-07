@@ -5,7 +5,10 @@ import axios from 'axios';
 Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
-        auth:null
+        auth:{
+            name:"이름"
+        },
+        apihost: "http://si-on.net:8080"
     },
     
     getters: {
@@ -19,7 +22,7 @@ export default new Vuex.Store({
             sessionStorage.setItem('JSESSIONID',data);
         },
         updateAuth(state) {
-            axios.get("http://si-on.net:8080/member/get_auth",
+            axios.get(state.apihost+"/member/get_auth",
                 {
                     headers:{
                         Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`

@@ -30,19 +30,27 @@
           <tr>
             <th>아이디</th>
             <td>
-              <v-card class="d-flex" width="45%" flat tile>
-                <v-text-field
-                  class="ml-10"
-                  style="width: 30%"
-                  v-model="user_id"
-                  label="아이디를 입력해 주세요."
-                  :rules="user_id_rule"
-                  required
-                  dense
-                  outlined
-                  hide-details="auto"
-                ></v-text-field>
-                <v-btn class="ml-3" color="secondary">중복 확인</v-btn>
+              <v-card class="d-flex vertical-center" flat tile>
+                <v-card width="40%" flat tile>
+                  <v-text-field
+                    class="ml-10"
+                    width="54px"
+                    v-model="user_id"
+                    label="아이디를 입력해 주세요."
+                    :rules="user_id_rule"
+                    :disabled="id_check"
+                    required
+                    dense
+                    outlined
+                    hide-details="auto"
+                  ></v-text-field>
+                </v-card>
+                <v-btn class="ml-3" color="secondary" @click.stop="open_id_check">중복 확인</v-btn>
+                <IdCheckDialog
+                  :dialog="id_dialog"
+                  :close="close_id_check"
+                />
+                <v-card v-if="!id_check" tile flat class="ml-3 my-auto">중복확인을 해주세요</v-card>
               </v-card>
             </td>
           </tr>
@@ -141,10 +149,10 @@
             <td>
               <v-checkbox
                 class="ml-9"
-                v-model="checkbox0"
+                v-model="checkbox"
                 name="checkbox"
                 :label="`SION카드 온라인회원 가입 전체동의`"
-                @click="checkbox1 = true; checkbox2 = true"
+                @click="checkbox1 = checkbox; checkbox2 = checkbox"
               ></v-checkbox>
 
               <v-card class="d-flex" width="100%" flat tile>
@@ -241,15 +249,18 @@
       </v-container>
 </template>
 
-                                    <script>
+<script>
 import Agree1 from "./Agree1.vue";
 import Agree2 from "./Agree2.vue";
+import IdCheckDialog from "./IdCheckDialog.vue";
+// import axios from "axios";
 
 export default {
   name: "Signin",
   data() {
     return {
       user_id: "",
+      id_check:false,
       user_id_rule: [
         (v) => !!v || "아이디는 필수 입력사항입니다.",
         (v) =>
@@ -284,6 +295,7 @@ export default {
           !(v && v.length >= 30) || "패스워드는 30자 이상 입력할 수 없습니다.",
         (v) => v === this.user_pw || "패스워드가 일치하지 않습니다.",
       ],
+      user_email:"",
       user_email_chk: "",
       user_email_rule: [
         (v) => /.+@.+\..+/.test(v) || "이메일 형식으로 입력해주세요.",
@@ -294,15 +306,38 @@ export default {
       dialog1: false,
       dialog2: false,
       dialog3: false,
+      id_dialog: false,
       온라인이용상세: false,
       개인정보상세: false,
+
     };
   },
   methods: {
+    open_id_check(){
+      this.id_dialog=true;
+
+      //let temp = this.user_id;
+      //this.user_id+="!";
+      //this.user_id=temp;
+
+      //this.user_id=temp;
+      // axios.get(this.$store.state.apihost+"/api/has_id?id="+this.user_id)
+      // .then(res=>{
+      //   this.id_check=res.data;
+      // })
+      // .catch(err=>{
+      //   console.log(err);
+      // })
+    },
+    close_id_check(ok){
+      this.id_dialog=false;
+      this.id_check=ok;
+    }
   },
   components: {
     Agree1,
     Agree2,
+    IdCheckDialog,
   },
 };
 </script>

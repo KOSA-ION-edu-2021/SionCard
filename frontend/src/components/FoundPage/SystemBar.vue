@@ -6,9 +6,9 @@
             <router-link to="/signin" class="white--text text-caption mr-2" tag="button">회원가입</router-link>
         </div>
         <div v-else>
-            <button class="white--text text-caption mr-2">{{this.$store.state.auth.id}}</button>
-            <div  class="white--text text-caption mr-2"> 님 반갑습니다. </div>
-            <router-link to="/logout" class="white--text text-caption mr-2" tag="button">로그아웃</router-link>
+            <button class="white--text text-caption mr-2">{{this.$store.state.auth.name}}</button>
+            <button disabled  class="white--text text-caption mr-2"> 님 반갑습니다. </button>
+            <button @click="logout" class="white--text text-caption mr-2" tag="button">로그아웃</button>
         </div>
     </v-system-bar>
 </template>
@@ -16,6 +16,11 @@
 <script>
 
 export default {
-
+    methods:{
+        logout(){
+            sessionStorage.removeItem('JSESSIONID');
+            this.$router.go() //새로고침
+        }
+    }
 }
 </script>
