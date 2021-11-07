@@ -19,6 +19,7 @@
           <v-btn
             color="primary"
             text
+            v-if="!has_id"
             @click="close(true)"
           >
             확인
@@ -37,13 +38,34 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     props:{
         dialog:Boolean,
-        close:Function
+        close:Function,
+        id:String,
     },
     data:()=>({
-      text:"이미 아이디가 존재합니다."
-    })
+      text:"이미 아이디가 존재합니다.",
+      has_id:true,
+    }),
+    updated(){
+      if(this.dialog){
+        axios.get(this.$store.state.apihost+"/api/id_check",{
+          hearders:{id: this.id}
+        })
+        .then(res=>{
+          res.data
+        })
+        .catch(err=>{
+          console.log(err);
+        })
+      }else{
+        //다일얼 로그가 꺼질때 무조건 아이디 없다고 뜨게 하기 위해서
+        this.text="이미 아이디가 존재합니다.";
+        this.has_id=true;
+      }
+    }
 }
 </script>
