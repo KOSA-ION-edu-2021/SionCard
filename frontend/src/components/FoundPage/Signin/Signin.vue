@@ -3,6 +3,8 @@
       <v-row>
         <v-col cols="1"></v-col>
         <v-col cols="10">
+          
+          <!-- 최상단 글귀 -->
           <v-row justify="center" class="">
             <v-col class="mb-10 mt-10" cols="auto">
               <v-card flat tile>
@@ -12,13 +14,13 @@
           </v-row>
 
           <h3>정보입력 및 약관동의</h3>
-
+          <!-- 회원가입 틀 -->
           <table>
             <tr>
               <th>성명</th>
               <td>
                 <v-text-field
-                  style="width: 30%"
+                  style="width: 40%"
                   v-model="user_nm"
                   label="이름을 입력해 주세요."
                   :rules="user_nm_rule"
@@ -32,10 +34,9 @@
             <tr>
               <th>아이디</th>
               <td>
-                <v-card class="d-flex" width="45%" flat tile>
+                <!-- <v-card class="d-flex" width="40%" flat tile> -->
                   <v-text-field
-                      class="ml-10"
-                      width="54px"
+                      style="width: 40%"
                       v-model="user_id"
                       label="아이디를 입력해 주세요."
                       @blur="id_check"
@@ -48,59 +49,57 @@
                       outlined
                       hide-details="auto"
                     ></v-text-field>
-                  <v-btn class="ml-3" color="secondary">중복 확인</v-btn>
-                </v-card>
+                  <!-- <v-btn class="ml-3" color="secondary">중복 확인</v-btn> -->
+                <!-- </v-card> -->
               </td>
             </tr>
             <tr>
               <th>비밀번호</th>
               <td>
-                <v-card class="d-flex" width="52%" flat tile>
-                  <v-text-field
-                    style="width: 30%"
-                    v-model="user_pw"
-                    type="password"
-                    label="비밀번호를 입력해 주세요."
-                    :rules="user_pw_rule"
-                    required
-                    dense
-                    hide-details="auto"
-                    outlined
-                  ></v-text-field>
-
-                  <!------------ 비민번호 설정 기준 버튼 / 모달창--------------- -->
-                  <v-dialog v-model="dialog1" width="400px">
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-btn
-                        class="ml-3"
-                        color="secondary"
-                        v-bind="attrs"
-                        v-on="on"
-                      >
-                        비밀번호 설정 기준
-                      </v-btn>
-                    </template>
-                    <v-card>
-                      <v-card-title>
-                        <span class="text-h5">비밀번호 설정 기준</span>
-                      </v-card-title>
-                      <v-card-text>
-                        <ul>
-                          <li>
-                            영문 대문자, 영문 소문자, 숫자, 특수문자(~ ! @ # $ % ^
-                            & * _ + ?) 중 3종 이상을 조합. 단, 특수문자 필수 포함
-                          </li>
-                        </ul>
-                      </v-card-text>
-                      <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="primary" text @click="dialog1 = false">
-                          확인
-                        </v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-dialog>
-                </v-card>
+                <v-text-field
+                        style="width: 40%"
+                        v-model="user_pw"
+                        type="password"
+                        label="비밀번호를 입력해 주세요."
+                        :rules="user_pw_rule"
+                        required
+                        dense
+                        hide-details="auto"
+                        outlined
+                      ></v-text-field>
+                
+                <!------------ 비민번호 설정 기준 버튼 / 모달창--------------- -->
+                      <v-dialog v-model="dialog1" width="30%">
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-btn
+                            class="ml-3"
+                            color="secondary"
+                            v-bind="attrs"
+                            v-on="on"
+                          >
+                            비밀번호 설정 기준
+                          </v-btn>
+                        </template>
+                        <v-card>
+                          <v-card-title>
+                            <span class="text-h5">비밀번호 설정 기준</span>
+                          </v-card-title>
+                          <v-card-text>
+                            <ul>
+                              <li>
+                                영문 대문자, 영문 소문자, 숫자, 특수문자(~ ! @ # $ % ^
+                                & * _ + ?) 중 3종 이상을 조합. 단, 특수문자 필수 포함
+                              </li>
+                            </ul>
+                          </v-card-text>
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="primary" text @click="dialog1 = false">
+                              확인
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-dialog>
               </td>
             </tr>
             <!-- =================여기까지 비밀번호 설정 기준 ============ -->
@@ -109,7 +108,7 @@
               <th>비밀번호 확인</th>
               <td>
                 <v-text-field
-                  style="width: 30%; text-align: center"
+                  style="width: 40%; text-align: center"
                   v-model="user_pw_chk"
                   type="password"
                   label="비밀번호를 입력해 주세요."
@@ -140,7 +139,7 @@
             </tr>
             <!-- ===============회원가입 필수동의===================== -->
             <tr class="agreebox">
-              <th>회원가입 필수동의</th>
+              <th>회원가입<br> 필수동의</th>
               <td>
                 <v-checkbox
                   v-model="checkbox"
@@ -149,6 +148,7 @@
                   @click="checkbox1 = checkbox; checkbox2 = checkbox"
                 ></v-checkbox>
 
+                <!-- 온라인 이용약관 -->
                 <v-card class="d-flex" width="100%" flat tile>
                   <v-checkbox
                     v-model="checkbox1"
@@ -185,6 +185,7 @@
                       </v-card-actions>
                     </v-card>
                   </v-dialog>
+                
                   <!-- ============================여기까지=========================== -->
                   <v-checkbox
                     v-model="checkbox2"
@@ -400,7 +401,7 @@ export default {
         })
         .catch(err=>{
           this.has_id=false;
-          this.duplicated_id_message="다시 시도해주세요."
+          this.error_message="다시 시도해주세요."
           console.log(err);
         })
     },
@@ -429,8 +430,8 @@ export default {
 .agreebox {
   height: 100px;
 }
-</style>
 
+</style>
 <style scoped>
 table,
 td,
@@ -440,13 +441,20 @@ tr {
   border-left: none;
   border-right: none;
   border-top-color: black;
+  height: 60px;
 }
 th {
   background: rgb(62, 62, 63);
   color: white;
+  width: 144px;
+  font-weight: 400;
+  height: 60px;
 }
 table {
-  width: 100%;
-  height: 500px;
+  width: 90%;
+  font-size: 18px;
+}
+td{
+  padding-left: 40px;
 }
 </style>
