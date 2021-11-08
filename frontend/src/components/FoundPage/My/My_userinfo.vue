@@ -1,21 +1,25 @@
 <template>
-    <v-row justify="start" class="ma-auto grey lighten-3">
+    <v-row justify="center" class="ma-auto grey lighten-3">
         
-        <v-col cols="2"></v-col>
+        <v-col cols="auto">
+          <v-row justify="center">
+              <!-- 사용자 이미지(아이콘) -->
+              <v-col cols="auto" align-self="center">
+                  <svg style="width:100px;height:100px" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M12,19.2C9.5,19.2 7.29,17.92 6,16C6.03,14 10,12.9 12,12.9C14,12.9 17.97,14 18,16C16.71,17.92 14.5,19.2 12,19.2M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z" />
+                  </svg>    
+              </v-col>
+              
+              <!-- 사용자 이름 -->
+              <v-col cols="auto" align-self="center" > 
+                <v-sheet class="text-h5 font-weight-black text--grey">
+                  윤지훈님
+                </v-sheet>
+              </v-col>
+          </v-row>
+        </v-col>
 
-        <!-- 사용자 이미지(아이콘) -->
-        <v-col cols="auto" align-self="center">
-            <svg style="width:100px;height:100px" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M12,19.2C9.5,19.2 7.29,17.92 6,16C6.03,14 10,12.9 12,12.9C14,12.9 17.97,14 18,16C16.71,17.92 14.5,19.2 12,19.2M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z" />
-            </svg>    
-        </v-col>
         
-        <!-- 사용자 이름 -->
-        <v-col cols="auto" align-self="center" > 
-          <v-sheet class="text-h5 font-weight-black text--grey">
-            윤지훈님
-          </v-sheet>
-        </v-col>
 
         <v-col cols="1"></v-col>
 

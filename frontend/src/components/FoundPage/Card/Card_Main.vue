@@ -1,9 +1,11 @@
 <template>
   <v-container >
-    <v-container class="">
-      
-    <!-- 신상 카드 이미지 슬라이드 -->
-    <v-carousel
+    
+    <v-row>
+      <v-col cols="1"></v-col>
+        <v-col cols="10">
+          <v-container>
+          <v-carousel
       cycle
       height="200"
       hide-delimiters
@@ -83,10 +85,10 @@
         >
           <v-card>
             <v-img :src="card.img" />
-            <v-card-title>
+            <v-card-title class="text-subtitle-2 font-weight-bold">
               {{ card.title }}
             </v-card-title>
-            <v-container>
+            <v-container class="text-caption">
               {{ card.content }}
             </v-container>
           </v-card>
@@ -112,10 +114,10 @@
         >
           <v-card>
             <v-img contain :src="card.img" />
-            <v-card-title>
+            <v-card-title class="text-subtitle-2 font-weight-bold">
               {{ card.title }}
             </v-card-title>
-            <v-container>
+            <v-container class="text-caption">
               {{ card.content }}
             </v-container>
           </v-card>
@@ -123,6 +125,11 @@
       </v-row>
     </v-row>
     </v-container>
+        </v-col>
+        <v-col cols="1"></v-col>
+    </v-row>
+    <!-- 신상 카드 이미지 슬라이드 -->
+    
   </v-container>
 </template>
 

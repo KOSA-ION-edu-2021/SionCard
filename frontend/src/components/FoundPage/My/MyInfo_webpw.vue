@@ -74,15 +74,6 @@
                             -
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="2">
-                          <v-row justify="center">
-                            <v-col>
-                              <v-btn>다음</v-btn>
-                            </v-col>
-                          </v-row>
-                        </td>
-                    </tr>
                 </table>
 
             </v-col> 

@@ -1,52 +1,58 @@
 <template>
   <v-container class="pa-3 mt-10">
-    <!-- 상단 글귀 -->
-    <div class="card-rec-top">
-      <v-container>
-        <v-row justify="start">
-          <v-col cols="auto" class=""> <h2>카드 추천</h2> </v-col>
-        </v-row>
-        <!-- 다시 선택 버튼 -->
-        <v-row justify="end">
-            <!-- 모달 -->
-            <v-col cols="auto" class="yellow " dense>
-                <Card_Modal 
-                @changeCheck1="changeCheck1"
-                @changeCheck2="changeCheck2"
-                @changeCheck3="changeCheck3"
-                />
-            </v-col>
-        </v-row>
-      </v-container>
-    </div>
-
-    <!-- 카드 이미지 출력 -->
-    <v-container class="mt-10">
-      <v-row justify="space-around">
-          <v-col class="mt-10" v-for="(card, index) in typeFilter(check1, check2, check3)" :key="index" cols="4" > 
-          <!-- <v-col class="mt-10" v-for="card in cardInfo" :key="card" cols="4" v-show="card_check(card,check1,check2,check3)">  -->
-          <v-card class="pa-3 mt-5 text-center" dense outlined>
-            <v-img
-              aspect-ratio="2"
-              contain
-              :src=card.img
-            />
-            <v-row class="mt-3">
-              <v-col cols="12">
-                <strong>{{ card.title }}</strong>
-              </v-col>
-              <v-col colls="12">
-                {{ card.content }}
-              </v-col>
+    <v-row>
+      <v-col cols="1"></v-col>
+      <v-col cols="10">
+        <!-- 상단 글귀 -->
+        <div class="card-rec-top">
+          <v-container>
+            <v-row justify="start">
+              <v-col cols="auto" class=""> <h2>카드 추천</h2> </v-col>
             </v-row>
-            <v-btn class="mt-3" color="" elevation="" to=""> 상세 페이지</v-btn>
-          </v-card>
-        </v-col>
-        <!--         <v-col cols="12">
-          <v-card class="pa-3"> Cols 12 123 {{title}} </v-card>
-        </v-col> -->
-      </v-row>
-    </v-container>
+            <!-- 다시 선택 버튼 -->
+            <v-row justify="end">
+                <!-- 모달 -->
+                <v-col cols="auto" class="yellow " dense>
+                    <Card_Modal 
+                    @changeCheck1="changeCheck1"
+                    @changeCheck2="changeCheck2"
+                    @changeCheck3="changeCheck3"
+                    />
+                </v-col>
+            </v-row>
+          </v-container>
+        </div>
+
+        <!-- 카드 이미지 출력 -->
+        <v-container class="mt-10">
+          <v-row justify="space-around">
+              <v-col class="mt-10" v-for="(card, index) in typeFilter(check1, check2, check3)" :key="index" cols="4" > 
+              <!-- <v-col class="mt-10" v-for="card in cardInfo" :key="card" cols="4" v-show="card_check(card,check1,check2,check3)">  -->
+              <v-card class="pa-3 mt-5 text-center" dense outlined>
+                <v-img
+                  aspect-ratio="2"
+                  contain
+                  :src=card.img
+                />
+                <v-row class="mt-3">
+                  <v-col cols="12">
+                    <strong>{{ card.title }}</strong>
+                  </v-col>
+                  <v-col colls="12">
+                    {{ card.content }}
+                  </v-col>
+                </v-row>
+                <v-btn class="mt-3" color="" elevation="" to=""> 상세 페이지</v-btn>
+              </v-card>
+            </v-col>
+            <!--         <v-col cols="12">
+              <v-card class="pa-3"> Cols 12 123 {{title}} </v-card>
+            </v-col> -->
+          </v-row>
+        </v-container>
+      </v-col>
+      <v-col cols="1"></v-col>
+    </v-row>
   </v-container>
 </template>
 
