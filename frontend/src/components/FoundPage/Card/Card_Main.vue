@@ -5,35 +5,34 @@
       <v-col cols="1"></v-col>
         <v-col cols="10">
           <v-container>
-          <v-carousel
-      cycle
-      height="200"
-      hide-delimiters
-      hide-delimiter-background
-      class="mt-10 mb-10"
-      width="1000px"
-    >
-
-      <!-- 이미지 -->
-      <v-carousel-item v-for="(card, i) in cardInfo" :key="i">
-        <v-card>
-          <v-row justify="center" align="center">
-              <v-col cols="4">
-                  <v-card-title>
-                      {{card.title}}
-                  </v-card-title>
-                  <p class="ml-4">{{ card.content }}</p>
-              </v-col>
-              <v-col cols="6">
-                  <v-img
-                  contain
-                  aspect-ratio="3"
-                  :src=card.img />
-              </v-col>
-          </v-row>
-        </v-card>
-      </v-carousel-item>
-    </v-carousel>
+            <!-- 이미지 -->
+            <v-carousel
+              cycle
+              height="200"
+              hide-delimiters
+              hide-delimiter-background
+              class="mt-10 mb-10"
+              width="1000px"
+            >
+                <v-carousel-item v-for="(card) in cardInfo" :key="card.id">
+                  <v-card>
+                    <v-row justify="center" align="center">
+                        <v-col cols="4">
+                            <v-card-title>
+                                {{card.title}}
+                            </v-card-title>
+                            <p class="ml-4">{{ card.content }}</p>
+                        </v-col>
+                        <v-col cols="6">
+                            <v-img
+                            contain
+                            aspect-ratio="3"
+                            :src=card.img />
+                        </v-col>
+                    </v-row>
+                  </v-card>
+                </v-carousel-item>
+            </v-carousel>
 
     <!-- 카드 추천 링크 -->
     <v-card class="ma-5">
@@ -79,7 +78,7 @@
       <v-row>
         <v-col
           v-for="card in cardInfo"
-          :key="card"
+          :key="card.id"
           cols="3"
           v-show="card.credit"
         >
@@ -108,7 +107,7 @@
       <v-row>
         <v-col
           v-for="card in cardInfo"
-          :key="card"
+          :key="card.id"
           cols="3"
           v-show="card.check"
         >

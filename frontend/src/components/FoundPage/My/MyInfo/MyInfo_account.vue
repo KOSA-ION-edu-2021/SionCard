@@ -1,6 +1,6 @@
 <template >
     <v-container>
-        <v-row class="mb-0 text-h6 font-weight-regular">
+        <v-row class="mb-5 mt-5 text-h6 font-weight-regular">
             <v-col>
                 <table style="height: 60px; ">
                     <tr>
@@ -11,7 +11,7 @@
             </v-col>
         </v-row>
 
-        <v-row class="text-h6 font-weight-regular">
+        <v-row class="mb-5 mt-5 text-h6 font-weight-regular">
             <v-col cols="">
                 <table>
                     <tr>
@@ -68,12 +68,31 @@ export default {
 </script>
 
 <style>
-    th{
-        width: 144px;
-        font-weight: 400;
-        font-size: 20px;
-    }
-    td{
-        padding-left: 40px;
-    }
+
+</style>
+<style scoped>
+table,
+td,
+tr {
+  border: 1px solid rgb(196, 201, 209);
+  border-collapse: collapse;
+  border-left: none;
+  border-right: none;
+  border-top-color: black;
+  height: 60px;
+}
+th {
+  background: rgb(62, 62, 63);
+  color: white;
+  width: 144px;
+  font-weight: 400;
+  height: 60px;
+}
+table {
+  width: 90%;
+  font-size: 18px;
+}
+td{
+  padding-left: 40px;
+}
 </style>

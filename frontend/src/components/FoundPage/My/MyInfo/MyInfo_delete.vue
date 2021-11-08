@@ -27,7 +27,7 @@
                         <td>
                           <v-text-field
                             style="width: 30%"
-                            label="ID"
+                            label="E-MAIL"
                             required
                             dense
                             hide-details="auto"
@@ -41,7 +41,7 @@
                         <td>
                           <v-text-field
                             style="width: 30%"
-                            label="ID"
+                            label="PW"
                             required
                             dense
                             hide-details="auto"
@@ -60,11 +60,38 @@
 export default {
     name: 'myinfo_delete',
     data:() => ({
-        e1: 1,
+      
     }),
 }
 </script>
 
 <style>
 
+</style>
+
+<style scoped>
+table,
+td,
+tr {
+  border: 1px solid rgb(196, 201, 209);
+  border-collapse: collapse;
+  border-left: none;
+  border-right: none;
+  border-top-color: black;
+  height: 60px;
+}
+th {
+  background: rgb(62, 62, 63);
+  color: white;
+  width: 144px;
+  font-weight: 400;
+  height: 60px;
+}
+table {
+  width: 90%;
+  font-size: 18px;
+}
+td{
+  padding-left: 40px;
+}
 </style>

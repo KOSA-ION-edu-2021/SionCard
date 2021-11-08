@@ -318,7 +318,9 @@ export default {
 .agreebox {
   height: 100px;
 }
+</style>
 
+<style scoped>
 table,
 td,
 tr {

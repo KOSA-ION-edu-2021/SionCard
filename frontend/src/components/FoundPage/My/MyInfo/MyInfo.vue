@@ -21,7 +21,7 @@
               <v-tab-item>
                 <v-container fluid>
                   <v-row>
-                    <v-col class="grey lighten-5"> 
+                    <v-col class="grey lighten-3"> 
                       <myinfo_account/>
                     </v-col>
                   </v-row>
