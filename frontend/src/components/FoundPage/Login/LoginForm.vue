@@ -75,8 +75,8 @@ export default {
     }),
     props:{
         go_page:String,
-    }
-    ,methods:{
+    },
+    methods:{
         submit(){
             axios.post(this.$store.state.apihost+'/api/login',{
                     id: this.id,

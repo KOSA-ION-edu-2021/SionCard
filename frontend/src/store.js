@@ -8,7 +8,7 @@ export default new Vuex.Store({
         auth:{
             name:"이름"
         },
-        apihost: "http://si-on.net:8080"
+        apihost: "http://localhost:8080"
     },
     
     getters: {

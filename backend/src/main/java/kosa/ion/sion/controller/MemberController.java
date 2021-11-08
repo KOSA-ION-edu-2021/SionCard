@@ -34,7 +34,7 @@ public class MemberController {
 	public MembersDto GetAuth(@RequestHeader HashMap<String,String> header) {
 		String[] token = header.get("authorization").split(" ");
 		String member_id = jwtProvider.getUserNameFromJwtToken(token[0].equals("Bearer")?token[1]:"");
-		MembersDto member = membersRepository.findByMemberId(member_id).orElseThrow(() -> new NoSuchElementException());;
+		MembersDto member = membersRepository.findByMemberId(member_id).orElseThrow(() -> new NoSuchElementException());
 		member.setPassword(null);
 		return member;
 	}

@@ -2,6 +2,7 @@ package kosa.ion.sion.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -54,12 +57,27 @@ public class ApiController {
 		auth.remove("id");
 		return ResponseEntity.ok(auth);
 	}
+	
+	//회원가입 부분
 	@PostMapping("/signup")
 	@ResponseBody
 	public ResponseEntity<MembersDto> signup(HttpServletResponse response, @RequestBody MembersDto member) {
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
 		return ResponseEntity.ok(membersRepository.save(member));
 	}
+
+	@GetMapping("/id_check")
+	public Boolean idCheck(@RequestParam String id) {
+		try {
+			membersRepository.findByMemberId(id).orElseThrow(() -> new NoSuchElementException());
+			return false;
+		}
+		catch(Exception e){
+			//아이디가 존재하지 않으므로 사용가능함.
+			return true;	
+		}
+	}
+	
 	
 	@Autowired
 	CardsRepository cardsRepository;

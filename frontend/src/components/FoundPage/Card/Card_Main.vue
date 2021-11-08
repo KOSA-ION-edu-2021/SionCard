@@ -76,7 +76,7 @@
       <v-row>
         <v-col
           v-for="card in cardInfo"
-          :key="card"
+          :key="card.id"
           cols="3"
           v-show="card.credit"
         >
@@ -105,7 +105,7 @@
       <v-row>
         <v-col
           v-for="card in cardInfo"
-          :key="card"
+          :key="card.id"
           cols="3"
           v-show="card.check"
         >
