@@ -19,7 +19,6 @@
               <td>
                 <v-text-field
                   style="width: 30%"
-                  class=""
                   v-model="user_nm"
                   label="이름을 입력해 주세요."
                   :rules="user_nm_rule"
@@ -35,16 +34,20 @@
               <td>
                 <v-card class="d-flex" width="45%" flat tile>
                   <v-text-field
-                    class=""
-                    style="width: 30%"
-                    v-model="user_id"
-                    label="아이디를 입력해 주세요."
-                    :rules="user_id_rule"
-                    required
-                    dense
-                    outlined
-                    hide-details="auto"
-                  ></v-text-field>
+                      class="ml-10"
+                      width="54px"
+                      v-model="user_id"
+                      label="아이디를 입력해 주세요."
+                      @blur="id_check"
+                      :error="error_message"
+                      :error-messages="error_message"
+                      :success="success_message"
+                      :success-messages="success_message"
+                      required
+                      dense
+                      outlined
+                      hide-details="auto"
+                    ></v-text-field>
                   <v-btn class="ml-3" color="secondary">중복 확인</v-btn>
                 </v-card>
               </td>
@@ -55,7 +58,6 @@
                 <v-card class="d-flex" width="52%" flat tile>
                   <v-text-field
                     style="width: 30%"
-                    class=""
                     v-model="user_pw"
                     type="password"
                     label="비밀번호를 입력해 주세요."
@@ -108,7 +110,6 @@
               <td>
                 <v-text-field
                   style="width: 30%; text-align: center"
-                  class=""
                   v-model="user_pw_chk"
                   type="password"
                   label="비밀번호를 입력해 주세요."
@@ -126,7 +127,6 @@
               <td>
                 <v-text-field
                   style="width: 40%"
-                  class=""
                   v-model="user_email"
                   type="email"
                   label="이메일주소를 입력해주세요."
@@ -143,18 +143,17 @@
               <th>회원가입 필수동의</th>
               <td>
                 <v-checkbox
-                  class=""
-                  v-model="checkbox0"
+                  v-model="checkbox"
                   name="checkbox"
                   :label="`SION카드 온라인회원 가입 전체동의`"
-                  @click="checkbox1 = true; checkbox2 = true"
+                  @click="checkbox1 = checkbox; checkbox2 = checkbox"
                 ></v-checkbox>
 
                 <v-card class="d-flex" width="100%" flat tile>
                   <v-checkbox
-                    class=""
                     v-model="checkbox1"
                     :label="`온라인 이용약관 (필수)`"
+                    @click="checkbox=(checkbox1 && checkbox2);"
                   ></v-checkbox>
                   <!-- ==================온라인 이용약관 버튼 / 모달창============= -->
                   <v-dialog v-model="dialog2" width="600px">
@@ -177,7 +176,7 @@
                       </v-card-text>
                       <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="primary" text @click="checkbox1 = true; dialog2 = false">
+                        <v-btn color="primary" text @click="checkbox1 = true; checkbox=(checkbox1 && checkbox2); dialog2 = false">
                           Agree
                         </v-btn>
                         <v-btn color="primary" text @click="dialog2 = false">
@@ -190,6 +189,7 @@
                   <v-checkbox
                     v-model="checkbox2"
                     :label="`개인정보 수집 및 이용 (필수)`"
+                    @click="checkbox=(checkbox1 && checkbox2);"
                   ></v-checkbox>
                   <!-- ====================개인정보 수집 및 이용 버튼/모달창========== -->
                   <v-dialog v-model="dialog3" width="600px">
@@ -212,7 +212,7 @@
                       </v-card-text>
                       <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="primary" text @click="checkbox2 = true; dialog3 = false">
+                        <v-btn color="primary" text @click="checkbox2 = true; checkbox=(checkbox1 && checkbox2); dialog3 = false">
                           Agree
                         </v-btn>
                         <v-btn color="primary" text @click="dialog3 = false">
@@ -226,11 +226,10 @@
               </td>
             </tr>
           </table>
-
           <v-row justify="center">
             <v-col class="ma-5" cols="auto">
               <v-btn
-                to="/signincpl"
+                @click="submit"
                 method="post"
                 x-large
                 class="ml-auto; mb-16"
@@ -248,15 +247,19 @@
     </v-container>
 </template>
 
-                                    <script>
+<script>
 import Agree1 from "./Agree1.vue";
 import Agree2 from "./Agree2.vue";
+import axios from "axios";
 
 export default {
   name: "Signin",
   data() {
     return {
       user_id: "",
+      has_id:false,
+      error_message:false,
+      success_message:false,
       user_id_rule: [
         (v) => !!v || "아이디는 필수 입력사항입니다.",
         (v) =>
@@ -291,11 +294,12 @@ export default {
           !(v && v.length >= 30) || "패스워드는 30자 이상 입력할 수 없습니다.",
         (v) => v === this.user_pw || "패스워드가 일치하지 않습니다.",
       ],
+      user_email:"",
       user_email_chk: "",
       user_email_rule: [
         (v) => /.+@.+\..+/.test(v) || "이메일 형식으로 입력해주세요.",
       ],
-      checkbox: [],
+      checkbox: false,
       checkbox1: false,
       checkbox2: false,
       dialog1: false,
@@ -303,9 +307,115 @@ export default {
       dialog3: false,
       온라인이용상세: false,
       개인정보상세: false,
+      formHasErrors: false,
     };
   },
   methods: {
+    submit(){
+      for(let rule of this.user_nm_rule){
+        if(typeof rule(this.user_nm)=='string'){
+          alert("올바른 이름을 입력해 주세요.")
+          return;
+        }
+      }
+      for(let rule of this.user_id_rule){
+        if(typeof rule(this.user_id)=='string'){
+          alert("올바른 아이디를 입력해 주세요.")
+          return;
+        }
+      }
+      axios.get(this.$store.state.apihost+"/api/id_check?id="+this.user_id)
+        .then(res=>{
+          if(res.data){
+            this.has_id=true;
+            this.error_message=false
+            this.success_message="사용 가능한 아이디 입니다."
+            return;
+          }else{
+            this.has_id=false;
+            this.error_message="이미 존재하는 아이디 입니다."
+            this.success_message=false
+            return;
+          }
+        })
+        .catch(err=>{
+          this.has_id=false;
+          this.error_message="다시 시도해주세요."
+          console.log(err);
+          return;
+        })
+      for(let rule of this.user_pw_rule){
+        if(typeof rule(this.user_pw)=='string'){
+          alert("올바른 암호를 입력해 주세요.")
+          return;
+        }
+      }
+      for(let rule of this.user_pw_rule2){
+        if(typeof rule(this.user_pw_chk)=='string'){
+          alert("올바른 암호를 입력해 주세요.")
+          return;
+        }
+      }
+      for(let rule of this.user_email_rule){
+        if(typeof rule(this.user_email)=='string'){
+          alert("올바른 이메일을 입력해 주세요.")
+          return;
+        }
+      }
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////입력값 확인.
+      axios.post(this.$store.state.apihost+"/api/signup",{
+        name:this.user_nm,
+        member_id:this.user_id,
+        password:this.user_pw,
+        email:this.user_email,
+      })
+      .then(()=>{
+        alert("사이온카드 회원이 된것을 환영합니다!");
+        this.$router.push('/login');
+      })
+      .catch(err=>{
+        console.log("통신에 실패하였습니다. 다시 시도해주세요"+err);
+      })
+    },
+    id_check(){
+        for(let rule of this.user_id_rule){
+          if(typeof rule(this.user_id)=='string'){
+            this.has_id=false;
+            this.error_message=rule(this.user_id);
+            this.success_message=false
+            return;
+          }
+        }
+        axios.get(this.$store.state.apihost+"/api/id_check?id="+this.user_id)
+        .then(res=>{
+          if(res.data){
+            this.has_id=true;
+            this.error_message=false
+            this.success_message="사용 가능한 아이디 입니다."
+          }else{
+            this.has_id=false;
+            this.error_message="이미 존재하는 아이디 입니다."
+            this.success_message=false
+          }
+        })
+        .catch(err=>{
+          this.has_id=false;
+          this.duplicated_id_message="다시 시도해주세요."
+          console.log(err);
+        })
+    },
+    
+  }, 
+  computed: {
+    form () {
+      return {
+        user_nm: this.user_nm,
+        user_id:this.user_id,
+        user_pw:this.user_pw,
+        user_pw_chk:this.user_pw_chk,
+        user_email:this.user_email
+      }
+    },
   },
   components: {
     Agree1,
@@ -314,7 +424,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
 .agreebox {
   height: 100px;
 }

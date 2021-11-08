@@ -8,45 +8,39 @@
             <div class="text-h5">
                 SionCard 로그인
             </div>
-            <v-text-field
-                class="ma-0 mt-2"
-                label="아이디를 입력해 주세요."
-                dense
-                outlined
-                hide-details="auto"
-            ></v-text-field>
-            <v-text-field
-                class="ma-0 mt-2"
-                type="password"
-                label="비밀번호를 입력해 주세요."
-                dense
-                hint="잘못 입력하셨습니다."
-                hide-details="auto"
-                outlined
-            ></v-text-field>
-            <v-card
-                class="d-flex align-end mt-2"
-                width="100%"
-
-                flat
-                tile
-            >
-                <router-link class="mr-auto" to="/signin" tag="button">
+            <form @submit.prevent="submit">
+                <v-text-field
+                    class="ma-0 mt-2"
+                    label="아이디를 입력해 주세요."
+                    v-model="id"
+                    dense
+                    outlined
+                    hide-details="auto"
+                ></v-text-field>
+                <v-text-field
+                    class="ma-0 mt-2"
+                    v-model="pw"
+                    type="password"
+                    label="비밀번호를 입력해 주세요."
+                    dense
+                    hint="잘못 입력하셨습니다."
+                    hide-details="auto"
+                    outlined
+                ></v-text-field>
+                <v-card
+                    class="d-flex align-end mt-2"
+                    width="100%"
+                    flat
+                    tile
+                >   
                     <v-btn
                         class="px-1"
                         text
                         color="primary"
+                        to="/signin"
                     >
                         회원가입
                     </v-btn>
-                </router-link>
-                <v-btn
-                    class="ml-auto"
-                    color="primary"
-                    dense
-                >
-                    로그인
-                </v-btn>
 
             </v-card>
             <!-- <v-card
@@ -76,11 +70,36 @@
 <script>
 import Find_ID from "./Findid.vue";
 import Find_PW from "./Findpassword.vue";
+import axios from "axios";
 
 export default {
     components: {
         Find_ID,
         Find_PW,
+    },
+    data:()=>({
+        id:"",
+        pw:""
+    }),
+    props:{
+        go_page:String,
+    },
+    methods:{
+        submit(){
+            axios.post(this.$store.state.apihost+'/api/login',{
+                    id: this.id,
+                    password: this.pw,
+            })
+            .then(res=>{
+                console.log(res);
+                this.$store.commit("setJwt",res.data.jwt);
+                this.$router.push(this.go_page||'/' ); //go_page에 값이 없으면 루트페이지로 간다.
+            })
+            .catch(err=>{
+                console.log(err);
+                alert('로그인에 실패하였습니다.');
+            })
+        },
     }
 }
 </script>

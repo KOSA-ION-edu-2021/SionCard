@@ -1,4 +1,4 @@
-package kosa.ion.sion.config.security;
+package kosa.ion.sion.security;
 
 import java.io.IOException;
 
@@ -12,6 +12,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
+//jwt 
 @Component
 public class JwtEntryPoint implements AuthenticationEntryPoint {
 	private static final Logger logger = LoggerFactory.getLogger(JwtEntryPoint.class);

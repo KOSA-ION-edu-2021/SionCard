@@ -16,13 +16,16 @@ import io.jsonwebtoken.UnsupportedJwtException;
 
 @Component
 public class JwtProvider {
-	private static String jwtSecret = "www.wky.krSecretKey";
+	private static String jwtSecret = "wsdfhue918@#@!wwwew";
+									  
 	private static final Logger logger = LoggerFactory.getLogger(JwtProvider.class);
-	private static int jwtExpirationMs = 86400000;
+	private static int jwtExpirationMs = 10*(60*1000);//10분
 
 	public String generateJwtToken(Authentication authentication) {
 		String name = authentication.getName();
-		return Jwts.builder().setSubject(name).setIssuedAt(new Date())
+		return Jwts.builder()
+				.setSubject(name)
+				.setIssuedAt(new Date())
 				.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
 				.signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
 	}

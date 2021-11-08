@@ -126,11 +126,12 @@ export default {
     ],
     cardlink: [
       {link: "/cardrecommend"},
-    ]
+    ],
+    auth:null
   }),
   props:{
     changeDraw:Function,
-  }
+  },
 };
 </script>
 

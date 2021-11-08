@@ -3,6 +3,7 @@ package kosa.ion.sion.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,8 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import kosa.ion.sion.config.security.JwtEntryPoint;
 import kosa.ion.sion.security.JwtAuthenticationFilter;
+import kosa.ion.sion.security.JwtEntryPoint;
 import kosa.ion.sion.service.CustomUserDetailService;
 
 @Configuration
@@ -32,14 +33,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception{
 		return super.authenticationManagerBean();
-		}
+	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
 		http.csrf().disable()
 		.authorizeRequests()
-			.antMatchers("/api").permitAll()
-			.antMatchers("/").authenticated()
+			.antMatchers(HttpMethod.OPTIONS).permitAll()
+			.antMatchers("/api/*").permitAll()
+			.antMatchers("/admin/*").hasRole("ADMIN")
+			.anyRequest().authenticated()
 		.and()
 		.exceptionHandling()
 		.authenticationEntryPoint(jwtPoint)
