@@ -103,10 +103,7 @@
       Log In
       </v-btn>
     </router-link>
-    <!-- Sign In -->
-    <!-- <v-btn> Sign In </v-btn> -->
-
-    <v-app-bar-nav-icon @click.stop="changeDraw"></v-app-bar-nav-icon>
+    
   </v-app-bar>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <v-container class="pa-3 mt-10">
+  <v-container class="pa-3 mt-10 mb-10">
     <v-row>
       <v-col cols="1"></v-col>
       <v-col cols="10">

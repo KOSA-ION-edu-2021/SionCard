@@ -132,7 +132,7 @@ export default {
     check: false,
     credit: false,
     point: false,
-    mileages: false,
+    mileage: false,
     discount: false,
     stack: false
   }),
