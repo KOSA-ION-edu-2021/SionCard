@@ -5,9 +5,7 @@ import axios from 'axios';
 Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
-        auth:{
-            name:"이름"
-        },
+        auth:null,
         apihost: "http://localhost:8080"
     },
     
