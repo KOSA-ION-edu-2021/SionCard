@@ -68,9 +68,10 @@
     align="center"
     justify="space-around"
     >
-    <v-btn text>
-      혜택 한눈에 보기
-    </v-btn></v-row>
+      <v-btn text>
+        혜택 한눈에 보기
+      </v-btn>
+    </v-row>
     <v-row justify="center">
     <v-col cols="6">
     <v-card tile flat>

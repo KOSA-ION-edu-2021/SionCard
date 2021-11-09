@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <!-- 카드 이미지와 대표 정보 출력 -->
-    <CardInforHead0 :num="a" />
+    <CardInforHead0 :num="id" />
     <!-- 나머지 부분들 출력    -->
-    <CardInforBody0 :num="a" />
+    <CardInforBody0 :num="id" />
   </v-container>
 </template>
 
@@ -11,6 +11,7 @@
 import CardInforHead0 from "./CardInforHead0.vue";
 import CardInforBody0 from "./CardInforBody0.vue";
 import cardInfo from "@/assets/carddetail.js"
+
 
 export default {
   name: "CardInfor",
@@ -20,8 +21,11 @@ export default {
     CardInforBody0,
   },
   data:()=>({
-        a:6,
+ 
     }),
+    props :{
+      id : Number
+    }
 };
 </script>
 

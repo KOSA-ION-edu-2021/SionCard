@@ -1,38 +1,44 @@
 <template>
   <v-container >
-    
-    <v-row>
-      <v-col cols="1"></v-col>
-        <v-col cols="10">
-          <v-container>
-            <!-- 이미지 -->
-            <v-carousel
-              cycle
-              height="200"
-              hide-delimiters
-              hide-delimiter-background
-              class="mt-10 mb-10"
-              width="1000px"
-            >
-                <v-carousel-item v-for="(card) in cardInfo" :key="card.id">
-                  <v-card>
-                    <v-row justify="center" align="center">
-                        <v-col cols="4">
-                            <v-card-title>
-                                {{card.title}}
-                            </v-card-title>
-                            <p class="ml-4">{{ card.content }}</p>
-                        </v-col>
-                        <v-col cols="6">
-                            <v-img
-                            contain
-                            aspect-ratio="3"
-                            :src=card.img />
-                        </v-col>
-                    </v-row>
-                  </v-card>
-                </v-carousel-item>
-            </v-carousel>
+    <v-container class="">
+      
+    <!-- 신상 카드 이미지 슬라이드 -->
+    <v-carousel
+      cycle
+      height="200"
+      hide-delimiters
+      hide-delimiter-background
+      class="mt-10 mb-10"
+      width="1000px"
+    >
+
+      <!-- 이미지 -->
+      <v-carousel-item v-for="(card, i) in cardInfo" :key="i">
+        <v-card>
+          <v-row justify="center" align="center">
+              <v-col cols="4">
+                  <v-card-title>
+                      {{card.title}}
+                  </v-card-title>
+                  <p class="ml-4">{{ card.content }}</p>
+              </v-col>
+              <v-col cols="6">
+                <router-link
+                              :to="{
+                                name: 'card',
+                                params: { id: card.id-1 },
+                              }"
+                            >
+                  <v-img
+                  contain
+                  aspect-ratio="3"
+                  :src=card.img />
+                   </router-link>
+              </v-col>
+          </v-row>
+        </v-card>
+      </v-carousel-item>
+    </v-carousel>
 
     <!-- 카드 추천 링크 -->
     <v-card class="ma-5">
@@ -82,6 +88,12 @@
           cols="3"
           v-show="card.credit"
         >
+         <router-link style="text-decoration: none;"
+                              :to="{
+                                name: 'card',
+                                params: { id: card.id-1 },
+                              }"
+                            >
           <v-card>
             <v-img :src="card.img" />
             <v-card-title class="text-subtitle-2 font-weight-bold">
@@ -91,6 +103,7 @@
               {{ card.content }}
             </v-container>
           </v-card>
+         </router-link>
         </v-col>
       </v-row>
     </v-row>
@@ -111,6 +124,12 @@
           cols="3"
           v-show="card.check"
         >
+         <router-link style="text-decoration: none;"
+                              :to="{
+                                name: 'card',
+                                params: { id: card.id-1 },
+                              }"
+                            >
           <v-card>
             <v-img contain :src="card.img" />
             <v-card-title class="text-subtitle-2 font-weight-bold">
@@ -120,14 +139,12 @@
               {{ card.content }}
             </v-container>
           </v-card>
+         </router-link>
         </v-col>
       </v-row>
     </v-row>
     </v-container>
-        </v-col>
-        <v-col cols="1"></v-col>
-    </v-row>
-    <!-- 신상 카드 이미지 슬라이드 -->
+       
     
   </v-container>
 </template>
