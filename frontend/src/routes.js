@@ -8,15 +8,7 @@ import MyInfo from "./components/FoundPage/My/MyInfo.vue"
 import MyCard from "./components/FoundPage/My/MyCard.vue"
 import Cardrecommend from "./components/FoundPage/Card/Card_Recommend.vue"
 import CardMain from "./components/FoundPage/Card/Card_Main.vue"
-
 import CardInfor0 from "./components/FoundPage/Card/CardInfor/CardInfor0.vue"
-import CardInfor1 from "./components/FoundPage/Card/CardInfor/CardInfor1.vue"
-import CardInfor2 from "./components/FoundPage/Card/CardInfor/CardInfor2.vue"
-// import CardInfor3 from "./components/FoundPage/Card/CardInfor/CardInfor3.vue"
-// import CardInfor4 from "./components/FoundPage/Card/CardInfor/CardInfor4.vue"
-// import CardInfor5 from "./components/FoundPage/Card/CardInfor/CardInfor5.vue"
-// import CardInfor6 from "./components/FoundPage/Card/CardInfor/CardInfor6.vue"
-// import CardInfor7 from "./components/FoundPage/Card/CardInfor/CardInfor7.vue"
 
 const routes=[
     {
@@ -70,17 +62,6 @@ const routes=[
                 component: CardInfor0,
                 props: true,
             },
-            {
-                path: "card1",
-                name: "cardinfor",
-                component: CardInfor1
-            },
-            {
-                path: "card2",
-                name: "cardinfor",
-                component: CardInfor2
-            },
-           
         ]
     },
     {
