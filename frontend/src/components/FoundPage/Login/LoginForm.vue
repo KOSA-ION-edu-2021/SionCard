@@ -51,14 +51,7 @@
                     </v-btn>
 
             </v-card>
-            <!-- <v-card
-                class="d-flex align-center mt-16"
-                width="100%"
-                flat tile
-            > -->
-                <!-- <v-spacer/> -->
-<!--                 <router-link class="ma-auto mr-1" to="/find_id" tag="button"> 아이디 찾기</router-link>
-                <router-link class="ma-auto" to="/find_password" tag="button">| 비밀번호 찾기 </router-link> -->
+            
             <v-row class="mt-7 justify-center">
                 <v-col cols="auto">
                     <Find_ID/>
@@ -100,7 +93,7 @@ export default {
                     password: this.pw,
             })
             .then(res=>{
-                console.log(res);
+                console.log(res.data);
                 this.$store.commit("setJwt",res.data.jwt);
                 this.$router.push(this.go_page||'/' ); //go_page에 값이 없으면 루트페이지로 간다.
             })

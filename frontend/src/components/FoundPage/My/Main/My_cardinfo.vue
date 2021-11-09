@@ -10,17 +10,17 @@
                         <!-- 좌측 상단 -->
                         <v-row justify="space-between" class="text-h6">
                                 <v-col cols="auto" class="font-weight-bold">
-                                대표 계좌
+                                대표 카드
                                 </v-col>
                                 <v-col cols="auto" >
-                                    신한은행 : 11038****190
+                                    (XX 카드 || 카드번호 : abcd-efgh-ijkl-mnop))
                                 </v-col>
                         </v-row>              
                         <v-row><v-divider></v-divider></v-row>
                         <!-- 좌측 중간 -->
                         <v-row justify="space-between" class="text-h5">
                                 <v-col cols="auto" class="text-subtitle-1 font-weight-bold" >
-                                출금 가능 금액
+                                총 사용 금액
                                 </v-col>
                                 <v-col cols="auto" >
                                     <b>0</b> 원

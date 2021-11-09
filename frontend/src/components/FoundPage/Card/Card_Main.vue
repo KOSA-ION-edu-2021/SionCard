@@ -86,7 +86,7 @@
           v-for="card in cardInfo"
           :key="card.id"
           cols="3"
-          v-show="card.credit"
+          v-show="card.card_credit"
         >
          <router-link style="text-decoration: none;"
                               :to="{
@@ -122,7 +122,7 @@
           v-for="card in cardInfo"
           :key="card.id"
           cols="3"
-          v-show="card.check"
+          v-show="card.card_check"
         >
          <router-link style="text-decoration: none;"
                               :to="{
@@ -150,11 +150,29 @@
 </template>
 
 <script>
-import cardInfo from "@/assets/cardInfo.js";
+/* import cardInfo from "@/assets/cardInfo.js"; */
+import axios from 'axios'
+
 export default {
   data: () => ({
-    cardInfo,
+    cardInfo : null,
   }),
+  mounted() {
+    this.getcardInfo()
+  },
+  methods:{
+    getcardInfo(){
+      axios.get(this.$store.state.apihost+'/api/card_info')
+      .then((res)=>{
+        console.log(res.data);
+        this.cardInfo = res.data 
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+
+    }
+  }
 };
 </script>
 

@@ -10,6 +10,7 @@ import Cardrecommend from "./components/FoundPage/Card/Card_Recommend.vue"
 import CardMain from "./components/FoundPage/Card/Card_Main.vue"
 import CardInfor0 from "./components/FoundPage/Card/CardInfor/CardInfor0.vue"
 
+
 const routes=[
     {
         path: "/",
@@ -44,7 +45,7 @@ const routes=[
             {
                 path: "mycard",
                 name: "mycard",
-                component: MyCard
+                component: MyCard,
             },
             {
                 path: "cardrecommend",
@@ -67,6 +68,7 @@ const routes=[
     {
         path: "*",
         component: NotFoundPage
-    }
+    },
+    
 ]
 export default routes

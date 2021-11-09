@@ -25,4 +25,7 @@ public class MembersDto {
 	private String name;
 	private String password;
 	private String email;
+	private String birth;
+	private String address;
+	private String phone;
 }

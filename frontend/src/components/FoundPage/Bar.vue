@@ -26,20 +26,20 @@
             plain
             v-bind="attrs"
             v-on="on"
-            to="/my_main"
+            @click="loginCheck_myMain"
           >
             My
           </v-btn>
         </template>
         <v-list>
-          <v-list-item class="" to="/myinfo">
-            <v-list-item-title>
+          <v-list-item class="" @click="loginCheck_myInfo">
+            <v-list-item-title >
                 <!-- <router-link class="text-decoration-none" to="/myinfo"> -->
                   내 정보
                 <!-- </router-link> -->
               </v-list-item-title>
           </v-list-item>
-          <v-list-item class="" to="/mycard">
+          <v-list-item class="" @click="loginCheck_myCard">
             <v-list-item-title>
                 <!-- <router-link class="text-decoration-none" to="/mycard"> -->
                   내 카드
@@ -58,6 +58,7 @@
             v-on="on"
             to="/card_main"
             class="mr-16"
+            
           >
             Card 
           </v-btn>
@@ -108,8 +109,34 @@ export default {
     ],
     auth:null
   }),
-  props:{
-    changeDraw:Function,
+  methods: {
+    loginCheck_myMain(){
+      if(this.$store.state.auth == null){
+        this.$router.push('login')
+        alert('로그인을 해야 접속 가능합니다!');
+      }
+      else{
+        this.$router.push('my_main')
+      }
+    },
+    loginCheck_myInfo(){
+      if(this.$store.state.auth == null){
+        this.$router.push('login')
+        alert('로그인을 해야 접속 가능합니다!');
+      }
+      else{
+        this.$router.push('my_info')
+      }
+    },
+    loginCheck_myCard(){
+      if(this.$store.state.auth == null){
+        this.$router.push('login')
+        alert('로그인을 해야 접속 가능합니다!');
+      }
+      else{
+        this.$router.push('my_card')
+      }
+    },
   },
 };
 </script>

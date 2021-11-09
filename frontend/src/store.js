@@ -5,13 +5,12 @@ import axios from 'axios';
 Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
-        auth:{
-            name:"이름"
-        },
-        apihost: "http://localhost:8080"
+        auth:null,
+        apihost: "http://localhost:8080",
     },
     
     getters: {
+        
     },
     mutations: {
         SET_DATA(state, payload) {

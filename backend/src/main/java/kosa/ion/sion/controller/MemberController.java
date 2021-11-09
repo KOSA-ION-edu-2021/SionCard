@@ -1,6 +1,7 @@
 package kosa.ion.sion.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import kosa.ion.sion.dto.CardsDto;
 import kosa.ion.sion.dto.MembersDto;
 import kosa.ion.sion.repository.MembersRepository;
 import kosa.ion.sion.security.JwtProvider;
@@ -38,5 +40,20 @@ public class MemberController {
 		member.setPassword(null);
 		return member;
 	}
+	
+	//@GetMapping("/memberinfo")
+	//public MembersDto MemeberInfo(@RequestHeader HashMap<String,String> header) {
+	//	String[] token = header.get("authorization").split(" ");
+	//	String member_id = jwtProvider.getUserNameFromJwtToken(token[0].equals("Bearer")?token[1]:"");
+	//	MembersDto member = membersRepository.findByMemberId(member_id).orElseThrow(() -> new NoSuchElementException());
+	//	member.setPassword(null);
+	//	return member;
+	//}
+	
+	@GetMapping("/memberinfo")
+	public List<MembersDto> MyInfo() {
+		return membersRepository.findAll();
+	}
+	
 	
 }
