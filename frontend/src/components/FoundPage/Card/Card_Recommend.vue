@@ -39,7 +39,14 @@
                 {{ card.content }}
               </v-col>
             </v-row>
+             <router-link style="text-decoration: none;"
+                              :to="{
+                                name: 'card',
+                                params: { id: card.id-1 },
+                              }"
+                            >
             <v-btn class="mt-3" color="" elevation="" to=""> 상세 페이지</v-btn>
+             </router-link>
           </v-card>
         </v-col>
         <!--         <v-col cols="12">

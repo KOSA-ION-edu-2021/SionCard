@@ -23,10 +23,17 @@
                   <p class="ml-4">{{ card.content }}</p>
               </v-col>
               <v-col cols="6">
+                <router-link
+                              :to="{
+                                name: 'card',
+                                params: { id: card.id-1 },
+                              }"
+                            >
                   <v-img
                   contain
                   aspect-ratio="3"
                   :src=card.img />
+                   </router-link>
               </v-col>
           </v-row>
         </v-card>
@@ -81,6 +88,12 @@
           cols="3"
           v-show="card.credit"
         >
+         <router-link style="text-decoration: none;"
+                              :to="{
+                                name: 'card',
+                                params: { id: card.id-1 },
+                              }"
+                            >
           <v-card>
             <v-img :src="card.img" />
             <v-card-title>
@@ -90,6 +103,7 @@
               {{ card.content }}
             </v-container>
           </v-card>
+         </router-link>
         </v-col>
       </v-row>
     </v-row>
@@ -110,6 +124,12 @@
           cols="3"
           v-show="card.check"
         >
+         <router-link style="text-decoration: none;"
+                              :to="{
+                                name: 'card',
+                                params: { id: card.id-1 },
+                              }"
+                            >
           <v-card>
             <v-img contain :src="card.img" />
             <v-card-title>
@@ -119,6 +139,7 @@
               {{ card.content }}
             </v-container>
           </v-card>
+         </router-link>
         </v-col>
       </v-row>
     </v-row>
