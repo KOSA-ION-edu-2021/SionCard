@@ -41,6 +41,14 @@
                     >
                         회원가입
                     </v-btn>
+                    <v-btn
+                        class="ml-auto"
+                        color="primary"
+                        type="submit"
+                        dense
+                    >
+                        로그인
+                    </v-btn>
 
             </v-card>
             <!-- <v-card

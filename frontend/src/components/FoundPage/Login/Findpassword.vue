@@ -7,7 +7,7 @@
       ><!-- fullscreen 추가하면 모달창 화면 전체 -->
       <template v-slot:activator="{ on, attrs }">
         <v-col class="" cols="auto" v-bind="attrs" v-on="on">
-          <v-btn color="primary" dark v-bind="attrs" v-on="on">
+          <v-btn color="grey darken-3" dark v-bind="attrs" v-on="on" text>
             <b> 비밀번호 찾기 </b>
           </v-btn>
         </v-col>
