@@ -32,6 +32,7 @@ public class MemberController {
 		return "success";
 	}
 	
+	
 	@GetMapping("/get_auth")
 	public MembersDto GetAuth(@RequestHeader HashMap<String,String> header) {
 		String[] token = header.get("authorization").split(" ");
@@ -50,10 +51,10 @@ public class MemberController {
 	//	return member;
 	//}
 	
-	@GetMapping("/memberinfo")
-	public List<MembersDto> MyInfo() {
-		return membersRepository.findAll();
-	}
+	//@GetMapping("/memberinfo")
+	//public List<MembersDto> MyInfo() {
+	//	return membersRepository.findAll();
+	//}
 	
 	
 }

@@ -134,7 +134,7 @@ export default {
         alert('로그인을 해야 접속 가능합니다!');
       }
       else{
-        this.$router.push('my_card')
+        this.$router.push('mycard')
       }
     },
   },
