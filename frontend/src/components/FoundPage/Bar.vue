@@ -64,19 +64,19 @@
           </v-btn>
         </template>
         <v-list >
-          <v-list-item class="" to="/cardinfor">
-            <v-list-item-title>
-              <!-- <router-link  to="/cardinfor" class="text-decoration-none"> -->
-                카드 안내
-              <!-- </router-link> -->
-              </v-list-item-title>
-          </v-list-item>
           <v-list-item class="" to="/cardrecommend">
             <!-- <router-link  to="/cardrecommend" class="text-decoration-none"> -->
             <v-list-item-title >
                 카드 추천
               </v-list-item-title>
               <!-- </router-link> -->
+          </v-list-item>
+          <v-list-item @click="loginCheck_cardApply">
+            <v-list-item-title>
+              <!-- <router-link  to="/cardinfor" class="text-decoration-none"> -->
+                카드 신청
+              <!-- </router-link> -->
+              </v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>    
@@ -125,7 +125,7 @@ export default {
         alert('로그인을 해야 접속 가능합니다!');
       }
       else{
-        this.$router.push('my_info')
+        this.$router.push('myinfo')
       }
     },
     loginCheck_myCard(){
@@ -135,6 +135,15 @@ export default {
       }
       else{
         this.$router.push('mycard')
+      }
+    },
+    loginCheck_cardApply(){
+      if(this.$store.state.auth == null){
+        this.$router.push('login')
+        alert('로그인을 해야 접속 가능합니다!');
+      }
+      else{
+        this.$router.push('cardapply')
       }
     },
   },

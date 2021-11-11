@@ -16,7 +16,8 @@
         >
 
           <!-- 이미지 -->
-          <v-carousel-item v-for="(card, i) in cardInfo" :key="i">
+          <v-carousel-item class="mt-5 mb-5"
+            v-for="(card, i) in cardInfo" :key="i">
             <v-card flat tile>
               <v-row justify="center" align="center">
                   <v-col cols="4">
@@ -44,7 +45,7 @@
         </v-carousel>
 
         <!-- 카드 추천 링크 -->
-        <v-card class="ma-5">
+        <v-card class="mt-5 mb-5"> 
           <v-container>
             <v-row justify="space-around">
               <v-col cols="5" align-self="center">
@@ -76,7 +77,7 @@
         </v-card>
 
         <!-- 신용카드 -->
-        <v-row class="ma-5">
+        <v-row class="mt-5 mb-5">
           <v-row class="mt-7">
             <v-col class="mr-3" cols="auto">
               <b>SI-ON 신용카드</b>
@@ -85,34 +86,34 @@
             <v-col class="ml-3"> 시온에서만 느끼는 효율적인 신용카드 </v-col>
           </v-row>
           <v-row>
-            <v-col
-              v-for="card in cardInfo"
-              :key="card.id"
-              cols="3"
-              v-show="card.card_credit"
-            >
-            <router-link style="text-decoration: none;"
-                                  :to="{
-                                    name: 'card',
-                                    params: { id: card.id-1 },
-                                  }"
-                                >
-              <v-card flat tile>
-                <v-img :src="card.img" />
-                <v-card-title class="text-subtitle-2 font-weight-bold">
-                  {{ card.title }}
-                </v-card-title>
-                <v-container class="text-caption">
-                  {{ card.content }}
-                </v-container>
-              </v-card>
-            </router-link>
-            </v-col>
+              <v-col
+                v-for="card in cardInfo"
+                :key="card.id"
+                cols="3"
+                v-show="card.card_credit"
+              >
+                <router-link style="text-decoration: none;"
+                                      :to="{
+                                        name: 'card',
+                                        params: { id: card.id-1 },
+                                      }"
+                                    >
+                  <v-card flat>
+                    <v-img :src="card.img" />
+                    <v-container class="text-subtitle-2 font-weight-bold">
+                      {{ card.title }}
+                    </v-container>
+                    <v-container class="text-caption">
+                      {{ card.content }}
+                    </v-container>
+                  </v-card>
+                </router-link>
+              </v-col>
           </v-row>
         </v-row>
 
         <!-- 체크카드 -->
-        <v-row class="ma-5 mb-5">
+        <v-row class="mt-5 mb-10">
           <v-row class="mt-7">
             <v-col class="mr-3" cols="auto">
               <b>SI-ON 체크카드</b>
@@ -133,7 +134,7 @@
                                     params: { id: card.id-1 },
                                   }"
                                 >
-              <v-card>
+              <v-card flat>
                 <v-img contain :src="card.img" />
                 <v-card-title class="text-subtitle-2 font-weight-bold">
                   {{ card.title }}

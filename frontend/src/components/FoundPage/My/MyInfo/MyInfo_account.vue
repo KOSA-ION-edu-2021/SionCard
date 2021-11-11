@@ -45,14 +45,21 @@
                         </td>
                     </tr>
                 </table>
-
             </v-col> 
         </v-row>
+                <v-row class="ma-5" justify="center">
+                    <v-col align-self="center">
+                        
+                        <Acount_Change/>
+                    </v-col>
+                </v-row>
+                
     </v-container>
 </template>
 
 <script>
 /* import axios from 'axios' */
+import Acount_Change from './MyInfo_account_Change.vue'
 export default {
     name:"myinfo_account",
     data:()=>({
@@ -60,6 +67,9 @@ export default {
         memberInfo : null,
         
     }),
+    components :{
+        Acount_Change,
+    },
     /* mounted() {
         this.getmemberInfo()
     }, */
