@@ -270,7 +270,19 @@ export default {
         mastercard: true,
         traficcard: true,
     }),
+    mounted() {
+        this.loginCheck_cardApply()    
+    },
     methods: {
+    loginCheck_cardApply(){
+      if(this.$store.state.auth == null){
+        this.$router.push('login')
+        alert('로그인을 해야 접속 가능합니다!');
+      }
+      else{
+        this.$router.push('cardapply')
+      }
+    },
         cardpick(num){
             this.wantedcard=this.cardInfo[num].img
         },

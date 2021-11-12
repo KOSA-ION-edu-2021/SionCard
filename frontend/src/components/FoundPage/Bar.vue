@@ -26,20 +26,20 @@
             plain
             v-bind="attrs"
             v-on="on"
-            @click="loginCheck_myMain"
+            to="/my_main"
           >
             My
           </v-btn>
         </template>
         <v-list>
-          <v-list-item class="" @click="loginCheck_myInfo">
+          <v-list-item class="" to="/myinfo">
             <v-list-item-title >
                 <!-- <router-link class="text-decoration-none" to="/myinfo"> -->
                   내 정보
                 <!-- </router-link> -->
               </v-list-item-title>
           </v-list-item>
-          <v-list-item class="" @click="loginCheck_myCard">
+          <v-list-item class="" to="/mycard">
             <v-list-item-title>
                 <!-- <router-link class="text-decoration-none" to="/mycard"> -->
                   내 카드
@@ -71,7 +71,7 @@
               </v-list-item-title>
               <!-- </router-link> -->
           </v-list-item>
-          <v-list-item @click="loginCheck_cardApply">
+          <v-list-item to="/cardapply">
             <v-list-item-title>
               <!-- <router-link  to="/cardinfor" class="text-decoration-none"> -->
                 카드 신청
@@ -110,47 +110,12 @@ export default {
     auth:null
   }),
   mounted() {
-    this.loginCheck_myMain()
-    /* this.loginCheck_myInfo()
-    this.loginCheck_myCard() */
+    
   },
   methods: {
-    loginCheck_myMain(){
-      if(this.$store.state.auth == null){
-        this.$router.push('login')
-        alert('로그인을 해야 접속 가능합니다!');
-      }
-      else{
-        this.$router.push('my_main')
-      }
-    },
-    loginCheck_myInfo(){
-      if(this.$store.state.auth == null){
-        this.$router.push('login')
-        alert('로그인을 해야 접속 가능합니다!');
-      }
-      else{
-        this.$router.push('myinfo')
-      }
-    },
-    loginCheck_myCard(){
-      if(this.$store.state.auth == null){
-        this.$router.push('login')
-        alert('로그인을 해야 접속 가능합니다!');
-      }
-      else{
-        this.$router.push('mycard')
-      }
-    },
-    loginCheck_cardApply(){
-      if(this.$store.state.auth == null){
-        this.$router.push('login')
-        alert('로그인을 해야 접속 가능합니다!');
-      }
-      else{
-        this.$router.push('cardapply')
-      }
-    },
+    
+    
+    
   },
 };
 </script>

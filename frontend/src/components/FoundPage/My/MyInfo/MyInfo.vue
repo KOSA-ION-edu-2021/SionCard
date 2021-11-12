@@ -76,23 +76,20 @@ export default {
       myinfo_webpw,
       myinfo_delete
   },
-  /* mounted() {
-    this.getmemberInfo()
+  mounted() {
+    this.loginCheck_myInfo()
   },
-  methods:{
-    getmemberInfo(){
-      axios.get(this.$store.state.apihost +'memberinfo')
-      .then((res)=>{
-        console.log(res.data);
-        this.memberInfo = res.data
-        console.log(this.memberInfo);
-      })
-      .catch((err)=>{
-        console.log(err);
-      })
-    }
-  }, */
-  
+  methods: {
+    loginCheck_myInfo(){
+      if(this.$store.state.auth == null){
+        this.$router.push('login')
+        alert('로그인을 해야 접속 가능합니다!');
+      }
+      else{
+        this.$router.push('myinfo')
+      }
+    },
+  },
 }
 </script>
 
