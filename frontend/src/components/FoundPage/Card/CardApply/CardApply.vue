@@ -3,7 +3,12 @@
       <v-row>
       <v-col cols="1"></v-col>
       <v-col cols="10">
-            <v-stepper v-model="e1">
+
+          <v-sheet class="mt-5 mb-10 text-h3 font-weight-bold">
+              카드 신청
+          </v-sheet>  
+
+            <v-stepper v-model="e1" class="mb-5" >
                 <!-- 상단 -->
                 <v-stepper-header class="grey lighten-2">
                     <v-stepper-step
@@ -42,48 +47,33 @@
                 </v-stepper-header>
 
                 <!-- 정보 입력 틀 -->
-                <v-stepper-items class="grey lighten-4">
+                <v-stepper-items class="grey lighten-4" >
 
                     <!-- 1단계 : 카드 선택 -->
-                    <v-stepper-content step="1">
-                        <v-hover v-slot="{ hover }">
-                        <v-row class="mb-12">
-                            <v-col cols="3"
-                            v-for="(card,i) in cardInfo" :key="i"
-                            >
-                              <v-card dense outlined
-                                :elevation="hover ? 10 : 1"
-                                :class="{ 'on-hover': hover }"
-                                >
-                                <v-img
-                                :src=card.img
-                                contain
-                                aspect-ratio="2"
-                                ></v-img>
-                                    <v-expand-transition>
-                                        <v-container
-                                        v-if="hover"
-                                        class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal text-h2 white--text"
-                                        :class="{ 'show-img': hover }"
-                                        >
-                                          <!-- <v-card
-                                          :class="{ 'show-img': hover }"
-                                          > -->
-                                            <v-img
-                                            :src=card.img
-                                            contain
-                                            aspect-ratio="2"
-                                            />
-                                          <!-- </v-card>   -->
-                                            
-                                        </v-container>
-                                    </v-expand-transition>
-                                         
-                                
-                                </v-card>    
+                    <v-stepper-content step="1" >
+                        
+                        <v-row class="mb-12" >
+                            <v-col cols="3" v-for="(card,i) in cardInfo" :key="i">
+                                <v-hover v-slot="{ hover }">
+                                    <v-img
+                                    class="ma-5"
+                                    :src=card.img
+                                    contain
+                                    aspect-ratio="2"
+                                    >
+                                        <v-expand-transition>
+                                                <v-img
+                                                v-if="hover"
+                                                :src=card.img
+                                                contain
+                                                />
+                                        </v-expand-transition>
+                                    </v-img>
+                                </v-hover>
+                                <!-- </v-card>  -->   
                             </v-col>
                         </v-row>
-                        </v-hover>
+                        
                         <v-btn
                         color="grey lighten-2"
                         @click="e1 = 2"
@@ -102,32 +92,31 @@
                         class="mb-12"
                         color="grey lighten-1"
                         >
-
                                 <v-img
                                 :src=cardInfo[0].img
                                 contain
                                 aspect-ratio="4"
                                 />
-                                <v-row class="mt-10 mb-10">
-                                    <v-col>
+                                <v-row class="mt-10 mb-10 text-h5 font-weight-bold" >
+                                    <v-col align-self="center" class="ml-5">
                                         해외 결제 기능
                                     </v-col>
-                                    <v-col>
-                                        <v-btn>master</v-btn>
+                                    <v-col align-self="center">
+                                        <v-btn @click="color1" :color=bgcolor1 outlined min-width="100" large>master</v-btn>
                                     </v-col>
-                                    <v-col>
-                                        <v-btn>master</v-btn>
+                                    <v-col align-self="center">
+                                        <v-btn @click="color2" :color=bgcolor2 outlined min-width="100" large>국내 전용</v-btn>
                                     </v-col>
                                 </v-row>
-                                <v-row class="mt-10 mb-10">
-                                    <v-col>
+                                <v-row class="mt-10 mb-10 text-h5 font-weight-bold" >
+                                    <v-col align-self="center" class="ml-5">
                                         후불교통 기능
                                     </v-col>
-                                    <v-col>
-                                        <v-btn>신청</v-btn>
+                                    <v-col align-self="center">
+                                        <v-btn @click="color3" :color=bgcolor3 outlined min-width="100" large>신청</v-btn>
                                     </v-col>
-                                    <v-col>
-                                        <v-btn>신청안함</v-btn>
+                                    <v-col align-self="center">
+                                        <v-btn @click="color4" :color=bgcolor4 outlined min-width="100" large>신청안함</v-btn>
                                     </v-col>
                                 </v-row>
 
@@ -263,7 +252,35 @@ export default {
     data: ()=>({
         cardInfo,
         e1: 1,
+        bgcolor1:'blue',
+        bgcolor2:'',
+        bgcolor3:'blue',
+        bgcolor4:'',
+        mastercard: true,
+        traficcard: true,
     }),
+    methods: {
+        color1(){
+            this.bgcolor1 = 'blue'
+            this.bgcolor2 = ''
+            this.mastercard = true
+        },
+        color2(){
+            this.bgcolor1 = ''
+            this.bgcolor2 = 'blue'
+            this.mastercard = false
+        },
+        color3(){
+            this.bgcolor3 = 'blue'
+            this.bgcolor4 = ''
+            this.traficcard = true
+        },
+        color4(){
+            this.bgcolor3 = ''
+            this.bgcolor4 = 'blue'
+            this.traficcard = false
+        },
+    },
 }
 </script>
 
