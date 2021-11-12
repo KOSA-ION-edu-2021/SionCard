@@ -1,6 +1,5 @@
 package kosa.ion.sion.dto;
 
-
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -16,18 +15,20 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 
 @Entity
-@Table(name = "membersCard")
+@Table(name = "memberUse")
 @Data
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class MembersCardDto {
+public class MemberUseDto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private Date cardEdate;
-	private String cardId;
-	@Column(unique=true)
 	private String cardNum;
-	private String cardTitle;
 	private String memberId;
-	
+	private String usePrice;
+	private Date useDate;
+	private String useLocation;
+	private String useDiscount;
+	private String useStack;
+	private String usePoint;
+	private String useMileage;
 }

@@ -3,6 +3,7 @@ package kosa.ion.sion.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +21,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import kosa.ion.sion.dto.CardsDto;
+import kosa.ion.sion.dto.MemberUseDto;
+import kosa.ion.sion.dto.MembersCardDto;
 import kosa.ion.sion.dto.MembersDto;
+import kosa.ion.sion.repository.MemberUseRepository;
 import kosa.ion.sion.repository.MembersCardRepository;
 import kosa.ion.sion.repository.MembersRepository;
 import kosa.ion.sion.security.JwtProvider;
@@ -51,7 +55,7 @@ public class MemberController {
 	}
 	
 	
-	//MembersCardRepository 부분
+	//MembersCardRepository
 	@Autowired
 	MembersCardRepository membersCardRepository;
 	
@@ -62,9 +66,20 @@ public class MemberController {
 	}
 	
 	//카드 신청 부분
-	@PostMapping("/card_application")
+	@PostMapping("/application")
 	@ResponseBody
 	public ResponseEntity<MembersCardDto> application(HttpServletResponse response, @RequestBody MembersCardDto memberscard) {
 		return ResponseEntity.ok(membersCardRepository.save(memberscard));
 	}
+	
+	//MemberUseRepository
+	@Autowired
+	MemberUseRepository memberUseRepository;
+	
+	//고객이 카드 사용한 정보 가져오기
+	@PostMapping("/get_use_card")
+	public List<MemberUseDto> getMembersUse(@RequestBody Map<String, Object> param) {
+		return memberUseRepository.findAll();
+	}
+	
 }
