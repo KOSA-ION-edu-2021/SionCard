@@ -22,7 +22,7 @@
                 <v-container fluid>
                   <v-row>
                     <v-col class="grey lighten-3"> 
-                      <myinfo_account/>
+                      <myinfo_account />
                     </v-col>
                   </v-row>
                 </v-container>
@@ -64,17 +64,34 @@
 import myinfo_account from './MyInfo_account.vue'
 import myinfo_webpw from './MyInfo_webpw.vue'
 import myinfo_delete from './MyInfo_delete.vue'
+/* import axios from 'axios' */
 
 export default {
   name: "myinfo",
   data:() =>({
-    
+    /* memberInfo : null, */
   }),
   components:{
       myinfo_account,
       myinfo_webpw,
       myinfo_delete
   },
+  /* mounted() {
+    this.getmemberInfo()
+  },
+  methods:{
+    getmemberInfo(){
+      axios.get(this.$store.state.apihost +'memberinfo')
+      .then((res)=>{
+        console.log(res.data);
+        this.memberInfo = res.data
+        console.log(this.memberInfo);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+    }
+  }, */
   
 }
 </script>

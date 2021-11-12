@@ -1,8 +1,8 @@
+
 package kosa.ion.sion.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import kosa.ion.sion.dto.CardsDto;
-import kosa.ion.sion.dto.MembersCardDto;
 import kosa.ion.sion.dto.MembersDto;
 import kosa.ion.sion.repository.MembersCardRepository;
 import kosa.ion.sion.repository.MembersRepository;
@@ -40,6 +39,7 @@ public class MemberController {
 	public String Test() {
 		return "success";
 	}
+	
 	
 	@GetMapping("/get_auth")
 	public MembersDto GetAuth(@RequestHeader HashMap<String,String> header) {

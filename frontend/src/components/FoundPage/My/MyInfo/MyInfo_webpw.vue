@@ -12,22 +12,23 @@
                         <th style="width:144px">인증 방법</th>
                         <td style=""> 
                           <v-radio-group
-                                v-model="row"
                                 row
                                 mandatory
                               >
                                 <v-radio
                                   label="이메일"
-                                  v-model="radioValues"
+                                  
                                   value="email"
                                   color="black"
                                   aira-checked
+                                  @click="emailCheck"
                                 ></v-radio>
                                 <v-radio
                                   label="SI-ON Card"
-                                  v-model="radioValues"
+                                  
                                   value="card"
                                   color="black"
+                                  @click="cardCheck"
                                 ></v-radio>
                             </v-radio-group>
                             <!-- {{radioValues}} -->
@@ -40,13 +41,13 @@
         <!-- 인증 정보 입력 -->
 
         <!-- 이메일 인증 정보 -->
-        <v-row class="mt-10">
+        <v-row class="mt-10" v-if="radioValues == 'email'">
           <v-col class="text-h4 font-weight-bold">
             인증 정보 입력
           </v-col>
         </v-row>
 
-        <v-row class="text-h6 font-weight-regular">
+        <v-row class="text-h6 font-weight-regular" v-if="radioValues == 'email'">
             <v-col cols="">
                 <table>
                     <tr>
@@ -65,13 +66,27 @@
                     <tr>
                         <th>이메일</th>
                         <td>
-                            03470@naver.com
+                          <v-text-field
+                            style="width: 30%"
+                            label="EMAIL"
+                            required
+                            dense
+                            hide-details="auto"
+                            outlined
+                          ></v-text-field>
                         </td>
                     </tr>
                     <tr>
-                        <th>-</th>
+                        <th>현재 비밀번호</th>
                         <td>
-                            -
+                          <v-text-field
+                            style="width: 30%"
+                            label="PW"
+                            required
+                            dense
+                            hide-details="auto"
+                            outlined
+                          ></v-text-field>
                         </td>
                     </tr>
                 </table>
@@ -80,13 +95,13 @@
         </v-row>
 
         <!-- SI-ON Card 인증 정보 -->
-        <v-row class="mt-10">
+        <v-row class="mt-10" v-if="radioValues == 'card'">
           <v-col class="text-h4 font-weight-bold">
             인증 정보 입력
           </v-col>
         </v-row>
 
-        <v-row class="text-h6 font-weight-regular">
+        <v-row class="text-h6 font-weight-regular" v-if="radioValues == 'card'">
             <v-col cols="">
                 <table>
                     <tr>
@@ -134,8 +149,17 @@
 export default {
     name: "myinfo_webpw",
     data: () => ({
-      radioValues: '',
+      radioValues: 'email',
     }),
+    methods:{
+      emailCheck(){
+        this.radioValues = 'email'
+      },
+      cardCheck(){
+        this.radioValues = 'card'
+      }
+
+    }
 }
 </script>
 

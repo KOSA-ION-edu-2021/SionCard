@@ -5,7 +5,7 @@
                 <table style="height: 60px; ">
                     <tr>
                         <th style="width:144px">고객명</th>
-                        <td style=""> 윤지훈</td>
+                        <td style=""> {{this.$store.state.auth.name}}</td>
                     </tr>
                 </table>
             </v-col>
@@ -17,53 +17,86 @@
                     <tr>
                         <th>ID</th>
                         <td>
-                            heewoong96
+                            {{this.$store.state.auth.member_id}}
                         </td>
                     </tr>
                     <tr>
                         <th>이메일</th>
                         <td>
-                            03470@naver.com
+                            {{this.$store.state.auth.email}}
                         </td>
                     </tr>
                     <tr>
                         <th>생년월일</th>
                         <td>
-                            -
+                            {{this.$store.state.auth.birth}}
                         </td>
                     </tr>
                     <tr>
                         <th>휴대전화</th>
                         <td>
-                            010-9699-9378
+                            {{this.$store.state.auth.phone}}
                         </td>
                     </tr>
                     <tr>
                         <th>주소</th>
                         <td>
-                            서울특별시 강서구 마곡중앙1로 71 마곡힐스테이트 13단지 1307동 604호
+                            {{this.$store.state.auth.address}}
                         </td>
                     </tr>
                 </table>
-
             </v-col> 
         </v-row>
+                <v-row class="ma-5" justify="center">
+                    <v-col align-self="center">
+                        
+                        <Acount_Change/>
+                    </v-col>
+                </v-row>
+                
     </v-container>
 </template>
 
 <script>
+/* import axios from 'axios' */
+import Acount_Change from './MyInfo_account_Change.vue'
 export default {
     name:"myinfo_account",
     data:()=>({
         open: false,
+        memberInfo : null,
         
     }),
-    methods: {
+    components :{
+        Acount_Change,
+    },
+    /* mounted() {
+        this.getmemberInfo()
+    }, */
+    methods:{
         changeopen : function(){
            this.open = true
            
-        }
+        },
+        /* getmemberInfo(){
+            axios.get(this.$store.state.apihost +"/member/memberinfo",{
+                headers:{
+                    Authorization:`Bearer ${sessionStorage.getItem('JSESSIONID')}`
+                }
+            })
+            .then((res)=>{
+                console.log(res.data);
+                this.memberInfo = res.data
+                console.log(this.memberInfo);
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+        } */
     },
+    props:{
+        /* memberInfo : Array, */
+    }
 }
 </script>
 
