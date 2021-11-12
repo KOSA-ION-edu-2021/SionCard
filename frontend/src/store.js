@@ -37,7 +37,7 @@ export default new Vuex.Store({
                 console.log(err);
                 state.auth=null;
             })
-        }
+        },
     },
     actions: {
         SET_DATA(context, payload) {
