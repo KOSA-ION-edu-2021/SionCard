@@ -109,6 +109,11 @@ export default {
     ],
     auth:null
   }),
+  mounted() {
+    this.loginCheck_myMain()
+    /* this.loginCheck_myInfo()
+    this.loginCheck_myCard() */
+  },
   methods: {
     loginCheck_myMain(){
       if(this.$store.state.auth == null){

@@ -60,6 +60,7 @@
                                     :src=card.img
                                     contain
                                     aspect-ratio="2"
+                                    @click="cardpick(i)"
                                     >
                                         <v-expand-transition>
                                                 <v-img
@@ -93,7 +94,7 @@
                         color="grey lighten-1"
                         >
                                 <v-img
-                                :src=cardInfo[0].img
+                                :src=wantedcard
                                 contain
                                 aspect-ratio="4"
                                 />
@@ -102,10 +103,14 @@
                                         해외 결제 기능
                                     </v-col>
                                     <v-col align-self="center">
-                                        <v-btn @click="color1" :color=bgcolor1 outlined min-width="100" large>master</v-btn>
+                                        <v-btn @click="color1" :color=bgcolor1 
+                                        outlined min-width="100" large 
+                                        class="font-weight-bold">master</v-btn>
                                     </v-col>
                                     <v-col align-self="center">
-                                        <v-btn @click="color2" :color=bgcolor2 outlined min-width="100" large>국내 전용</v-btn>
+                                        <v-btn @click="color2" :color=bgcolor2 
+                                        outlined min-width="100" large 
+                                        class="font-weight-bold">국내 전용</v-btn>
                                     </v-col>
                                 </v-row>
                                 <v-row class="mt-10 mb-10 text-h5 font-weight-bold" >
@@ -113,10 +118,14 @@
                                         후불교통 기능
                                     </v-col>
                                     <v-col align-self="center">
-                                        <v-btn @click="color3" :color=bgcolor3 outlined min-width="100" large>신청</v-btn>
+                                        <v-btn @click="color3" :color=bgcolor3 
+                                        outlined min-width="100" large 
+                                        class="font-weight-bold">신청</v-btn>
                                     </v-col>
                                     <v-col align-self="center">
-                                        <v-btn @click="color4" :color=bgcolor4 outlined min-width="100" large>신청안함</v-btn>
+                                        <v-btn @click="color4" :color=bgcolor4 
+                                        outlined min-width="100" large 
+                                        class="font-weight-bold">신청안함</v-btn>
                                     </v-col>
                                 </v-row>
 
@@ -252,6 +261,8 @@ export default {
     data: ()=>({
         cardInfo,
         e1: 1,
+        wantedcardID:0,
+        wantedcard:'',
         bgcolor1:'blue',
         bgcolor2:'',
         bgcolor3:'blue',
@@ -260,6 +271,9 @@ export default {
         traficcard: true,
     }),
     methods: {
+        cardpick(num){
+            this.wantedcard=this.cardInfo[num].img
+        },
         color1(){
             this.bgcolor1 = 'blue'
             this.bgcolor2 = ''
