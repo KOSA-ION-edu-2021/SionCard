@@ -78,6 +78,12 @@ public class ApiController {
 		}
 	}
 	
+	@PostMapping("/find_id")
+	public MembersDto findId(@RequestBody MembersDto membersDto) {
+		memberDto= membersRepository.findByNameAndEmail(null)
+		return membersDto;
+	}
+	
 	
 	@Autowired
 	CardsRepository cardsRepository;

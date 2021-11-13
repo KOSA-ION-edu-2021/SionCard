@@ -18,7 +18,6 @@
 <script>
 export default {
     data:()=>({
-
         introduce:{
             title:"안녕하세요.SionCard 입니다",
             sub:"행복을 주는 카드 시온카드 입니다.오늘도 행복한 하루 되세요!"
@@ -26,6 +25,3 @@ export default {
     }),
 }
 </script>
-
-<style>
-</style>
