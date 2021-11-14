@@ -18,10 +18,10 @@
           <!-- 이미지 -->
           <v-carousel-item class="mt-5 mb-5"
             v-for="(card, i) in cardInfo" :key="i">
-            <v-card flat tile>
+            <v-card  class="grey lighten-3">
               <v-row justify="center" align="center">
                   <v-col cols="4">
-                      <v-card-title>
+                      <v-card-title class="text-subtitle-1 font-weight-bold">
                           {{card.title}}
                       </v-card-title>
                       <p class="ml-4">{{ card.content }}</p>
@@ -45,7 +45,7 @@
         </v-carousel>
 
         <!-- 카드 추천 링크 -->
-        <v-card class="mt-5 mb-5"> 
+        <v-card class="mt-5 mb-5 grey lighten-3"> 
           <v-container>
             <v-row justify="space-around">
               <v-col cols="5" align-self="center">
@@ -98,14 +98,14 @@
                                         params: { id: card.id-1 },
                                       }"
                                     >
-                  <v-card flat>
+                  <v-card flat class="grey lighten-2">
                     <v-img :src="card.img" />
-                    <v-container class="text-subtitle-2 font-weight-bold">
+                    <v-sheet class="text-subtitle-2 font-weight-bold mt-5 mt-5 grey lighten-2">
                       {{ card.title }}
-                    </v-container>
-                    <v-container class="text-caption">
+                    </v-sheet>
+                    <v-sheet class="text-caption mt-5 mt-5 grey lighten-2">
                       {{ card.content }}
-                    </v-container>
+                    </v-sheet>
                   </v-card>
                 </router-link>
               </v-col>
@@ -134,14 +134,14 @@
                                     params: { id: card.id-1 },
                                   }"
                                 >
-              <v-card flat>
+              <v-card flat class="grey lighten-2">
                 <v-img contain :src="card.img" />
-                <v-card-title class="text-subtitle-2 font-weight-bold">
-                  {{ card.title }}
-                </v-card-title>
-                <v-container class="text-caption">
-                  {{ card.content }}
-                </v-container>
+                <v-sheet class="text-subtitle-2 font-weight-bold mt-5 mt-5 grey lighten-2">
+                      {{ card.title }}
+                    </v-sheet>
+                    <v-sheet class="text-caption mt-5 mt-5 grey lighten-2">
+                      {{ card.content }}
+                    </v-sheet>
               </v-card>
             </router-link>
             </v-col>

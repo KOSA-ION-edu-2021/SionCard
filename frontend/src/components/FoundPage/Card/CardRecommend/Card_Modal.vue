@@ -6,14 +6,15 @@
       max-width="600px"
       ><!-- fullscreen 추가하면 모달창 화면 전체 -->
       <template v-slot:activator="{ on, attrs }">
-        <!-- <v-btn color="primary" dark v-bind="attrs" v-on="on">
-                Open Dialog
-              </v-btn> -->
-        <v-col class="yello" cols="auto" v-bind="attrs" v-on="on">
+        <v-hover v-slot="{hover}">
+        <v-card class="grey lighten-2" flat :elevation="hover ? 12 : 0">
+        <v-col  cols="auto" v-bind="attrs" v-on="on" >
           <!-- 다시 선택 아이콘 -->
           <v-icon color="blue "> mdi-dialpad </v-icon>
           <b> 카드 선택 </b>
-        </v-col>
+        </v-col>  
+        </v-card>
+        </v-hover>
       </template>
 
       <!-- 모달 페이지 -->

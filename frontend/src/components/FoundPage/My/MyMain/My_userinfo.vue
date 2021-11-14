@@ -12,7 +12,7 @@
               
               <!-- 사용자 이름 -->
               <v-col cols="auto" align-self="center" > 
-                <v-sheet class="text-h5 font-weight-black text--grey">
+                <v-sheet class="text-h5 font-weight-black text--grey grey lighten-3">
                   {{this.$store.state.auth.name}}님
                 </v-sheet>
               </v-col>

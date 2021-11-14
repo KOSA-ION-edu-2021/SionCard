@@ -42,9 +42,8 @@
                 <v-list-item-content>
                   <v-list-item-title  >
                         <v-list-item-action class="ma-0">
-                        <v-checkbox></v-checkbox>
                         </v-list-item-action>
-                    *******
+                    아직
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
@@ -52,9 +51,8 @@
                 <v-list-item-content>
                   <v-list-item-title  >
                         <v-list-item-action class="ma-0">
-                        <v-checkbox></v-checkbox>
                         </v-list-item-action>
-                    *******
+                    미완성이지롱
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
@@ -72,9 +70,8 @@
                 <v-list-item-content>
                   <v-list-item-title  >
                         <v-list-item-action class="ma-0">
-                        <v-checkbox></v-checkbox>
                         </v-list-item-action>
-                    point
+                    기대돼?
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
@@ -92,9 +89,8 @@
                 <v-list-item-content>
                   <v-list-item-title  >
                         <v-list-item-action class="ma-0">
-                        <v-checkbox></v-checkbox>
                         </v-list-item-action>
-                    즉시 할인
+                    비밀이야
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
@@ -112,9 +108,8 @@
                 <v-list-item-content>
                   <v-list-item-title  >
                         <v-list-item-action class="ma-0">
-                        <v-checkbox></v-checkbox>
                         </v-list-item-action>
-                    point
+                    ㅋㅋ
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
@@ -132,9 +127,8 @@
                 <v-list-item-content>
                   <v-list-item-title  >
                         <v-list-item-action class="ma-0">
-                        <v-checkbox></v-checkbox>
                         </v-list-item-action>
-                    point
+                    살려줘 ㅠ
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
@@ -152,7 +146,7 @@
 export default {
     name: 'Account_Change',
     data:()=>({
-        dialog: true,
+        dialog: false,
     }),
     methods: {
         

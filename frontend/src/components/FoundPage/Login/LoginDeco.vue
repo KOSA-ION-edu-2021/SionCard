@@ -1,6 +1,6 @@
 <template>
     <v-card
-        class="d-flex mt-16"
+        class="d-flex mt-16 grey lighten-2"
         tile flat
         height="330"
     >

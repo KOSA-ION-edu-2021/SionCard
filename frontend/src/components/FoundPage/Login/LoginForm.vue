@@ -1,6 +1,6 @@
 <template>
     <v-card
-        class="   ma-auto" 
+        class="grey lighten-2 ma-auto" 
         width="330"
         height="300" 
         tile flat> <!-- d-flex -->
@@ -30,7 +30,7 @@
                     outlined
                 ></v-text-field>
                 <v-card
-                    class="d-flex align-end mt-2"
+                    class="d-flex align-end mt-2 grey lighten-2"
                     width="100%"
                     flat
                     tile

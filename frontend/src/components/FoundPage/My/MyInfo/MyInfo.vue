@@ -4,7 +4,7 @@
         <v-col cols="1"/>
         <v-col cols="10" class="text-h3 font-weight-bold">  
 
-          <v-sheet class="mt-5">
+          <v-sheet class="mt-5 grey lighten-2">
             고객 정보 관리
           </v-sheet>  
 
