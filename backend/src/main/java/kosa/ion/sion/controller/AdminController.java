@@ -1,19 +1,10 @@
 package kosa.ion.sion.controller;
 
-import javax.servlet.http.HttpServletResponse;
-
+import kosa.ion.sion.repository.CardsRepository;
+import kosa.ion.sion.vo.FileVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import kosa.ion.sion.dto.CardsDto;
-import kosa.ion.sion.repository.CardsRepository;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/admin")
@@ -26,9 +17,18 @@ public class AdminController{
 	public String Test() {
 		return "success";
 	}
-	@PostMapping("/card_info")
+
+//	@PostMapping("/card_info")
+//	@ResponseBody
+//	public ResponseEntity<CardsDto> signup(@RequestBody FileTestDto fileTestDto) {
+//		return ResponseEntity.ok(cardsRepository.save(card_info));
+//	}
+
+	@PostMapping("/file_up")
 	@ResponseBody
-	public ResponseEntity<CardsDto> signup(HttpServletResponse response, @RequestBody CardsDto card_info) {
-		return ResponseEntity.ok(cardsRepository.save(card_info));
+	public ResponseEntity<Boolean> signup(@RequestBody FileVO fileVO) {
+
+
+		return ResponseEntity.ok(false);
 	}
 }
