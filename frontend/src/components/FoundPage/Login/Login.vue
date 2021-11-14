@@ -43,8 +43,7 @@ export default {
   data: () => ({
       rules: [
         v => v || '파일이 존재하지 않습니다.',
-        v => v.size < 30000000 || console.log(v) ||'30MB보다 작은 파일을 올려주세요!',
-                            //  3270972
+        v => v.map(res=>res.size).reduce((p,n)=>p+n) < 30000000 || '전체용량이 30MB보다 작은 파일을 올려주세요!',
       ],
       file:null
   }),
