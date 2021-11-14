@@ -7,7 +7,7 @@
             <router-link to="/signin" class="white--text text-caption ml-2 mr-16" tag="button">회원가입</router-link>
         </div>
         <div v-else class="mr-16">
-            <button class="white--text text-caption mr-2">{{this.$store.state.auth.name}}</button>
+            <router-link to="/my_main" ><button class="white--text text-caption mr-2">{{this.$store.state.auth.name}}</button></router-link>
             <button disabled  class="white--text text-caption mr-2"> 님 반갑습니다. </button>
             <!-- <span class="mr-2 ml-2 white--text">|</span> -->
             <button @click="logout" class="white--text text-caption ml-2 mr-16" tag="button">로그아웃</button>
