@@ -2,7 +2,7 @@
   <v-container>
     <!-- 온라인 신청 버튼 -->
     <v-row justify="center">
-    <v-card tile flat>
+    <v-card tile flat class="grey lighten-2">
       <router-link to="/cardapply">
       <v-btn rounded color="primary"> 온라인 신청 </v-btn>
       </router-link>
@@ -15,20 +15,21 @@
 
         <!-- 연회비 -->
         <v-expansion-panels tile flat accordion>
-          <v-expansion-panel>
+          <v-expansion-panel class="grey lighten-2">
             <v-expansion-panel-header class="font-weight-black">연회비</v-expansion-panel-header>
             <v-expansion-panel-content>
               <v-data-table
                 :headers="headers"
                 :items="cardInfo[num].brands"
                 hide-default-footer
+                class="grey lighten-2"
               >
               </v-data-table>
             </v-expansion-panel-content>
           </v-expansion-panel>
 
           <!-- 결제 은행 -->
-          <v-expansion-panel v-if="cardInfo[num].bank">
+          <v-expansion-panel class="grey lighten-2" v-if="cardInfo[num].bank">
             <v-expansion-panel-header class="font-weight-black">결제은행</v-expansion-panel-header>
             <v-expansion-panel-content>
               <!-- <ul> -->
@@ -50,7 +51,7 @@
           </v-expansion-panel>
 
           <!-- 유의 사항 -->
-          <v-expansion-panel>
+          <v-expansion-panel class="grey lighten-2">
             <v-expansion-panel-header class="font-weight-black">유의사항</v-expansion-panel-header>
             <v-expansion-panel-content>
               <ul>
@@ -76,8 +77,8 @@
     </v-row>
     <v-row justify="center">
     <v-col cols="6">
-    <v-card tile flat>
-      <v-list flat>
+    <v-card tile flat class="grey lighten-2">
+      <v-list flat class="grey lighten-2">
         <v-list-item-group
           v-model="model"
           color="indigo"
@@ -149,7 +150,7 @@
 
     <!-- 카드 안내 사항 -->
     <v-row justify="center">
-    <v-card tile flat style="font-size:xx-small; margin-top:50px; margin-bottom:50px">
+    <v-card tile flat style="font-size:xx-small; margin-top:50px; margin-bottom:50px" class="grey lighten-2">
       <p class="mb-2">회사명 : 사이온 카드</p>
       <!-- <p class="mb-2">상품명 : {{cardInfo[a].title}} </p>
       <p class="mb-2">카드 출시 일자 : {{cardInfo[a].date}}</p> -->

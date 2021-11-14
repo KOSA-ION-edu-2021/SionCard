@@ -1,6 +1,6 @@
 <template>
-<v-container>
-<v-card tile flat style="margin-left: 30px">
+<v-container class="grey lighten-2" color="grey lighten-2">
+<v-card tile flat style="margin-left: 30px" class="grey lighten-2">
       <v-row class="align-center justify-center" >
         <v-col cols="2" md="1" />
         <v-col cols="4" class="pa-0 d-md-block justify-center">
@@ -18,7 +18,7 @@
 <v-col cols="1" />    
 <v-col cols="6" md="6" class="pa-0; mb-5">
 <v-card
-        class="d-flex mt-16"
+        class="d-flex mt-16 grey lighten-2"
         tile flat
         height="300"
     >

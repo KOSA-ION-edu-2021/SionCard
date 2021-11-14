@@ -4,7 +4,7 @@
       <v-col cols="1"></v-col>
       <v-col cols="10">
 
-          <v-sheet class="mt-5 mb-10 text-h3 font-weight-bold">
+          <v-sheet class="mt-5 mb-10 text-h3 font-weight-bold" color="grey lighten-2">
               카드 신청
           </v-sheet>  
 
