@@ -4,7 +4,6 @@
         <Player 
             height="100%"
             width="100%"
-            :src="require('@/assets/main3.mp4')"
         />
     </v-container>
 </template>
