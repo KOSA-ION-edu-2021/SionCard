@@ -4,14 +4,14 @@
       <v-row class="align-center justify-center" >
         <v-col cols="2" md="1" />
         <v-col cols="4" class="pa-0 d-md-block justify-center">
-            <v-img
-            v-if="(num === 0) || (num === 1) || (num === 2)"
+            <v-img  
+            v-if="(num == 0) || (num == 1) || (num == 2)"
             :src="(`${cardInfo[num].img}`)"
             style="transform:rotate(90deg); width: 350px"
             ></v-img>
 
             <v-img
-            v-if="(num === 3) || (num === 4) || (num === 5) || (num === 6)"
+            v-if="(num == 3) || (num == 4) || (num == 5) || (num == 6)"
             :src="(`${cardInfo[num].img}`)"
             ></v-img>
         </v-col>
@@ -57,11 +57,14 @@
 import cardInfo from '@/assets/carddetail.js'
 export default {
   data:() => ({
-      cardInfo : cardInfo,   
+      cardInfo : cardInfo,
     }),
     props: {
     num : Number,
   },
+//   mounted: {
+//       num : this.num
+//   }
 }
 </script>
 

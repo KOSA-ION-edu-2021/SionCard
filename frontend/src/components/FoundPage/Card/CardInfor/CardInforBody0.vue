@@ -3,7 +3,9 @@
     <!-- 온라인 신청 버튼 -->
     <v-row justify="center">
     <v-card tile flat>
+      <router-link to="/cardapply">
       <v-btn rounded color="primary"> 온라인 신청 </v-btn>
+      </router-link>
     </v-card>
     </v-row>
 
@@ -195,7 +197,7 @@ export default {
       ],
     }),
     props: {
-    num : Number,
+    num : String,
   },
 };
 </script>
