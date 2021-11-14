@@ -1,26 +1,31 @@
 
 package kosa.ion.sion.controller;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import kosa.ion.sion.dto.CardsDto;
 import kosa.ion.sion.dto.MemberUseDto;
 import kosa.ion.sion.dto.MembersCardDto;
 import kosa.ion.sion.dto.MembersDto;
@@ -54,7 +59,6 @@ public class MemberController {
 		return member;
 	}
 	
-	
 	//MembersCardRepository
 	@Autowired
 	MembersCardRepository membersCardRepository;
@@ -69,6 +73,29 @@ public class MemberController {
 	@PostMapping("/application")
 	@ResponseBody
 	public ResponseEntity<MembersCardDto> application(HttpServletResponse response, @RequestBody MembersCardDto memberscard) {
+		
+		// 유효기간 설정 START	
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.add(Calendar.YEAR, 2);
+		
+		java.sql.Date sqlDate = new java.sql.Date(cal.getTimeInMillis());
+		// 유효기간 설정 END
+		
+		// 카드번호 설정 START	16자리 번호 난수 생성
+		Random num = new Random();
+		StringBuffer cardNum = new StringBuffer();
+		
+		for(int i = 0; i < 16; i++) {
+			int index = num.nextInt(10);
+			System.out.println(index);
+			cardNum.append(index);
+		}
+		// 카드번호 설정 END
+		
+		memberscard.setCardEdate(sqlDate);
+		memberscard.setCardNum(String.valueOf(cardNum));
+		
 		return ResponseEntity.ok(membersCardRepository.save(memberscard));
 	}
 	

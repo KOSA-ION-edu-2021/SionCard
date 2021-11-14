@@ -165,6 +165,7 @@
                                                 <v-text-field
                                                     style="width: 50%"
                                                     label="ID"
+                                                    v-model="id"
                                                     required
                                                     dense
                                                     hide-details="auto"
@@ -192,6 +193,8 @@
                                                 <v-text-field
                                                     style="width: 50%"
                                                     label="PW"
+                                                    type="password"
+                                                    v-model="pw"
                                                     required
                                                     dense
                                                     hide-details="auto"
@@ -204,10 +207,10 @@
                                     </v-col> 
                                 </v-row>
                         </v-container>
-
+                        <!-- 카드 신청 application 함수 작동 부분 -->
                         <v-btn
                         color="grey lighten-2"
-                        @click="e1 = 4"
+                        @click="PwdCheck_cardApply()"
                         >
                         Continue
                         </v-btn>
@@ -257,6 +260,7 @@
 
 <script>
 import cardInfo from '@/assets/cardInfo.js'
+import axios from "axios";
 export default {
     data: ()=>({
         cardInfo,
@@ -269,9 +273,13 @@ export default {
         bgcolor4:'',
         mastercard: true,
         traficcard: true,
+        selected_card_id : 0,
+        pw:"",
+        id:"",
+        number: 4,
     }),
     mounted() {
-        this.loginCheck_cardApply()    
+        this.loginCheck_cardApply()
     },
     methods: {
     loginCheck_cardApply(){
@@ -285,6 +293,8 @@ export default {
     },
         cardpick(num){
             this.wantedcard=this.cardInfo[num].img
+            // application에서 쓸 id 값.
+            this.selected_card_id = num
         },
         color1(){
             this.bgcolor1 = 'blue'
@@ -306,7 +316,54 @@ export default {
             this.bgcolor4 = 'blue'
             this.traficcard = false
         },
+        // 개인 정보 인증 패스워드 인증
+        PwdCheck_cardApply(){
+            axios.post(this.$store.state.apihost + '/api/pwd_check',{
+                id : this.id,
+                pwd : this.pw,
+            })
+            .then((res)=>{
+                if(res.data != null && res.data != '' && res.data != undefined && res.data){
+                    alert('본인 인증 되었습니다!');
+                    // 본인 인증 성공했을시 카드정보 저장
+                    this.application()
+                    
+                }else{
+                    alert('본인 인증 실패하였습니다!')
+                }
+            })
+            .catch(err=>{
+                console.log(err);
+                alert('시스템 문제가 발생하였습니다.')
+            })
+        },
+        // 카드 신청 function
+        application(){
+            let param = {
+                card_id : this.cardInfo[this.selected_card_id].id,
+                card_title : this.cardInfo[this.selected_card_id].title,
+                member_id : this.$store.state.auth.member_id,
+            }
+            // 카드 종류, 카드 이름, 회원 아이디 제대로 들어오는지 확인
+            console.log("param = " + param.card_id, param.card_title, param.member_id);
+            
+            axios.post(this.$store.state.apihost + "/member/application", param,{
+                headers:{
+                        Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`
+                    },
+            })
+            .then(res => {
+                this.e1 = 4,
+                console.log(res)
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+        },
+
+
     },
+    
 }
 </script>
 

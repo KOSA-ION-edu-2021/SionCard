@@ -1,7 +1,7 @@
 export default[
     {
     id : 1,
-    title: "아모레퍼시픽 시온카드 체크",
+    title: "아모레퍼시픽 사이온카드 체크",
     img: "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCheckBOACPOs.png",
     content: "체크카드도 뷰티포인트 적립 혜택을!",
     card_type: "check",
@@ -12,7 +12,7 @@ export default[
     },
     {
     id : 2,
-    title: "위버스 시온카드 체크",
+    title: "위버스 사이온카드 체크",
     img: "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCheckBRBCLDs.png",
     content: "All things for Fans",
     check: true,
@@ -23,7 +23,7 @@ export default[
     },
     {
     id : 3,
-    title: "시온카드 Puzzle",
+    title: "사이온카드 Puzzle",
     img: "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCreditAXJCLTs.gif",
     content: "나만의 맞춤카드 Play Your Puzzle!",
     check: false,
@@ -34,7 +34,7 @@ export default[
     },
     {
         id : 4,
-        title: "시온 LABE",
+        title: "사이온카드 LABE",
         img: "https://www.shinhancard.com/pconts/images/contents/card/plate/cdVipAL1CI9s.png",
         content: "Play your best score",
         check: false,
@@ -45,7 +45,7 @@ export default[
     },
     {
         id : 5,
-        title: "L.PAY 시온카드 체크",
+        title: "L.PAY 사이온카드 체크",
         img: "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCheckAXHC7Ps.png",
         content: "나만의 맞춤카드 Play Your Puzzle!",
         check: true,
@@ -56,7 +56,7 @@ export default[
     },
     {
         id : 6,
-        title: "시온 YaY",
+        title: "사이온카드 YaY",
         img: "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCreditAXGC75_VISAs.gif",
         content: "신나는 나의 Home Life, Yay (예이~!)",
         check: false,
@@ -67,7 +67,7 @@ export default[
     },
     {
         id : 7,
-        title: "시온카드 The CLASSIC-S",
+        title: "사이온카드 The CLASSIC-S",
         img: "https://www.shinhancard.com/pconts/images/contents/card/plate/cdVipALXC6Es.png",
         content: "포인트에 포인트를 더하다!",
         check: false,

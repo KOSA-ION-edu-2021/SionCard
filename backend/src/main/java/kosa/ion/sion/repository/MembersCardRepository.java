@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import kosa.ion.sion.dto.MembersCardDto;
 
 
-//@RepositoryRestResource(collectionResourceRel = "memberscarddto", path="memberscarddto")
-//@CrossOrigin("*")
+@RepositoryRestResource(collectionResourceRel = "memberscarddto", path="memberscarddto")
+@CrossOrigin("*")
 public interface MembersCardRepository extends JpaRepository<MembersCardDto, Long>{
 	
 }

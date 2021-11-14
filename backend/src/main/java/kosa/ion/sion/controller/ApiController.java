@@ -2,7 +2,9 @@ package kosa.ion.sion.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -78,12 +80,25 @@ public class ApiController {
 		}
 	}
 	
-	
 	@Autowired
 	CardsRepository cardsRepository;
 	
 	@GetMapping("/card_info")
 	public List<CardsDto> CardInfo() {
 		return cardsRepository.findAll();
+	}
+	
+	// 카드 신청 부분에서 비밀번호 확인 용도
+	@PostMapping("/pwd_check")
+	public Boolean pwdCheck(@RequestBody Map<String, Object> param) {
+		try {
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(param.get("id"), param.get("pwd")));
+			System.out.println("인증성공");
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("인증실패");
+			return false;
+		}
 	}
 }
