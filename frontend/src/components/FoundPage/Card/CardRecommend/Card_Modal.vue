@@ -7,7 +7,7 @@
       ><!-- fullscreen 추가하면 모달창 화면 전체 -->
       <template v-slot:activator="{ on, attrs }">
         <v-hover v-slot="{hover}">
-        <v-card flat :elevation="hover ? 12 : 0">
+        <v-card class="grey lighten-2" flat :elevation="hover ? 12 : 0">
         <v-col  cols="auto" v-bind="attrs" v-on="on" >
           <!-- 다시 선택 아이콘 -->
           <v-icon color="blue "> mdi-dialpad </v-icon>

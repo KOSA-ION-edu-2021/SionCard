@@ -18,7 +18,7 @@
           <!-- 이미지 -->
           <v-carousel-item class="mt-5 mb-5"
             v-for="(card, i) in cardInfo" :key="i">
-            <v-card flat tile>
+            <v-card  class="grey lighten-3">
               <v-row justify="center" align="center">
                   <v-col cols="4">
                       <v-card-title class="text-subtitle-1 font-weight-bold">
@@ -45,7 +45,7 @@
         </v-carousel>
 
         <!-- 카드 추천 링크 -->
-        <v-card class="mt-5 mb-5"> 
+        <v-card class="mt-5 mb-5 grey lighten-3"> 
           <v-container>
             <v-row justify="space-around">
               <v-col cols="5" align-self="center">
@@ -98,12 +98,12 @@
                                         params: { id: card.id-1 },
                                       }"
                                     >
-                  <v-card flat>
+                  <v-card flat class="grey lighten-2">
                     <v-img :src="card.img" />
-                    <v-sheet class="text-subtitle-2 font-weight-bold mt-5 mt-5">
+                    <v-sheet class="text-subtitle-2 font-weight-bold mt-5 mt-5 grey lighten-2">
                       {{ card.title }}
                     </v-sheet>
-                    <v-sheet class="text-caption mt-5 mt-5">
+                    <v-sheet class="text-caption mt-5 mt-5 grey lighten-2">
                       {{ card.content }}
                     </v-sheet>
                   </v-card>
@@ -134,12 +134,12 @@
                                     params: { id: card.id-1 },
                                   }"
                                 >
-              <v-card flat>
+              <v-card flat class="grey lighten-2">
                 <v-img contain :src="card.img" />
-                <v-sheet class="text-subtitle-2 font-weight-bold mt-5 mt-5">
+                <v-sheet class="text-subtitle-2 font-weight-bold mt-5 mt-5 grey lighten-2">
                       {{ card.title }}
                     </v-sheet>
-                    <v-sheet class="text-caption mt-5 mt-5">
+                    <v-sheet class="text-caption mt-5 mt-5 grey lighten-2">
                       {{ card.content }}
                     </v-sheet>
               </v-card>

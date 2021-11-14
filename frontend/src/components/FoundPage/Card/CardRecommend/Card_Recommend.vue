@@ -32,7 +32,7 @@
           <v-row justify="space-around">
               <v-col class="mt-10" v-for="(card, index) in typeFilter(check1, check2, check3)" :key="index" cols="4" > 
               <!-- <v-col class="mt-10" v-for="card in cardInfo" :key="card" cols="4" v-show="card_check(card,check1,check2,check3)">  -->
-              <v-card class="pa-3 mt-5 text-center"  flat tile>
+              <v-card class="pa-3 mt-5 text-center grey lighten-2"  flat tile>
                 <v-img
                   aspect-ratio="2"
                   contain
@@ -52,7 +52,9 @@
                                     params: { id: card.id-1 },
                                   }"
                                 >
-                <v-btn class="mt-7" elevation=""> 상세 페이지</v-btn> <!--  color="" elevation="" to="" -->
+                <v-hover v-slot="{hover}">
+                  <v-btn class="mt-7" :elevation="hover ? 12 : 0"> 상세 페이지</v-btn> <!--  color="" elevation="" to="" -->
+                </v-hover>
                 </router-link>
               </v-card>
             </v-col>

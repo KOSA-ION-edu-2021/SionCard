@@ -7,7 +7,7 @@
           <!-- 최상단 글귀 -->
           <v-row justify="center" class="">
             <v-col class="mb-10 mt-10" cols="auto">
-              <v-card flat tile>
+              <v-card flat tile class="grey lighten-2">
                 <h1>회원가입</h1>
               </v-card>
             </v-col>
@@ -149,8 +149,9 @@
                 ></v-checkbox>
 
                 <!-- 온라인 이용약관 -->
-                <v-card class="d-flex" width="100%" flat tile>
+                <v-card class="d-flex grey lighten-2" width="100%" flat tile>
                   <v-checkbox
+                  class="grey lighten-2"
                     v-model="checkbox1"
                     :label="`온라인 이용약관 (필수)`"
                     @click="checkbox=(checkbox1 && checkbox2);"
@@ -167,7 +168,7 @@
                         상세보기
                       </v-btn>
                     </template>
-                    <v-card>
+                    <v-card class="grey lighten-2">
                       <v-card-title>
                         <span class="text-h5">SION카드 온라인회원 약관</span>
                       </v-card-title>
