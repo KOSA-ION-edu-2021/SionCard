@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="">
+  <v-row>
     <v-dialog
       v-model="dialog"
       transition="dialog-bottom-transition"
@@ -25,7 +25,7 @@
         </v-toolbar>
 
         <!-- 정보 입력란 (이름 / 이메일)  -->
-        <v-list three-line subheader v-if="!user_id">
+        <v-list three-line subheader v-if="!result">
             <v-list-item>
               <!-- <v-list-item-content width="100px" class="ma-1"> -->
               <v-col cols=""><b>이름</b></v-col>
@@ -72,8 +72,8 @@
             <v-list-item class="justify-center">
               <v-row class="justify-center">
                 <v-col cols="8"></v-col>
-                <v-col cols="2" dense algin-self="center" justify="center">
-                  <v-btn click="submit" color="primary"> 아이디 찾기 </v-btn>
+                <v-col cols="2" dense algin-self="center" class="justify-center">
+                  <v-btn @click="submit" color="primary"> 아이디 찾기 </v-btn>
                 </v-col>
               </v-row>
             </v-list-item>
@@ -83,12 +83,12 @@
           
           <v-list-item>
             <!-- <v-list-item-content width="100px" class="ma-1"> -->
-            <v-col cols=""><b>아이디는 </b></v-col>
+            <v-col cols=""><b>아이디</b></v-col>
             <!-- </v-list-item-content> -->
 
             <!-- <v-row justify="start"> -->
             <v-col cols="10" dense>
-              {{this.user_id}} 입니다.
+              {{this.result}}
             </v-col>
             <!-- </v-row> -->
           </v-list-item>
@@ -117,18 +117,20 @@ export default {
     user_email_rule: [
         (v) => /.+@.+\..+/.test(v) || "이메일 형식으로 입력해주세요.",
     ],
-    user_id: "",
+    result: "",
   }),
-  props: {},
+  props: {
+    justify:Object
+  },
   methods: {
     submit(){
-      axios.post(this.$store.state.apihost + '/member/find_id',{
+      axios.post(this.$store.state.apihost + '/api/find_id',{
         name : this.user_nm,
         email : this.user_email
       })
       .then(res=>{
-        console.log(res);
-        this.user_id=res.data.id;
+        console.log(res.data);
+        this.result=res.data;
       })
       .catch(err=>{
         console.log(err);
@@ -136,6 +138,9 @@ export default {
       
     }
   },
+  updated(){
+    if(!this.dialog) this.result="";
+  }
 };
 </script>
 

@@ -25,13 +25,14 @@
         </v-toolbar>
 
         <!-- 정보 입력란 (이름 / 이메일)  -->
-        <v-list three-line subheader>
+        <v-list three-line subheader v-if="!result">
           
             <v-list-item>
               <v-col cols=""><b>이름</b></v-col>
                 <v-col cols="10" dense>
                   <v-text-field
                     label="이름을 입력해 주세요."
+                    v-model="user_nm"
                     dense
                     outlined
                     hide-details="auto"
@@ -47,6 +48,7 @@
                 <v-col cols="10" dense>
                   <v-text-field
                     label="ID를 입력해 주세요."
+                    v-model="user_id"
                     dense
                     outlined
                     hide-details="auto"
@@ -66,6 +68,7 @@
               <v-col cols="10" dense>
                 <v-text-field
                   label="이메일을 입력해 주세요."
+                  v-model="user_email"
                   dense
                   outlined
                   hide-details="auto"
@@ -79,27 +82,63 @@
 
           
             <v-list-item class="justify-center">
-              <v-row class="justify-center">
-                <v-col cols="10" dense algin-self="center" justify="center">
-                  <v-btn> 비밀번호 찾기 </v-btn>
+              <v-row class="justify-right">
+                <v-col cols="8"></v-col>
+                <v-col cols="1" dense algin-self="center">
+                  <v-btn @click="submit"> 비밀번호 찾기 </v-btn>
                 </v-col>
               </v-row>
             </v-list-item>
           
         </v-list>
+
+        <v-card tile flat v-else>
+          <v-list-item>
+            <!-- <v-list-item-content width="100px" class="ma-1"> -->
+            <v-col cols=""><b>비밀번호</b></v-col>
+            <!-- </v-list-item-content> -->
+
+            <!-- <v-row justify="start"> -->
+            <v-col cols="10" dense>
+              {{this.result}}
+            </v-col>
+            <!-- </v-row> -->
+          </v-list-item>
+
+        </v-card>
       </v-card>
     </v-dialog>
   </v-row>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: "Find_PW",
   data: () => ({
     dialog: false,
+    user_nm: "",
+    user_email: "",
+    user_id: "",
+    result:""
   }),
   props: {},
-  methods: {},
+  methods: {
+    submit(){
+      axios.post(this.$store.state.apihost + '/api/find_pw',{
+        name : this.user_nm,
+        email : this.user_email,
+        member_id : this.user_id
+      })
+      .then(res=>{
+        console.log(res.data);
+        this.result=res.data;
+      })
+      .catch(err=>{
+        console.log(err);
+      })
+      
+    }},
 };
 </script>
 
