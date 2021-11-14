@@ -109,6 +109,9 @@ export default {
                 alert('로그인에 실패하였습니다.');
             })
         },
+    },
+    updated(){
+        if(!this.dialog) this.result="";
     }
 }
 </script>
