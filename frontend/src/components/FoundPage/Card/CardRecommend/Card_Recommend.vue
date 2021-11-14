@@ -12,12 +12,16 @@
             <!-- 다시 선택 버튼 -->
             <v-row justify="end">
                 <!-- 모달 -->
-                <v-col cols="auto" class="yellow " dense>
+                <v-col cols="12">
+                
+                <v-col cols="auto" class="" dense >
                     <Card_Modal 
                     @changeCheck1="changeCheck1"
                     @changeCheck2="changeCheck2"
                     @changeCheck3="changeCheck3"
                     />
+                </v-col>
+                
                 </v-col>
             </v-row>
           </v-container>
@@ -28,17 +32,17 @@
           <v-row justify="space-around">
               <v-col class="mt-10" v-for="(card, index) in typeFilter(check1, check2, check3)" :key="index" cols="4" > 
               <!-- <v-col class="mt-10" v-for="card in cardInfo" :key="card" cols="4" v-show="card_check(card,check1,check2,check3)">  -->
-              <v-card class="pa-3 mt-5 text-center" dense outlined>
+              <v-card class="pa-3 mt-5 text-center"  flat tile>
                 <v-img
                   aspect-ratio="2"
                   contain
                   :src=card.img
                 />
                 <v-row class="mt-3">
-                  <v-col cols="12">
-                    <strong>{{ card.title }}</strong>
+                  <v-col cols="12" class="font-weight-bold">
+                    {{ card.title }}
                   </v-col>
-                  <v-col colls="12">
+                  <v-col colls="12" class="text-subtitle-2">
                     {{ card.content }}
                   </v-col>
                 </v-row>
@@ -48,7 +52,7 @@
                                     params: { id: card.id-1 },
                                   }"
                                 >
-                <v-btn class="mt-3" color="" elevation="" to=""> 상세 페이지</v-btn>
+                <v-btn class="mt-7" elevation=""> 상세 페이지</v-btn> <!--  color="" elevation="" to="" -->
                 </router-link>
               </v-card>
             </v-col>

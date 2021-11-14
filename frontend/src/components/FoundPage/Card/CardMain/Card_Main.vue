@@ -21,7 +21,7 @@
             <v-card flat tile>
               <v-row justify="center" align="center">
                   <v-col cols="4">
-                      <v-card-title>
+                      <v-card-title class="text-subtitle-1 font-weight-bold">
                           {{card.title}}
                       </v-card-title>
                       <p class="ml-4">{{ card.content }}</p>
@@ -100,12 +100,12 @@
                                     >
                   <v-card flat>
                     <v-img :src="card.img" />
-                    <v-container class="text-subtitle-2 font-weight-bold">
+                    <v-sheet class="text-subtitle-2 font-weight-bold mt-5 mt-5">
                       {{ card.title }}
-                    </v-container>
-                    <v-container class="text-caption">
+                    </v-sheet>
+                    <v-sheet class="text-caption mt-5 mt-5">
                       {{ card.content }}
-                    </v-container>
+                    </v-sheet>
                   </v-card>
                 </router-link>
               </v-col>
@@ -136,12 +136,12 @@
                                 >
               <v-card flat>
                 <v-img contain :src="card.img" />
-                <v-card-title class="text-subtitle-2 font-weight-bold">
-                  {{ card.title }}
-                </v-card-title>
-                <v-container class="text-caption">
-                  {{ card.content }}
-                </v-container>
+                <v-sheet class="text-subtitle-2 font-weight-bold mt-5 mt-5">
+                      {{ card.title }}
+                    </v-sheet>
+                    <v-sheet class="text-caption mt-5 mt-5">
+                      {{ card.content }}
+                    </v-sheet>
               </v-card>
             </router-link>
             </v-col>

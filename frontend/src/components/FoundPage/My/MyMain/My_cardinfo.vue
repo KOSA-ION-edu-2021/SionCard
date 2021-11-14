@@ -12,7 +12,7 @@
                                 <v-col cols="auto" class="font-weight-bold">
                                 대표 카드
                                 </v-col>
-                                <v-col cols="auto" >
+                                <v-col cols="auto" class="text-subtitle-2">
                                     (XX 카드 || 카드번호 : abcd-efgh-ijkl-mnop))
                                 </v-col>
                         </v-row>              
