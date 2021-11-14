@@ -9,4 +9,7 @@ import kosa.ion.sion.dto.MembersDto;
 public interface MembersRepository extends JpaRepository<MembersDto, Long>{
 	Optional<MembersDto> findByMemberId(String username);
 	Optional<MembersDto> findByPassword(String password);
+	Optional<MembersDto> findByNameAndEmail(String name,String email);
+	Optional<MembersDto> findByNameAndEmailAndMemberId(String name,String email,String id);
+	
 }
