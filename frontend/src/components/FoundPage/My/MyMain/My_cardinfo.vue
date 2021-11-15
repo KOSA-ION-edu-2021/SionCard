@@ -12,6 +12,7 @@
                                 <v-col cols="auto" class="font-weight-bold">
                                 대표 카드
                                 </v-col>
+                                
                                 <v-col cols="auto" class="text-subtitle-2">
                                     (XX 카드 || 카드번호 : abcd-efgh-ijkl-mnop))
                                 </v-col>
@@ -111,60 +112,66 @@
                         <!-- 거래 내역 -->
                         <v-row v-for="num in 3" :key="num">
                             <v-col cols="3">
-                                <!-- {{this.usedate}} -->
+                                <!-- {{num}}
+                                {{usedate[num-1]}} -->
                             </v-col>
                             <v-col cols="6">
-                                <!-- {{this.uselocation}} -->
+                                <!-- {{uselocation[num-1]}} -->
                             </v-col>
                             <v-col cols="3">
-                                <!-- {{this.useprice}} -->
+                                <!-- {{useprice[num-1]}} -->
                             </v-col>
                         </v-row>
                 </v-col>
             </v-row>
             <!-- 하단 끝 -->
+            
+    <!-- <v-btn @click="carduse">
+        클릭ewrewwerewrrew
+    </v-btn>   -->
         </v-col>
         <v-col></v-col>
     </v-row>  
       <!-- 상단 : 대표계좌 이용내역 -->
       
-      <v-btn @click="carduse()">
-          클릭
-      </v-btn>    
+        
 
   </v-container>
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 export default {
     name: "Mycardinfo",
      data: ()=>({
-        cardnum : 0,
-        usedate :"",
-        uselocation : "",
-        useprice : 0,
+        // cardnum : {"0" : 1,"1":2},
+        // usedate :{"0":1},
+        // uselocation : {},
+        // useprice : {},
     }),
     mounted() {
         this.$store.commit('updateAuth',this.loginCheck_myMain)
+        // this.carduse()
   },
     methods:{
-        carduse(){
-            axios.get(this.$store.state.apihost + '/member/get_use_card',{
-                 headers:{
-                        Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`
-                    },
-            }).then(res => {
-                this.cardnum = res.data.card_num
-                this.usedate = res.data.use_date
-                this.uselocation = res.data.use_location
-                this.price = res.data.useprice
-                console.log(res)
-            })
-            .catch((err)=>{
-                console.log(err);
-            })
-        }
+        // carduse(){
+        //     axios.get(this.$store.state.apihost + '/member/get_use_card',{
+        //          headers:{
+        //                 Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`
+        //             },
+        //     }).then(res => {
+        //         res.data.forEach((card,i) => {
+        //             this.cardnum[i]=card.card_num;
+        //             this.usedate[i]=card.usedate;
+        //             this.uselocation[i]=card.uselocation; 
+        //             this.useprice[i]=card.useprice;
+        //         });
+        //         console.log(res)
+        //     })
+        //     .catch((err)=>{
+        //         console.log(err);
+        //     })
+        // }
     },
     // mounted(){
     //     this.carduse()
