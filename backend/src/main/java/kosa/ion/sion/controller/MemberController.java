@@ -13,6 +13,7 @@ import java.util.Random;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -106,8 +107,10 @@ public class MemberController {
 	
 	//고객이 카드 사용한 정보 가져오기
 	@GetMapping("/get_use_card")
-	public List<MemberUseDto> getMembersUse() {
-		return memberUseRepository.findAll();
+	public List<MemberUseDto> getMembersUse(@RequestHeader HashMap<String,String> header) {
+		String[] token = header.get("authorization").split(" ");
+		String member_id = jwtProvider.getUserNameFromJwtToken(token[0].equals("Bearer")?token[1]:"");
+		return memberUseRepository.findTop5ByMemberIdOrderByUseDateDesc(member_id);
 	}
 	
 	//관리자 페이지 멤버 DB 전송
