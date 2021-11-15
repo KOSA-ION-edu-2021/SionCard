@@ -57,7 +57,8 @@ export default {
       
   },
   mounted() {
-    this.loginCheck_myCard()
+    this.$store.commit('updateAuth',this.loginCheck_myCard);
+    //this.loginCheck_myCard()
   },
   methods: {
     loginCheck_myCard(){

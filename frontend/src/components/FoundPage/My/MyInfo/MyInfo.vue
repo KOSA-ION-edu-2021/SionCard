@@ -77,7 +77,8 @@ export default {
       myinfo_delete
   },
   mounted() {
-    this.loginCheck_myInfo()
+    // this.loginCheck_myInfo()
+    this.$store.commit('updateAuth',this.loginCheck_myMain)
   },
   methods: {
     loginCheck_myInfo(){

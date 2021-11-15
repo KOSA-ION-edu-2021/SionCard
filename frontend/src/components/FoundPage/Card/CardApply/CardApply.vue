@@ -276,12 +276,12 @@ export default {
         selected_card_id : 0,
         pw:"",
         id:"",
-        number: 4,
     }),
     mounted() {
-        this.loginCheck_cardApply()
+        this.$store.commit('updateAuth',this.loginCheck_cardApply);
     },
     methods: {
+        
     loginCheck_cardApply(){
       if(this.$store.state.auth == null){
         this.$router.push('login')

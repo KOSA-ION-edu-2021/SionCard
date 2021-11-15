@@ -104,8 +104,8 @@ public class MemberController {
 	MemberUseRepository memberUseRepository;
 	
 	//고객이 카드 사용한 정보 가져오기
-	@PostMapping("/get_use_card")
-	public List<MemberUseDto> getMembersUse(@RequestBody Map<String, Object> param) {
+	@GetMapping("/get_use_card")
+	public List<MemberUseDto> getMembersUse() {
 		return memberUseRepository.findAll();
 	}
 	

@@ -70,6 +70,9 @@ export default {
         mdiAccount,
         },
     }),
+    mounted() {
+        this.$store.commit('updateAuth',this.loginCheck_myMain)
+  },
 }
 </script>
 

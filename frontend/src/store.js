@@ -10,7 +10,6 @@ export default new Vuex.Store({
     },
     
     getters: {
-        
     },
     mutations: {
         SET_DATA(state, payload) {
@@ -20,7 +19,7 @@ export default new Vuex.Store({
         setJwt(state, data){
             sessionStorage.setItem('JSESSIONID',data);
         },
-        updateAuth(state) {
+        updateAuth(state, callback) {
             axios.get(state.apihost+"/member/get_auth",
                 {
                     headers:{
@@ -31,6 +30,7 @@ export default new Vuex.Store({
             .then(res=>{
                 console.log(res.data)
                 state.auth=res.data;
+                callback && callback();
             })
             .catch(err=>{
                 console.log("로그인이 되어 있지 않습니다.");

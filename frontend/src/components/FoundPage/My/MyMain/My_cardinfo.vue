@@ -111,13 +111,13 @@
                         <!-- 거래 내역 -->
                         <v-row v-for="num in 3" :key="num">
                             <v-col cols="3">
-                                2021.10.6
+                                <!-- {{this.usedate}} -->
                             </v-col>
                             <v-col cols="6">
-                                카카오페이FBS출금
+                                <!-- {{this.uselocation}} -->
                             </v-col>
                             <v-col cols="3">
-                                50,000원
+                                <!-- {{this.useprice}} -->
                             </v-col>
                         </v-row>
                 </v-col>
@@ -128,13 +128,47 @@
     </v-row>  
       <!-- 상단 : 대표계좌 이용내역 -->
       
+      <v-btn @click="carduse()">
+          클릭
+      </v-btn>    
 
   </v-container>
 </template>
 
 <script>
+import axios from "axios";
 export default {
     name: "Mycardinfo",
+     data: ()=>({
+        cardnum : 0,
+        usedate :"",
+        uselocation : "",
+        useprice : 0,
+    }),
+    mounted() {
+        this.$store.commit('updateAuth',this.loginCheck_myMain)
+  },
+    methods:{
+        carduse(){
+            axios.get(this.$store.state.apihost + '/member/get_use_card',{
+                 headers:{
+                        Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`
+                    },
+            }).then(res => {
+                this.cardnum = res.data.card_num
+                this.usedate = res.data.use_date
+                this.uselocation = res.data.use_location
+                this.price = res.data.useprice
+                console.log(res)
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+        }
+    },
+    // mounted(){
+    //     this.carduse()
+    // }
 }
 </script>
 
