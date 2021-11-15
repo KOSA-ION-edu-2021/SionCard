@@ -138,4 +138,11 @@ public class ApiController {
 			return false;
 		}
 	}
+	
+	//관리자 페이지 멤버 DB 전송
+		@GetMapping("/member_info")
+		public List<MembersDto> MemberdInfo() {
+			return membersRepository.findAll();
+		}
+	
 }
