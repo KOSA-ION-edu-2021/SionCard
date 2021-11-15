@@ -12,7 +12,8 @@ import CardApply from "./components/FoundPage/Card/CardApply/CardApply.vue"
 import CardInfor0 from "./components/FoundPage/Card/CardInfor/CardInfor0.vue"
 
 import Admin_Main from "./components/FoundPage/Admin/Admin_Main.vue"
-import Admin_Login from "./components/FoundPage/Admin/Login/Login.vue"
+import Admin_MainView from "./components/FoundPage/Admin/Admin_MainView.vue"
+import Admin_Login from "./components/FoundPage/Admin/Admin_Login/Admin_Login.vue"
 import Admin_User from "./components/FoundPage/Admin/Admin_User/Admin_User.vue"
 import Admin_Card from "./components/FoundPage/Admin/Admin_Card/Admin_Card.vue"
 
@@ -82,6 +83,11 @@ const routes=[
         children:[
             {
                 path: "",
+                name: "admin_main_view",
+                component: Admin_MainView
+            },
+            {
+                path: "login",
                 name: "Login",
                 component: Admin_Login
             },
