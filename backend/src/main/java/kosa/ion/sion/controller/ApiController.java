@@ -1,11 +1,13 @@
 package kosa.ion.sion.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.NoSuchElementException;
-
-import javax.servlet.http.HttpServletResponse;
-
+import kosa.ion.sion.dto.CardsDto;
+import kosa.ion.sion.dto.MembersDto;
+import kosa.ion.sion.repository.CardsRepository;
+import kosa.ion.sion.repository.FileTestRepository;
+import kosa.ion.sion.repository.MembersRepository;
+import kosa.ion.sion.security.JwtProvider;
+import kosa.ion.sion.service.MailService;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,22 +15,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import kosa.ion.sion.dto.CardsDto;
-import kosa.ion.sion.dto.MembersDto;
-import kosa.ion.sion.repository.CardsRepository;
-import kosa.ion.sion.repository.MembersRepository;
-import kosa.ion.sion.security.JwtProvider;
-import kosa.ion.sion.service.MailService;
-import net.bytebuddy.utility.RandomString;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api")
@@ -45,9 +40,10 @@ public class ApiController {
 	
 	@Autowired
 	private MailService mailService;
-	
+
 	@GetMapping("/test")
 	public String Test() {
+		System.out.println("success");
 		return "success";
 	}
 	//jwt 부분
@@ -121,5 +117,19 @@ public class ApiController {
 	@GetMapping("/card_info")
 	public List<CardsDto> CardInfo() {
 		return cardsRepository.findAll();
+	}
+
+	@Autowired
+	FileTestRepository fileTestRepository;
+	@PostMapping("/file_up")
+	public ResponseEntity<Boolean> fileUp(@RequestParam(name="files") List<MultipartFile> files) throws IOException {
+		System.out.println(files.toArray()+"");
+		for(MultipartFile file : files){
+			if(file.isEmpty()) continue;
+			File newFile = new File("images/"+file.getOriginalFilename());
+			file.transferTo(newFile);
+
+		}
+		return ResponseEntity.ok(true);
 	}
 }

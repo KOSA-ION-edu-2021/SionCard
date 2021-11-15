@@ -52,11 +52,13 @@ export default {
       console.log(this.file);
     },
     send(){
-      this.printFile();
-      axios.post(this.$store.state.apihost+"/admin/file_up",{
-        name:"test",
-        files:this.file,
-      })
+      let body= new FormData();
+
+      this.file.forEach(data => {
+        body.append('files',data);
+      });
+      console.log(body.get("files"));
+      axios.post(this.$store.state.apihost+"/api/file_up",body)
       .then(res=>{
         console.log(res);
       })
