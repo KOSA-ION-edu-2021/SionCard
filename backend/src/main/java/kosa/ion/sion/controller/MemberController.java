@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import kosa.ion.sion.dto.CardsDto;
 import kosa.ion.sion.dto.MemberUseDto;
 import kosa.ion.sion.dto.MembersCardDto;
 import kosa.ion.sion.dto.MembersDto;
@@ -107,6 +108,12 @@ public class MemberController {
 	@PostMapping("/get_use_card")
 	public List<MemberUseDto> getMembersUse(@RequestBody Map<String, Object> param) {
 		return memberUseRepository.findAll();
+	}
+	
+	//관리자 페이지 멤버 DB 전송
+	@GetMapping("/member_info")
+	public List<MembersDto> MemberdInfo() {
+		return membersRepository.findAll();
 	}
 	
 }

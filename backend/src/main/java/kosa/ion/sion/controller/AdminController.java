@@ -1,5 +1,7 @@
 package kosa.ion.sion.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +32,10 @@ public class AdminController{
 	@ResponseBody
 	public ResponseEntity<CardsDto> signup(HttpServletResponse response, @RequestBody CardsDto card_info) {
 		return ResponseEntity.ok(cardsRepository.save(card_info));
+	}
+	
+	@GetMapping("/card")
+	public List<CardsDto> CardInfo() {
+		return cardsRepository.findAll();
 	}
 }
