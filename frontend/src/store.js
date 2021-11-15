@@ -36,6 +36,7 @@ export default new Vuex.Store({
                 console.log("로그인이 되어 있지 않습니다.");
                 console.log(err);
                 state.auth=null;
+                callback && callback();
             })
         },
     },
