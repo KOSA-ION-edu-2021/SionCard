@@ -4,7 +4,14 @@
     <v-col cols="10">
       
       <v-sheet class="mt-5 mb-5 text-h3 grey lighten-2"> 고객 정보 관리 </v-sheet>
-
+      <v-row>
+        <v-col class="d-flex justify-end" cols="11">
+          <v-btn >
+            카드 추가하기
+          </v-btn>
+        </v-col>
+        <v-col cols="1"></v-col>
+      </v-row>
       <v-row justify="center">
         <v-col align-self="center">
           <table>
@@ -59,7 +66,7 @@ export default {
         });
     },
     checkAdmin(){
-            if(this.$store.state.auth.id !== 119){
+            if(this.$store.state.auth.member_id !== 'admin'){
               this.$router.push('/')
               alert('관리자만 접속 가능합니다!');
             }

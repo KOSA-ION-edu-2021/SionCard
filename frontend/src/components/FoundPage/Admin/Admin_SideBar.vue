@@ -3,7 +3,7 @@
       v-model="drawer"
       absolute
       left
-      temporary
+      app
     >
       <v-list
         nav

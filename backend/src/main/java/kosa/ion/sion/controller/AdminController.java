@@ -21,12 +21,12 @@ public class AdminController{
 	public String Test() {
 		return "success";
 	}
-	//가정 : formdata로 받으면 Body가 아니라 pram으로 받아야 하는 가능성이 있다.
+	//가정 : formdata로 받으면 Body가 아니라 pram으로 받아야 한다?
 	@PostMapping("/create_card")
-	public ResponseEntity<CardsDto> createCard(@RequestParam CardVo cardVo) {
+	public ResponseEntity<Boolean> createCard(@RequestParam CardVo cardVo) {
 		UUID.randomUUID();
 		cardVo.getImg();
-		return ResponseEntity.ok(cardsRepository.save());
+		return ResponseEntity.ok(false);
 	}
 	
 	@GetMapping("/card")

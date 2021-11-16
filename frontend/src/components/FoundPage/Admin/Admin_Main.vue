@@ -28,7 +28,7 @@ export default {
     }),
     methods:{
         changeDraw(){
-            this.drawer=!this.drawer
+            this.drawer=!this.drawer;
         },
 
     },
