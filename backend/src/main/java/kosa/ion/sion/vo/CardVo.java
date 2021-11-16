@@ -9,10 +9,10 @@ public class CardVo {
     private String title;
     private String content;
     private String cardType;
-    private boolean cardCheck;
-    private boolean cardCredit;
+    private Boolean cardCheck;
+    private Boolean cardCredit;
     private String benefitType;
     private String benefitContent;
-    private boolean mastercard;
-    private boolean traficcard;
+    private Boolean mastercard;
+    private Boolean traficcard;
 }
