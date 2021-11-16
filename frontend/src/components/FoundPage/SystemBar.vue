@@ -55,7 +55,13 @@ export default {
             return Number.parseInt((this.$store.state.auth.expire-this.preTime)/1000/60);
         },
         seconds: function(){
-            const result = "0"+Number.parseInt((this.$store.state.auth.expire-this.preTime)/1000%60);
+            const num = Number.parseInt((this.$store.state.auth.expire-this.preTime)/1000%60);
+            if(this.minutes==0 && num<=0){
+                sessionStorage.removeItem('JSESSIONID');
+                this.$store.commit('updateAuth');
+                return null;
+            }
+            const result="0"+num;
             return result.substring(result.length-2,result.length);
         }
     }

@@ -1,5 +1,5 @@
 <template class="">
-  <v-container class="mt-10 mb-10">
+  <v-container class="mt-10 mb-10" v-if="!!this.$store.getters.getAuth">
     <v-row>
       <v-col cols="1"></v-col>
       <v-col cols="10">

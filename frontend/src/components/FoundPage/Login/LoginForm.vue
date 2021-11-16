@@ -106,10 +106,8 @@ export default {
                 password: this.pw,
             })
             .then(res=>{
-                console.log(res.data);
                 this.$store.commit("setJwt",res.data.jwt);
                 this.$store.state.expire = new Date(res.data.expire);
-                console.log(this.$store.state.expire.toJSON());
                 this.$router.push(this.go_page||'/' ); //go_page에 값이 없으면 루트페이지로 간다.
             })
             .catch(err=>{

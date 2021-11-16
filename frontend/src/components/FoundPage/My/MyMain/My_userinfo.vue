@@ -1,5 +1,5 @@
 <template>
-    <v-row justify="center" class="ma-auto grey lighten-3">
+    <v-row justify="center" class="ma-auto grey lighten-3"  v-if="!!this.$store.getters.getAuth">
         
         <v-col cols="auto">
           <v-row justify="center">

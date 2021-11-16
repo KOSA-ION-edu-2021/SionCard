@@ -3,13 +3,14 @@ import Vue from 'vue';
 import axios from 'axios';
 
 Vue.use(Vuex);
+
 export default new Vuex.Store({
     state: {
         auth:null,
         apihost: "http://localhost:8080",
     },
-    
     getters: {
+        getAuth:state=>state.auth,
     },
     mutations: {
         SET_DATA(state, payload) {
@@ -45,6 +46,6 @@ export default new Vuex.Store({
         SET_DATA(context, payload) {
             console.log("actions:SET_DATA");
             context.commit("SET_DATA", payload);
-        }
+        },
     }
 });

@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container v-if="!this.$store.getters.getAuth">
       <v-row>
         <v-col cols="1"></v-col>
         <v-col cols="10">
@@ -413,7 +413,15 @@ export default {
         })
     },
     
+    loginCheck_myLogin(){
+      if(this.$store.getters.getAuth != null){
+        this.$router.go(-1)
+      }
+    },
   }, 
+  mounted(){
+    this.$store.commit('updateAuth',this.loginCheck_myLogin)
+  },
   computed: {
     form () {
       return {

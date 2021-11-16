@@ -1,5 +1,5 @@
 <template>
-  <v-card tile flat class="grey lighten-2"><!-- style="margin-top: 166px" -->
+  <v-card tile flat class="grey lighten-2" v-if="!this.$store.getters.getAuth"><!-- style="margin-top: 166px" -->
     <v-container class="grey lighten-2">
       <v-row class="ma-auto pa-auto ">
         <v-col cols="1" md="" class="grey lighten-2"/>
@@ -25,5 +25,15 @@ export default {
     LoginForm,
     LoginDeco,
   },
+  mounted(){
+    this.$store.commit('updateAuth',this.loginCheck_myLogin)
+  },
+  methods:{
+    loginCheck_myLogin(){
+      if(this.$store.getters.getAuth != null){
+        this.$router.go(-1)
+      }
+    },
+  }
 };
 </script>
