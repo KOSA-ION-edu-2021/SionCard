@@ -1,11 +1,10 @@
 package kosa.ion.sion.dto;
 
-import javax.persistence.*;
-
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-
 import lombok.Data;
+
+import javax.persistence.*;
 
 
 @Entity
@@ -24,4 +23,6 @@ public class CardsDto {
 	private boolean cardCredit;
 	private String benefitType;
 	private String benefitContent;
+	private boolean mastercard;
+	private boolean traficcard;
 }

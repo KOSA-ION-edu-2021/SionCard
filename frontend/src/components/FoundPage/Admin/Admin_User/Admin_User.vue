@@ -59,7 +59,7 @@ export default {
         })},
     
     checkAdmin(){
-            if(this.$store.state.auth.id !== 119){
+            if(this.$store.state.auth.member_id !== 'admin'){
               this.$router.push('/')
               alert('관리자만 접속 가능합니다!');
             }

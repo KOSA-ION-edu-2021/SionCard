@@ -1,21 +1,14 @@
 package kosa.ion.sion.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import kosa.ion.sion.dto.CardsDto;
 import kosa.ion.sion.repository.CardsRepository;
+import kosa.ion.sion.vo.CardVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/admin")
@@ -28,10 +21,12 @@ public class AdminController{
 	public String Test() {
 		return "success";
 	}
-	@PostMapping("/card_info")
-	@ResponseBody
-	public ResponseEntity<CardsDto> signup(HttpServletResponse response, @RequestBody CardsDto card_info) {
-		return ResponseEntity.ok(cardsRepository.save(card_info));
+	//가정 : formdata로 받으면 Body가 아니라 pram으로 받아야 하는 가능성이 있다.
+	@PostMapping("/create_card")
+	public ResponseEntity<CardsDto> createCard(@RequestParam CardVo cardVo) {
+		UUID.randomUUID();
+		cardVo.getImg();
+		return ResponseEntity.ok(cardsRepository.save());
 	}
 	
 	@GetMapping("/card")
