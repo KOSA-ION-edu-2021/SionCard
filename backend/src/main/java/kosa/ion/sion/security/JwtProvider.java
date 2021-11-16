@@ -27,10 +27,20 @@ public class JwtProvider {
 	public String getUserNameFromJwtToken(String token) {
 		return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
 	}
-	public Date getExpirationaFromJwtToken(String token){
+	public Date getExpirationaFromJwtToken(String token){ //add 2021-11-16
 		return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getExpiration();
 	}
 
+	public String getRefreshJwtToken(String token) { //add 2021-11-17
+		Claims jwt = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
+		return Jwts.builder()
+				.setSubject(jwt.getSubject())
+				.setIssuedAt(new Date())
+				.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+				.signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
+	}
+	
+	
 	public boolean validateJwtToken(String authToken) {
 		try {
 			Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);

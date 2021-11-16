@@ -6,7 +6,6 @@ import kosa.ion.sion.repository.CardsRepository;
 import kosa.ion.sion.repository.MembersRepository;
 import kosa.ion.sion.security.JwtProvider;
 import kosa.ion.sion.service.MailService;
-import kosa.ion.sion.vo.LoginVo;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -47,29 +46,23 @@ public class ApiController {
 	public String Test() {
 		return "success";
 	}
-
-
-	@GetMapping("/expire_time")
-	public ResponseEntity<Date> ExpireTime(@RequestHeader HashMap<String, String> headers){
-		String[] token = headers.get("authorization").split(" ");
-		return ResponseEntity.ok(jwtProvider.getExpirationaFromJwtToken(token[0].equals("Bearer")?token[1]:""));
-	}
+	
 	//jwt 부분
 	@PostMapping("/login")
 	@ResponseBody
-	public ResponseEntity<LoginVo> login(HttpServletResponse response, @RequestBody LoginVo loginVo) {
+	public ResponseEntity<Map<String,String>> login(@RequestBody Map<String,String> Auth) {
 		Authentication authentication = authenticationManager
-				.authenticate(new UsernamePasswordAuthenticationToken(loginVo.getId(),loginVo.getPassword()));
+				.authenticate(new UsernamePasswordAuthenticationToken(Auth.get("id"),Auth.get("password")));
 		String jwt = jwtProvider.generateJwtToken(authentication);
-		Date expire = jwtProvider.getExpirationaFromJwtToken(jwt);
-		loginVo = new LoginVo(null,null,jwt,expire);
-		return ResponseEntity.ok(loginVo);
+		Auth.clear();
+		Auth.put("jwt", jwt);
+		return ResponseEntity.ok(Auth);
 	}
 	
 	//회원가입 부분
 	@PostMapping("/signup")
 	@ResponseBody
-	public ResponseEntity<MembersDto> signup(HttpServletResponse response, @RequestBody MembersDto member) {
+	public ResponseEntity<MembersDto> signup(@RequestBody MembersDto member) {
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
 		return ResponseEntity.ok(membersRepository.save(member));
 	}

@@ -10,13 +10,14 @@
             <router-link to="/my_main" ><button class="white--text text-caption mr-2">{{this.$store.state.auth.name}}</button></router-link>
             <button disabled  class="white--text text-caption mr-2"> 님 반갑습니다. </button>
             <!-- <span class="mr-2 ml-2 white--text">|</span> -->
-            <button class="white--text text-caption mr-2"> {{`${loginTime.getMinutes()}:${loginTime.getSeconds()}`}`}</button>
+            <button @click="refreshJwt" class="white--text text-caption mr-2"> {{`${minutes}:${seconds}`}}</button>
             <button @click="logout" class="white--text text-caption ml-2 mr-16" tag="button">로그아웃</button>
         </div>
     </v-system-bar>
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
     methods:{
@@ -26,10 +27,22 @@ export default {
         },
         setExpire(){
             if(!this.$store.state.auth) return;
-            console.log(1);
             this.preTime = new Date();
+        },
+        refreshJwt(){
+            axios.get(this.$store.state.apihost+"/member/refresh_jwt",{
+                headers:{
+                    Authorization:`Bearer ${sessionStorage.getItem("JSESSIONID")}`,
+                }
+            })
+            .then(res=>{
+                sessionStorage.setItem("JSESSIONID",res.data.jwt);
+                this.$store.commit('updateAuth');
+            })
+            .catch(err=>{
+                console.log(err);
+            })
         }
-        
     },
     data:()=>({
         preTime : new Date(),
@@ -38,9 +51,13 @@ export default {
         setInterval(this.setExpire,1000);
     },
     computed:{
-        loginTime: function(){ 
-            return this.$store.state.expire-this.preTime;
+        minutes: function(){ 
+            return Number.parseInt((this.$store.state.auth.expire-this.preTime)/1000/60);
         },
+        seconds: function(){
+            const result = "0"+Number.parseInt((this.$store.state.auth.expire-this.preTime)/1000%60);
+            return result.substring(result.length-2,result.length);
+        }
     }
     
 

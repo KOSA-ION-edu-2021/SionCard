@@ -7,7 +7,6 @@ export default new Vuex.Store({
     state: {
         auth:null,
         apihost: "http://localhost:8080",
-        expire: new Date(),
     },
     
     getters: {
@@ -30,7 +29,8 @@ export default new Vuex.Store({
             )
             .then(res=>{
                 console.log(res.data)
-                state.auth=res.data;
+                state.auth=res.data
+                state.auth.expire = new Date(state.auth.expire);
                 callback && callback();
             })
             .catch(err=>{
