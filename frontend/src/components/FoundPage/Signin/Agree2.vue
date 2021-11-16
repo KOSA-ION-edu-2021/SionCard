@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow: scroll; width: 100%; height: 450px; padding: 10px">
+  <div style="overflow: auto; width: 100%; height: 450px; padding: 10px">
     <ul style="list-style: none">
       <li>1.개인정보 수집 및 이용목적</li>
       <br />

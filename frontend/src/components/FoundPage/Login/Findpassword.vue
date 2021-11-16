@@ -16,8 +16,8 @@
       <!-- 모달 페이지 -->
       <v-card>
         <!-- 최상단 bar -->
-        <v-toolbar dark color="primary">
-          <v-toolbar-title class="">PW 찾기</v-toolbar-title>
+        <v-toolbar color="grey darken-3">
+          <v-toolbar-title class="white--text">PW 찾기</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon dark @click="dialog = false">
             <v-icon>mdi-close</v-icon>
@@ -85,7 +85,7 @@
               <v-row class="justify-right">
                 <v-col cols="8"></v-col>
                 <v-col cols="1" dense algin-self="center">
-                  <v-btn @click="submit"> 비밀번호 찾기 </v-btn>
+                  <v-btn @click="submit" color="grey lighten-2"> 비밀번호 찾기 </v-btn>
                 </v-col>
               </v-row>
             </v-list-item>

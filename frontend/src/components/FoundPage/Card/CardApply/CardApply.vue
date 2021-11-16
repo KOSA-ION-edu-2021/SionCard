@@ -55,21 +55,24 @@
                         <v-row class="mb-12" >
                             <v-col cols="3" v-for="(card,i) in cardInfo" :key="i">
                                 <v-hover v-slot="{ hover }">
-                                    <v-img
-                                    class="ma-5"
-                                    :src=card.img
-                                    contain
-                                    aspect-ratio="2"
-                                    @click="cardpick(i)"
-                                    >
-                                        <v-expand-transition>
-                                                <v-img
-                                                v-if="hover"
-                                                :src=card.img
-                                                contain
-                                                />
-                                        </v-expand-transition>
-                                    </v-img>
+                                    <v-container class="text-center">
+                                      {{card.title}} 
+                                        <v-img
+                                        class="ma-5"
+                                        :src=card.img
+                                        contain
+                                        :aspect-ratio=cardsize
+                                        @click="cardpick(i)"
+                                        >
+                                            <v-expand-transition>
+                                                    <v-img
+                                                    v-if="hover"
+                                                    :src=card.img
+                                                    contain
+                                                    />
+                                            </v-expand-transition>
+                                        </v-img>
+                                    </v-container>
                                 </v-hover>
                                 <!-- </v-card>  -->   
                             </v-col>
@@ -77,7 +80,7 @@
                         
                         <v-btn
                         color="grey lighten-2"
-                        @click="e1 = 2"
+                        @click="nextStep"
                         >
                         Continue
                         </v-btn>
@@ -230,7 +233,7 @@
                         >
                         <v-row justify="center">
                             <v-col align-self="center" class="text-center"> 
-                                <v-sheet class="text-h3 font-weight-bold">
+                                <v-sheet class="text-h3 font-weight-bold grey lighten-4">
                                     신청이 완료되었습니다.
                                 </v-sheet>
                             </v-col>
@@ -266,7 +269,8 @@ export default {
         cardInfo,
         e1: 1,
         wantedcardID:0,
-        wantedcard:'',
+        wantedcard:null,
+        cardsize: 2,
         bgcolor1:'blue',
         bgcolor2:'',
         bgcolor3:'blue',
@@ -295,6 +299,14 @@ export default {
             this.wantedcard=this.cardInfo[num].img
             // application에서 쓸 id 값.
             this.selected_card_id = num
+            this.cardsize = 1
+        },
+        nextStep(){
+            if(this.wantedcard == null){
+                alert('카드를 선택해주세요!')
+            }else{
+                this.e1 = 2
+            }
         },
         color1(){
             this.bgcolor1 = 'blue'

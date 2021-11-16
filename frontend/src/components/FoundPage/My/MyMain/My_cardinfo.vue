@@ -45,7 +45,8 @@
                                 받은 혜택
                                 </v-col>
                                 <v-col cols="" class="text-subtitle-2">
-                                    21.10.04 ~ 21.11.04 기준
+                                    <!-- 21.10.04 ~ 21.11.04 기준 -->
+                                    <Calendar/>
                                 </v-col>
                         </v-row>              
                         <v-row><v-divider></v-divider></v-row>
@@ -84,11 +85,11 @@
                         </v-row>
 
                         <!-- 우측 하단 버튼 -->
-                        <v-row justify="center">
+                        <!-- <v-row justify="center">
                             <v-col cols="auto">
                                 <v-btn elevation="2">상세 내역</v-btn>
                             </v-col>
-                        </v-row>
+                        </v-row> -->
 
                     </v-col>
                 </v-row>
@@ -140,7 +141,9 @@
 </template>
 
 <script>
+import Calendar from './My_cardinfo_calendar.vue'
 // import axios from "axios";
+
 export default {
     name: "Mycardinfo",
      data: ()=>({
@@ -149,6 +152,9 @@ export default {
         // uselocation : {},
         // useprice : {},
     }),
+    components:{
+        Calendar,
+    },
     mounted() {
         this.$store.commit('updateAuth',this.loginCheck_myMain)
         // this.carduse()

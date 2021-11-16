@@ -45,7 +45,6 @@
                     </v-btn>
                     <v-btn
                         class="ml-auto"
-                        color="primary"
                         type="submit"
                         dense
                     >

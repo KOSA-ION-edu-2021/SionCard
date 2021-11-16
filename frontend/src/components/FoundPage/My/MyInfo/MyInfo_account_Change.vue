@@ -3,18 +3,14 @@
     <v-dialog
       v-model="dialog"
       transition="dialog-bottom-transition"
-      max-width="600px"
+      width="30%"
       ><!-- fullscreen 추가하면 모달창 화면 전체 -->
       <template v-slot:activator="{ on, attrs }">
         
         <v-col class="yello" cols="auto" v-bind="attrs" v-on="on">
-          <v-btn
-            depressed
-            elevation="12"
-            outlined
-            >
-                기본 정보 변경
-            </v-btn>
+          <v-btn elevation="2">
+              기본 정보 변경
+          </v-btn>
         </v-col>
       </template>
 
@@ -34,44 +30,23 @@
         <!-- ID 변경  -->
         <v-list three-line subheader>
           <v-list-item>
-            <v-list-item-content class="ma-1">
-              <v-list-item-title><b>ID</b></v-list-item-title>
+            <v-list-item-content class="text-center">
+              <v-list-item-title class="text-font-weight">
+                ID
+              </v-list-item-title>
             </v-list-item-content>
             <v-row justify="start">
-              <v-col cols="auto" dense >
+              <v-col cols="auto" dense align-self="center">
                 <v-list-item-content>
                   <v-list-item-title  >
-                        <v-list-item-action class="ma-0">
-                        </v-list-item-action>
-                    아직
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-col>
-              <v-col cols="auto" dense>
-                <v-list-item-content>
-                  <v-list-item-title  >
-                        <v-list-item-action class="ma-0">
-                        </v-list-item-action>
-                    미완성이지롱
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-col>
-            </v-row>
-          </v-list-item>
-          <v-divider></v-divider>
-
-          <!-- 이메일 -->
-          <v-list-item>
-            <v-list-item-content class="ma-1">
-              <v-list-item-title ><b>이메일</b></v-list-item-title>
-            </v-list-item-content>
-            <v-row justify="start">
-              <v-col cols="auto" dense>
-                <v-list-item-content>
-                  <v-list-item-title  >
-                        <v-list-item-action class="ma-0">
-                        </v-list-item-action>
-                    기대돼?
+                      
+                      <v-text-field
+                        label="ID"
+                        required
+                        dense
+                        hide-details="auto"
+                        outlined
+                      ></v-text-field>
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
@@ -79,18 +54,51 @@
           </v-list-item>
           <v-divider></v-divider>
 
-          <!-- 생년월일 -->
+          <!-- 이메일 변경  -->
           <v-list-item>
-            <v-list-item-content class="ma-1">
-              <v-list-item-title ><b>생년월일</b></v-list-item-title>
+            <v-list-item-content class="text-center">
+              <v-list-item-title class="text-font-weight">
+                이메일
+              </v-list-item-title>
             </v-list-item-content>
             <v-row justify="start">
-              <v-col cols="auto" dense>
+              <v-col cols="auto" dense align-self="center">
                 <v-list-item-content>
                   <v-list-item-title  >
-                        <v-list-item-action class="ma-0">
-                        </v-list-item-action>
-                    비밀이야
+                      
+                      <v-text-field
+                        label="EMAIL"
+                        required
+                        dense
+                        hide-details="auto"
+                        outlined
+                      ></v-text-field>
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-col>
+            </v-row>
+          </v-list-item>
+          <v-divider></v-divider>
+
+          <!-- 생일 변경  -->
+          <v-list-item>
+            <v-list-item-content class="text-center">
+              <v-list-item-title class="text-font-weight">
+                생년월일
+              </v-list-item-title>
+            </v-list-item-content>
+            <v-row justify="start">
+              <v-col cols="auto" dense align-self="center">
+                <v-list-item-content>
+                  <v-list-item-title  >
+                      
+                      <v-text-field
+                        label="BIRTHDAY"
+                        required
+                        dense
+                        hide-details="auto"
+                        outlined
+                      ></v-text-field>
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
@@ -98,18 +106,25 @@
           </v-list-item>
           <v-divider></v-divider>
           
-          <!-- 휴대전화 -->
+          <!-- 전화번호 변경  -->
           <v-list-item>
-            <v-list-item-content class="ma-1">
-              <v-list-item-title ><b>휴대전화</b></v-list-item-title>
+            <v-list-item-content class="text-center">
+              <v-list-item-title class="text-font-weight">
+                전화번호
+              </v-list-item-title>
             </v-list-item-content>
             <v-row justify="start">
-              <v-col cols="auto" dense>
+              <v-col cols="auto" dense align-self="center">
                 <v-list-item-content>
                   <v-list-item-title  >
-                        <v-list-item-action class="ma-0">
-                        </v-list-item-action>
-                    ㅋㅋ
+                      
+                      <v-text-field
+                        label="PHONE-NUMBER"
+                        required
+                        dense
+                        hide-details="auto"
+                        outlined
+                      ></v-text-field>
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
@@ -117,24 +132,42 @@
           </v-list-item>
           <v-divider></v-divider>
 
-          <!-- 주소 -->
+          <!-- 주소 변경  -->
           <v-list-item>
-            <v-list-item-content class="ma-1">
-              <v-list-item-title ><b>주소</b></v-list-item-title>
+            <v-list-item-content class="text-center">
+              <v-list-item-title class="text-font-weight">
+                주소
+              </v-list-item-title>
             </v-list-item-content>
             <v-row justify="start">
-              <v-col cols="auto" dense>
+              <v-col cols="auto" dense align-self="center">
                 <v-list-item-content>
                   <v-list-item-title  >
-                        <v-list-item-action class="ma-0">
-                        </v-list-item-action>
-                    살려줘 ㅠ
+                      
+                      <v-text-field
+                        label="ADDRESS"
+                        required
+                        dense
+                        hide-details="auto"
+                        outlined
+                      ></v-text-field>
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
             </v-row>
           </v-list-item>
           <v-divider></v-divider>
+
+          <!-- 완료 버튼 -->
+          <v-list-item>
+            <v-row justify="end">
+              <v-col cols="auto" dense align-self="center">
+                <v-list-item-content>
+                  <v-btn> 기본 정보 변경 </v-btn>
+                </v-list-item-content>
+              </v-col>
+            </v-row>
+          </v-list-item>
 
         </v-list>
       </v-card>

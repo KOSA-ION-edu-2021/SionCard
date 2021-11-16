@@ -20,7 +20,7 @@
       <!-- 모달 페이지 -->
       <v-card>
         <!-- 최상단 bar -->
-        <v-toolbar dark color="primary">
+        <v-toolbar dark color="grey darken-3">
           <v-btn icon dark @click="dialog = false">
             <v-icon>mdi-close</v-icon>
           </v-btn>

@@ -20,7 +20,7 @@
               <th>성명</th>
               <td>
                 <v-text-field
-                  style="width: 40%"
+                  style="width: 100%"
                   v-model="user_nm"
                   label="이름을 입력해 주세요."
                   :rules="user_nm_rule"
@@ -36,7 +36,7 @@
               <td>
                 <!-- <v-card class="d-flex" width="40%" flat tile> -->
                   <v-text-field
-                      style="width: 40%"
+                      style="width: 100%"
                       v-model="user_id"
                       label="아이디를 입력해 주세요."
                       @blur="id_check"
@@ -57,7 +57,7 @@
               <th>비밀번호</th>
               <td>
                 <v-text-field
-                        style="width: 40%"
+                        style="width: 100%"
                         v-model="user_pw"
                         type="password"
                         label="비밀번호를 입력해 주세요."
@@ -67,7 +67,8 @@
                         hide-details="auto"
                         outlined
                       ></v-text-field>
-                
+              </td>
+              <td>  
                 <!------------ 비민번호 설정 기준 버튼 / 모달창--------------- -->
                       <v-dialog v-model="dialog1" width="30%">
                         <template v-slot:activator="{ on, attrs }">
@@ -108,7 +109,7 @@
               <th>비밀번호 확인</th>
               <td>
                 <v-text-field
-                  style="width: 40%; text-align: center"
+                  style="width: 100%; text-align: center"
                   v-model="user_pw_chk"
                   type="password"
                   label="비밀번호를 입력해 주세요."
@@ -125,7 +126,7 @@
               <th>이메일</th>
               <td>
                 <v-text-field
-                  style="width: 40%"
+                  style="width: 100%"
                   v-model="user_email"
                   type="email"
                   label="이메일주소를 입력해주세요."
@@ -140,7 +141,7 @@
             <!-- ===============회원가입 필수동의===================== -->
             <tr class="agreebox">
               <th>회원가입<br> 필수동의</th>
-              <td>
+              <td colspan="2">
                 <v-checkbox
                   v-model="checkbox"
                   name="checkbox"
@@ -205,7 +206,7 @@
                         상세보기
                       </v-btn>
                     </template>
-                    <v-card>
+                    <v-card class="grey lighten-2">
                       <v-card-title>
                         <span class="text-h5">개인정보 수집 및 이용</span>
                       </v-card-title>
@@ -238,7 +239,7 @@
                 color="secondary"
                 dense
               >
-                다음
+                가입 완료
               </v-btn>
             </v-col>
           </v-row>
@@ -457,5 +458,11 @@ table {
 }
 td{
   padding-left: 40px;
+}
+td:nth-child(3){
+  border-top-color:  rgb(196, 201, 209);
+}
+tr:last-child td{
+  border-top-color:  rgb(196, 201, 209);
 }
 </style>

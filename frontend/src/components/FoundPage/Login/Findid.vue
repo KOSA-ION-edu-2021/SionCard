@@ -16,7 +16,7 @@
       <!-- 모달 페이지 -->
       <v-card>
         <!-- 최상단 bar -->
-        <v-toolbar dark color="primary">
+        <v-toolbar dark color="grey darken-3">
           <v-toolbar-title class="">ID 찾기</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon dark @click="dialog = false">
@@ -73,7 +73,7 @@
               <v-row class="justify-center">
                 <v-col cols="8"></v-col>
                 <v-col cols="2" dense algin-self="center" class="justify-center">
-                  <v-btn @click="submit" color="primary"> 아이디 찾기 </v-btn>
+                  <v-btn @click="submit" color="grey lighten-2"> 아이디 찾기 </v-btn>
                 </v-col>
               </v-row>
             </v-list-item>
