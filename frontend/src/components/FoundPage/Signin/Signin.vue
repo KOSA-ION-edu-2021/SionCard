@@ -326,6 +326,8 @@ export default {
           return;
         }
       }
+
+
       axios.get(this.$store.state.apihost+"/api/id_check?id="+this.user_id)
         .then(res=>{
           if(res.data){
@@ -363,6 +365,10 @@ export default {
           alert("올바른 이메일을 입력해 주세요.")
           return;
         }
+      }
+      if(!this.dialog2 || !this.dalog2){
+        alert("개인정보동의를 전부 체크해 주세요.");
+        return;
       }
  ///////////////////////////////////////////////////////////////////////////////////////////////////////입력값 확인.
       axios.post(this.$store.state.apihost+"/api/signup",{

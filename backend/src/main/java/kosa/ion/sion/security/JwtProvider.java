@@ -1,25 +1,19 @@
 package kosa.ion.sion.security;
 
-import java.util.Date;
-
+import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.SignatureException;
-import io.jsonwebtoken.UnsupportedJwtException;
+import java.util.Date;
 
 @Component
 public class JwtProvider {
 	private static String jwtSecret = "wsdfhue918@#@!wwwew";
 									  
 	private static final Logger logger = LoggerFactory.getLogger(JwtProvider.class);
-	private static int jwtExpirationMs = 10*(60*1000);//10분
+	private static int jwtExpirationMs = 0*(60*60*1000)+10*(60*1000);//시간, 분
 
 	public String generateJwtToken(Authentication authentication) {
 		String name = authentication.getName();
@@ -32,6 +26,9 @@ public class JwtProvider {
 
 	public String getUserNameFromJwtToken(String token) {
 		return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+	}
+	public Date getExpirationaFromJwtToken(String token){
+		return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getExpiration();
 	}
 
 	public boolean validateJwtToken(String authToken) {

@@ -7,6 +7,7 @@ export default new Vuex.Store({
     state: {
         auth:null,
         apihost: "http://localhost:8080",
+        expire: new Date(),
     },
     
     getters: {

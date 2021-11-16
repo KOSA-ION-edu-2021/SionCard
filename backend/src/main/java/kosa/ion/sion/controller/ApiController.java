@@ -6,6 +6,7 @@ import kosa.ion.sion.repository.CardsRepository;
 import kosa.ion.sion.repository.MembersRepository;
 import kosa.ion.sion.security.JwtProvider;
 import kosa.ion.sion.service.MailService;
+import kosa.ion.sion.vo.LoginVo;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -24,10 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -49,16 +47,23 @@ public class ApiController {
 	public String Test() {
 		return "success";
 	}
+
+
+	@GetMapping("/expire_time")
+	public ResponseEntity<Date> ExpireTime(@RequestHeader HashMap<String, String> headers){
+		String[] token = headers.get("authorization").split(" ");
+		return ResponseEntity.ok(jwtProvider.getExpirationaFromJwtToken(token[0].equals("Bearer")?token[1]:""));
+	}
 	//jwt 부분
 	@PostMapping("/login")
 	@ResponseBody
-	public ResponseEntity<HashMap<String, String>> login(HttpServletResponse response, @RequestBody HashMap<String,String> auth) {
+	public ResponseEntity<LoginVo> login(HttpServletResponse response, @RequestBody LoginVo loginVo) {
 		Authentication authentication = authenticationManager
-				.authenticate(new UsernamePasswordAuthenticationToken(auth.get("id"),auth.get("password")));
-		auth.put("jwt",jwtProvider.generateJwtToken(authentication));
-		auth.remove("password");
-		auth.remove("id");
-		return ResponseEntity.ok(auth);
+				.authenticate(new UsernamePasswordAuthenticationToken(loginVo.getId(),loginVo.getPassword()));
+		String jwt = jwtProvider.generateJwtToken(authentication);
+		Date expire = jwtProvider.getExpirationaFromJwtToken(jwt);
+		loginVo = new LoginVo(null,null,jwt,expire);
+		return ResponseEntity.ok(loginVo);
 	}
 	
 	//회원가입 부분
