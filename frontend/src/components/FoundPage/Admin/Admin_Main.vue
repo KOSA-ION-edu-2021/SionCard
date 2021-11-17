@@ -2,8 +2,8 @@
   <v-app>
     <!-- <v-system-bar app></v-system-bar> -->
     
-    <SideBar :drawer="drawer" ></SideBar>
-    <SystemBar :drawer="drawer" :changeDraw="changeDraw"></SystemBar>
+    <SideBar :drawer="drawer" v-if="!!this.$store.getters.getAuth"></SideBar>
+    <SystemBar :drawer="drawer" :changeDraw="changeDraw" v-if="!!this.$store.getters.getAuth"></SystemBar>
     
     <v-main class="align-center grey lighten-2">
         <router-view/>
@@ -32,12 +32,6 @@ export default {
         },
 
     },
-    updated(){
-        this.$store.commit('updateAuth');
-    },
-    mounted(){
-        this.$store.commit('updateAuth');
-    }
 };
 </script>
 

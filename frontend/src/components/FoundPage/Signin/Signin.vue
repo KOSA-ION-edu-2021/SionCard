@@ -414,9 +414,7 @@ export default {
     },
     
     loginCheck_myLogin(){
-      if(this.$store.getters.getAuth != null){
-        this.$router.go(-1)
-      }
+      this.$store.getters.getAuth && this.$router.go(-1)
     },
   }, 
   mounted(){

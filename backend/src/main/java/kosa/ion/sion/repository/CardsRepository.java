@@ -11,5 +11,5 @@ import kosa.ion.sion.dto.CardsDto;
 @RepositoryRestResource(collectionResourceRel = "cardsdto", path="cardsdto")
 @CrossOrigin("*")
 public interface CardsRepository extends JpaRepository<CardsDto, Long>{
-
+	public void deleteById(Long id);
 }

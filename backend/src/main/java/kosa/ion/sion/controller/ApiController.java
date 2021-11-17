@@ -66,17 +66,12 @@ public class ApiController {
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
 		return ResponseEntity.ok(membersRepository.save(member));
 	}
+	
+	
 
 	@GetMapping("/id_check")
 	public Boolean idCheck(@RequestParam String id) {
-		try {
-			membersRepository.findByMemberId(id).orElseThrow(() -> new NoSuchElementException());
-			return false;
-		}
-		catch(Exception e){
-			//아이디가 존재하지 않으므로 사용가능함.
-			return true;	
-		}
+		return !membersRepository.existsByMemberId(id);
 	}
 	
 	@PostMapping("/find_id")
