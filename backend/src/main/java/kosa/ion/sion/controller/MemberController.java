@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kosa.ion.sion.dto.MemberUseDto;
 import kosa.ion.sion.dto.MembersCardDto;
 import kosa.ion.sion.dto.MembersDto;
+import kosa.ion.sion.getter.SumUseGetter;
 import kosa.ion.sion.repository.MemberUseRepository;
 import kosa.ion.sion.repository.MembersCardRepository;
 import kosa.ion.sion.repository.MembersRepository;
@@ -145,5 +146,11 @@ public class MemberController {
 		return membersRepository.findAll();
 	}
 
+	@GetMapping("/sum_use")
+	public List<SumUseGetter> sumUse(@RequestHeader Map<String,String> headers) {
+		String[] token = headers.get("authorization").split(" ");
+		String member_id = jwtProvider.getUserNameFromJwtToken(token[1]);
+		return memberUseRepository.sumUseByMemberId(member_id);
+	}
 
 }
