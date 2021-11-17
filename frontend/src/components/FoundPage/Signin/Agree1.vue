@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow: scroll; width: 100%; height: 450px; padding: 10px">
+  <div style="overflow: auto; width: 100%; height: 450px; padding: 10px">
     <ul style="list-style: none">
       <li><h3>제 1 조 (목 적)</h3></li>
 

@@ -2,18 +2,18 @@
   <v-container v-if="!!this.$store.getters.getAuth">
       <v-row >
         <v-col cols="1"/>
-        <v-col cols="10" class="text-h3 font-weight-bold">  
+        <v-col cols="10" class="text-h3 font-weight-bold ">  
 
           <v-sheet class="mt-5 grey lighten-2">
             고객 정보 관리
           </v-sheet>  
 
-          <v-card class="mt-10">
+          <v-card class="mt-10 ">
             <v-tabs
               color="black"
               left
             >
-              <v-tab class=""><div class="tab">기본 정보 변경</div></v-tab>
+              <v-tab>기본 정보 변경</v-tab>
               <v-tab>웹 비밀번호 변경</v-tab>
               <v-tab>웹 회원 탈퇴</v-tab>
 
@@ -21,7 +21,7 @@
               <v-tab-item>
                 <v-container fluid>
                   <v-row>
-                    <v-col class="grey lighten-3"> 
+                    <v-col class="grey lighten-4"> 
                       <myinfo_account />
                     </v-col>
                   </v-row>
@@ -29,10 +29,10 @@
               </v-tab-item>
 
               <!-- 비밀번호 변경 -->
-              <v-tab-item>
+              <v-tab-item >
                 <v-container fluid>
                   <v-row>
-                    <v-col class="grey lighten-3"> 
+                    <v-col class="grey lighten-4"> 
                       <myinfo_webpw/>
                     </v-col>
                   </v-row>
@@ -43,7 +43,7 @@
               <v-tab-item>
                 <v-container fluid>
                   <v-row>
-                    <v-col class="grey lighten-3"> 
+                    <v-col class="grey lighten-4"> 
                       <myinfo_delete/>
                     </v-col>
                   </v-row>
@@ -77,8 +77,8 @@ export default {
       myinfo_delete
   },
   mounted() {
-    this.loginCheck_myInfo()
-    this.$store.commit('updateAuth',this.loginCheck_myMain)
+    //this.loginCheck_myInfo()
+    //this.$store.commit('updateAuth',this.loginCheck_myMain)
   },
   methods: {
     loginCheck_myInfo(){
@@ -95,7 +95,7 @@ export default {
 </script>
 
 <style>
-.tab:focus-within{
-  font-weight: bold;
+.v-slide-group__wrapper {
+  background-color: #E0E0E0;
 }
 </style>
