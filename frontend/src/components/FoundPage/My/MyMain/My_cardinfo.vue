@@ -1,5 +1,6 @@
 <template class="">
-  <v-container class="mt-10 mb-10" v-if="!!this.$store.getters.getAuth">
+  <!-- <v-container class="mt-10 mb-10" v-if="!!this.$store.getters.getAuth"> -->
+    <v-container class="mt-10 mb-10">
     <v-row>
       <v-col cols="1"></v-col>
       <v-col cols="10">
@@ -23,6 +24,13 @@
                 </v-col>
                 <v-col cols="auto"> <b>0</b> 원 </v-col>
               </v-row>
+              <!-- 좌측 하단 버튼 -->
+              <v-row justify="center">
+                <v-col cols="auto">
+                  <v-btn elevation="2">상세 내역</v-btn>
+                </v-col>
+              </v-row>
+            </v-col>
 
                     <!-- 우측 -->
                     <v-col cols="4" class="">
@@ -77,13 +85,6 @@
                                 <v-btn elevation="2">상세 내역</v-btn>
                             </v-col>
                         </v-row> -->
-
-              <!-- 우측 하단 버튼 -->
-              <v-row justify="center">
-                <v-col cols="auto">
-                  <v-btn elevation="2">상세 내역</v-btn>
-                </v-col>
-              </v-row>
             </v-col>
           </v-row>
         </v-card>
@@ -110,34 +111,35 @@
               </v-col>
               <v-col cols="3"> {{ card.use_price }} </v-col>
             </v-row>
+
           </v-col>
         </v-row>
         <!-- 하단 끝 -->
       </v-col>
-      <v-col></v-col>
+      <v-col cols="1"></v-col>
     </v-row>
     <!-- 상단 : 대표계좌 이용내역 -->
   </v-container>
 </template>
 
 <script>
-import Calendar from './My_cardinfo_calendar.vue'
-// import axios from "axios";
+import Calendar from "./My_cardinfo_calendar.vue";
+import axios from "axios";
 
 export default {
-    name: "Mycardinfo",
-     data: ()=>({
-        // cardnum : {"0" : 1,"1":2},
-        // usedate :{"0":1},
-        // uselocation : {},
-        // useprice : {},
-    }),
-    components:{
-        Calendar,
-    },
-    mounted() {
-        this.$store.commit('updateAuth',this.loginCheck_myMain)
-        // this.carduse()
+  name: "Mycardinfo",
+  data: () => ({
+    // cardnum : {"0" : 1,"1":2},
+    // usedate :{"0":1},
+    // uselocation : {},
+    // useprice : {},
+  }),
+  components: {
+    Calendar,
+  },
+  mounted() {
+    this.$store.commit("updateAuth", this.loginCheck_myMain);
+    // this.carduse()
   },
   methods: {
     carduse() {
@@ -149,9 +151,9 @@ export default {
         })
         .then((res) => {
           if (res.data.length != 0) {
-            this.cards = res.data.map(res=>{
-                res.use_price+="원";
-                return res;
+            this.cards = res.data.map((res) => {
+              res.use_price += "원";
+              return res;
             });
             console.log(this.cards);
           }
