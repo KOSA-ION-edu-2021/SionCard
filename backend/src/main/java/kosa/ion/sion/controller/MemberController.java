@@ -193,6 +193,4 @@ public class MemberController {
 			MembersDto changeinfo = membersRepository.save(member);
 			return changeinfo;	
 		}
-
-
 }
