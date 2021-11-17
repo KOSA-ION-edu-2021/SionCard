@@ -21,7 +21,7 @@
                 <v-col cols="auto" class="text-subtitle-1 font-weight-bold">
                   총 사용 금액
                 </v-col>
-                <v-col cols="auto"> <b>0</b> 원 </v-col>
+                <v-col cols="auto"> {{usesum[0].sum_price}} </v-col>
               </v-row>
 
               <!-- 우측 하단 버튼 -->
@@ -49,32 +49,32 @@
                 <v-col cols="auto" class="text-subtitle-1 font-weight-bold">
                   할인
                 </v-col>
-                <v-col cols="auto">
-                  <!-- <b>{{discount[num-1]}}</b>  -->
+                <v-col cols="auto" class="text-h6">
+                  {{usesum[0].sum_discount}}
                 </v-col>
               </v-row>
               <v-row justify="space-between" class="text-h5">
                 <v-col cols="auto" class="text-subtitle-1 font-weight-bold">
                   적립
                 </v-col>
-                <v-col cols="auto">
-                  <!-- <b>{{stack[num-1]}}</b>   -->
+                <v-col cols="auto" class="text-h6">
+                  {{usesum[0].sum_stack}}
                 </v-col>
               </v-row>
               <v-row justify="space-between" class="text-h5">
                 <v-col cols="auto" class="text-subtitle-1 font-weight-bold">
                   포인트
                 </v-col>
-                <v-col cols="auto">
-                  <!-- <b>{{point[num-1]}}</b>  -->
+                <v-col cols="auto" class="text-h6">
+                  {{usesum[0].sum_point}}
                 </v-col>
               </v-row>
               <v-row justify="space-between" class="text-h5">
                 <v-col cols="auto" class="text-subtitle-1 font-weight-bold">
                   마일리지
                 </v-col>
-                <v-col cols="auto">
-                  <!-- <b>{{mileage[num-1]}}</b>   -->
+                <v-col cols="auto" class="text-h6">
+                  {{usesum[0].sum_mileage}}
                 </v-col>
               </v-row>
 
@@ -130,10 +130,20 @@ export default {
         use_date: "카드 이용 내역이 없습니다.",
       },
     ],
+    usesum: [
+      {
+        sum_price : 0,
+        sum_stack : 0,
+        sum_mileage : 0,
+        sum_discount : 0,
+        sum_point : 0,
+      },
+    ],
   }),
   mounted() {
     this.$store.commit("updateAuth", this.loginCheck_myMain);
     this.carduse();
+    this.sumUse();
   },
   methods: {
     carduse() {
@@ -156,6 +166,27 @@ export default {
           console.log(err);
         });
     },
+    sumUse(){
+      axios.get(this.$store.state.apihost + "/member/sum_use", {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("JSESSIONID")}`,
+          },
+        })
+        .then((res) => {
+            this.usesum = res.data.map(res=>{
+                res.sum_price+="원";
+                res.sum_stack+="원 적립";
+                res.sum_point+="포인트";
+                res.sum_discount+="원 할인";
+                res.sum_mileage+="마일리지";
+                return res;
+            });
+            console.log(this.usesum);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   },
 };
 </script>
