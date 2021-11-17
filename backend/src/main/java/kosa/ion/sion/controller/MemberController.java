@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kosa.ion.sion.dto.MemberUseDto;
 import kosa.ion.sion.dto.MembersCardDto;
 import kosa.ion.sion.dto.MembersDto;
+import kosa.ion.sion.getter.SumUseGetter;
 import kosa.ion.sion.repository.MemberUseRepository;
 import kosa.ion.sion.repository.MembersCardRepository;
 import kosa.ion.sion.repository.MembersRepository;
@@ -189,8 +190,15 @@ public class MemberController {
 			
 		MembersDto member = membersRepository.findByMemberId(memberId).orElseThrow(()->	new ResourceNotFoundException());
 			member.setBirth(membersDto.getBirth());
-
+			
 			MembersDto changeinfo = membersRepository.save(member);
 			return changeinfo;	
 		}
+	@GetMapping("/sum_use")
+	public List<SumUseGetter> sumUse(@RequestHeader Map<String,String> headers) {
+		String[] token = headers.get("authorization").split(" ");
+		String member_id = jwtProvider.getUserNameFromJwtToken(token[1]);
+		return memberUseRepository.sumUseByMemberId(member_id);
+	}
+
 }
