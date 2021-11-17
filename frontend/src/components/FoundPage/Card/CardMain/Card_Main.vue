@@ -53,7 +53,7 @@
                   <b>찾아 드림</b>
                 </v-col>
                 <v-col>
-                  시온카드가 당신에게 딱 맞는 <br />
+                  사이온카드가 당신에게 딱 맞는 <br />
                   카드를 찾아드림
                 </v-col>
                 <v-col>
@@ -83,7 +83,7 @@
               <b>SI-ON 신용카드</b>
             </v-col>
             <v-divider vertical />
-            <v-col class="ml-3"> 시온에서만 느끼는 효율적인 신용카드 </v-col>
+            <v-col class="ml-3"> 사이온에서만 느끼는 효율적인 신용카드 </v-col>
           </v-row>
           <v-row>
               <v-col
@@ -119,7 +119,7 @@
               <b>SI-ON 체크카드</b>
             </v-col>
             <v-divider vertical />
-            <v-col class="ml-3"> 시온만의 짜릿한 체크카드 </v-col>
+            <v-col class="ml-3"> 사이온만의 짜릿한 체크카드 </v-col>
           </v-row>
           <v-row>
             <v-col

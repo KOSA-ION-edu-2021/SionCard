@@ -2,7 +2,7 @@ export default[
     {
         id : 1,
         cid : 1,
-        title: "아모레퍼시픽 시온카드 체크",
+        title: "아모레퍼시픽 사이온카드 체크",
         img: "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCheckBOACPOs.png",
         content: "체크카드도 뷰티포인트 적립 혜택을!",
         date: "2014년 9월 14일",
@@ -82,7 +82,7 @@ export default[
     {
         id : 3,
         cid : 3,
-        title: "시온카드 Puzzle",
+        title: "사이온카드 Puzzle",
         img: "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCreditAXJCLTs.gif",
         content: "나만의 맞춤카드 Play Your Puzzle!",
         date:"2021년 9월 15일",
@@ -119,7 +119,7 @@ export default[
     {
         id : 4,
         cid : 4,
-        title: "시온 LABE",
+        title: "사이온 LABE",
         img: "https://www.shinhancard.com/pconts/images/contents/card/plate/cdVipAL1CI9s.png",
         content: "Play your best score",
         date: "2020년 6월 6일",
@@ -160,7 +160,7 @@ export default[
     {
         id : 5,
         cid : 5,
-        title: "L.PAY 시온카드 체크",
+        title: "L.PAY 사이온카드 체크",
         img: "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCheckAXHC7Ps.png",
         content: "나만의 맞춤카드 Play Your Puzzle!",
         date: "2021년 11월 06일",
@@ -198,7 +198,7 @@ export default[
     {
         id : 6,
         cid : 6,
-        title: "시온 YaY",
+        title: "사이온 YaY",
         img: "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCreditAXGC75_VISAs.gif",
         content: "신나는 나의 Home Life, Yay (예이~!)",
         date:"2020년 12월 25일",

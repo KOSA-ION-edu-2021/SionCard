@@ -20,6 +20,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import com.fasterxml.jackson.databind.annotation.JsonValueInstantiator;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -142,4 +144,6 @@ public class ApiController {
 		headers.add("Content-Type", Files.probeContentType(Paths.get(path)));
 		return new ResponseEntity<Resource>(resource,headers, HttpStatus.OK);
 	}
+	
+	
 }
