@@ -10,15 +10,21 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kosa.ion.sion.dto.MemberUseDto;
 import kosa.ion.sion.dto.MembersCardDto;
 import kosa.ion.sion.dto.MembersDto;
+import kosa.ion.sion.getter.SumUseGetter;
 import kosa.ion.sion.repository.MemberUseRepository;
 import kosa.ion.sion.repository.MembersCardRepository;
 import kosa.ion.sion.repository.MembersRepository;
@@ -76,6 +83,13 @@ public class MemberController {
 				.phone(member.getPhone())
 				.expire(jwtProvider.getExpirationaFromJwtToken(token[1]))
 				.build();
+	}
+
+	@DeleteMapping("/members/{memberId}")
+	public Boolean deleteMember(@PathVariable String memberId) {
+		if(!membersRepository.existsByMemberId(memberId)) return false;
+		membersRepository.deleteByMemberId(memberId);
+		return true;
 	}
 	
 	//MembersCardRepository
@@ -135,6 +149,56 @@ public class MemberController {
 	public List<MembersDto> MemberdInfo() {
 		return membersRepository.findAll();
 	}
+	
+	// My 정보 변경
+	// 이메일 변경
+	@PutMapping("/member_info/email/{memberId}")
+	@Transactional
+	public MembersDto changeemail(@PathVariable(value = "memberId") String memberId,@Valid @RequestBody MembersDto membersDto){
+				
+			MembersDto member = membersRepository.findByMemberId(memberId).orElseThrow(()->	new ResourceNotFoundException());
+			member.setEmail(membersDto.getEmail());
+			MembersDto changeinfo = membersRepository.save(member);
+			return changeinfo;	
+		}
+	// 주소 변경
+	@PutMapping("/member_info/address/{memberId}")
+	@Transactional
+	public MembersDto changeaddress(@PathVariable(value = "memberId") String memberId,@Valid @RequestBody MembersDto membersDto){
+						
+			MembersDto member = membersRepository.findByMemberId(memberId).orElseThrow(()->	new ResourceNotFoundException());
+			member.setAddress(membersDto.getAddress());
 
+			MembersDto changeinfo = membersRepository.save(member);
+			return changeinfo;	
+		}
+	// 전화번호 변경
+	@PutMapping("/member_info/phone/{memberId}")
+	@Transactional
+	public MembersDto changephone(@PathVariable(value = "memberId") String memberId,@Valid @RequestBody MembersDto membersDto){
+							
+			MembersDto member = membersRepository.findByMemberId(memberId).orElseThrow(()->	new ResourceNotFoundException());
+			member.setPhone(membersDto.getPhone());
+
+			MembersDto changeinfo = membersRepository.save(member);
+			return changeinfo;	
+		}
+	// 생일 변경
+	@PutMapping("/member_info/birth/{memberId}")
+	@Transactional
+	public MembersDto changebirth(@PathVariable(value = "memberId") String memberId,@Valid @RequestBody MembersDto membersDto){
+			
+		MembersDto member = membersRepository.findByMemberId(memberId).orElseThrow(()->	new ResourceNotFoundException());
+			member.setBirth(membersDto.getBirth());
+			
+			MembersDto changeinfo = membersRepository.save(member);
+			return changeinfo;	
+		}
+	@GetMapping("/sum_use")
+	public List<SumUseGetter> sumUse(@RequestHeader Map<String,String> headers) {
+		String[] token = headers.get("authorization").split(" ");
+		String member_id = jwtProvider.getUserNameFromJwtToken(token[1]);
+		return memberUseRepository.sumUseByMemberId(member_id);
+	}
 
 }

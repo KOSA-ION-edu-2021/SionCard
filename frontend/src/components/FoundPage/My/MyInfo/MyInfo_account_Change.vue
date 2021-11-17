@@ -29,11 +29,9 @@
 
         <!-- ID 변경  -->
         <v-list three-line subheader>
-          <v-list-item>
-            <v-list-item-content class="text-center">
-              <v-list-item-title class="text-font-weight">
-                ID
-              </v-list-item-title>
+          <!-- <v-list-item>
+            <v-list-item-content class="ma-1">
+              <v-list-item-title><b>ID</b></v-list-item-title>
             </v-list-item-content>
             <v-row justify="start">
               <v-col cols="auto" dense align-self="center">
@@ -52,7 +50,7 @@
               </v-col>
             </v-row>
           </v-list-item>
-          <v-divider></v-divider>
+          <v-divider></v-divider> -->
 
           <!-- 이메일 변경  -->
           <v-list-item>
@@ -65,17 +63,36 @@
               <v-col cols="auto" dense align-self="center">
                 <v-list-item-content>
                   <v-list-item-title  >
-                      
-                      <v-text-field
-                        label="EMAIL"
-                        required
-                        dense
-                        hide-details="auto"
-                        outlined
-                      ></v-text-field>
+                        <v-list-item-action class="ma-0">
+                          <v-text-field
+                            style="width: 30%"
+                            label="EMAIL"
+                            v-model="email"
+                            required
+                            dense
+                            hide-details="auto"
+                            outlined
+                          ></v-text-field>
+                        </v-list-item-action>
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
+            <v-spacer />
+              <v-col cols="auto" dense>
+                <v-list-item-content>
+                  <v-list-item-title  >
+                        <v-list-item-action class="ma-0">
+                          <v-btn
+                          color="grey lighten-2" 
+                          @click="changeemail()"
+                          >
+                            변경
+                          </v-btn>
+                        </v-list-item-action> 
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-col>
+              <v-spacer />
             </v-row>
           </v-list-item>
           <v-divider></v-divider>
@@ -91,17 +108,36 @@
               <v-col cols="auto" dense align-self="center">
                 <v-list-item-content>
                   <v-list-item-title  >
-                      
-                      <v-text-field
-                        label="BIRTHDAY"
-                        required
-                        dense
-                        hide-details="auto"
-                        outlined
-                      ></v-text-field>
+                        <v-list-item-action class="ma-0">
+                          <v-text-field
+                            style="width: 30%"
+                            label="0000-00-00"
+                            v-model="birth"
+                            required
+                            dense
+                            hide-details="auto"
+                            outlined
+                          ></v-text-field>
+                        </v-list-item-action> 
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
+              <v-spacer />
+              <v-col cols="auto" dense>
+                <v-list-item-content>
+                  <v-list-item-title  >
+                        <v-list-item-action class="ma-0">
+                          <v-btn
+                          color="grey lighten-2" 
+                          @click="changebirth()"
+                          >
+                            변경
+                          </v-btn>
+                        </v-list-item-action> 
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-col>
+              <v-spacer />
             </v-row>
           </v-list-item>
           <v-divider></v-divider>
@@ -117,17 +153,36 @@
               <v-col cols="auto" dense align-self="center">
                 <v-list-item-content>
                   <v-list-item-title  >
-                      
-                      <v-text-field
-                        label="PHONE-NUMBER"
-                        required
-                        dense
-                        hide-details="auto"
-                        outlined
-                      ></v-text-field>
+                        <v-list-item-action class="ma-0">
+                          <v-text-field
+                            style="width: 30%"
+                            label="010-0000-0000"
+                            v-model="phone"
+                            required
+                            dense
+                            hide-details="auto"
+                            outlined
+                          ></v-text-field>
+                        </v-list-item-action>
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
+            <v-spacer />
+              <v-col cols="auto" dense>
+                <v-list-item-content>
+                  <v-list-item-title  >
+                        <v-list-item-action class="ma-0">
+                          <v-btn
+                          color="grey lighten-2" 
+                          @click="changephone()"
+                          >
+                            변경
+                          </v-btn>
+                        </v-list-item-action> 
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-col>
+              <v-spacer />
             </v-row>
           </v-list-item>
           <v-divider></v-divider>
@@ -143,17 +198,36 @@
               <v-col cols="auto" dense align-self="center">
                 <v-list-item-content>
                   <v-list-item-title  >
-                      
-                      <v-text-field
-                        label="ADDRESS"
-                        required
-                        dense
-                        hide-details="auto"
-                        outlined
-                      ></v-text-field>
+                        <v-list-item-action class="ma-0">
+                          <v-text-field
+                            style="width: 30%"
+                            label="주소"
+                            v-model="address"
+                            required
+                            dense
+                            hide-details="auto"
+                            outlined
+                          ></v-text-field>
+                        </v-list-item-action>
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
+            <v-spacer />
+              <v-col cols="auto" dense>
+                <v-list-item-content>
+                  <v-list-item-title  >
+                        <v-list-item-action class="ma-0">
+                          <v-btn
+                          color="grey lighten-2" 
+                          @click="changeaddress()"
+                          >
+                            변경
+                          </v-btn>
+                        </v-list-item-action> 
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-col>
+              <v-spacer />
             </v-row>
           </v-list-item>
           <v-divider></v-divider>
@@ -176,13 +250,95 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
     name: 'Account_Change',
     data:()=>({
         dialog: false,
+        email : "",
+        phone : "",
+        birth : "",
+        address : "",
     }),
     methods: {
-        
+        // 이메일 변경 함수
+        changeemail(){
+            let param = {
+                email : this.email,
+            }            
+            axios.put(this.$store.state.apihost + "/member/member_info/email/"+this.$store.state.auth.member_id, param,{
+                headers:{
+                        Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`
+                    },
+            })
+            .then(res => {
+                alert('이메일 변경이 완료되었습니다')
+                console.log(res);
+            })
+            .catch((err)=>{
+                alert('변경에 실패하였습니다. 다시 시도해주세요')
+                console.log(err);
+            })
+        },
+        // 주소 변경 함수
+         changeaddress(){
+            let param = {
+                address : this.address,
+            }            
+            axios.put(this.$store.state.apihost + "/member/member_info/address/"+this.$store.state.auth.member_id, param,{
+                headers:{
+                        Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`
+                    },
+            })
+            .then(res => {
+                alert('주소 변경이 완료되었습니다')
+                console.log(res);
+            })
+            .catch((err)=>{
+                alert('변경에 실패하였습니다. 다시 시도해주세요')
+                console.log(err);
+            })
+        },
+        // 생일 변경 함수
+        changebirth(){
+            let param = {
+                birth : this.birth,
+            }            
+            axios.put(this.$store.state.apihost + "/member/member_info/birth/"+this.$store.state.auth.member_id, param,{
+                headers:{
+                        Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`
+                    },
+            })
+            .then(res => {
+                alert('생년월일 변경이 완료되었습니다')
+                console.log(res);
+
+            })
+            .catch((err)=>{
+                alert('변경에 실패하였습니다. 다시 시도해주세요')
+                console.log(err);
+            })
+        },
+        // 전화번호 변경 함수
+        changephone(){
+            let param = {
+                phone : this.phone,
+            }            
+            axios.put(this.$store.state.apihost + "/member/member_info/phone/"+this.$store.state.auth.member_id, param,{
+                headers:{
+                        Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`
+                    },
+            })
+            .then(res => {
+                alert('전화번호 변경이 완료되었습니다')
+                console.log(res);
+
+            })
+            .catch((err)=>{
+                alert('변경에 실패하였습니다. 다시 시도해주세요')
+                console.log(err);
+            })
+        },
     },
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center">
+  <v-row justify="center" v-if="!!this.$store.getters.getAuth">
     <v-col cols="1"></v-col>
     <v-col cols="10">
       
@@ -56,7 +56,7 @@ export default {
   },
   mounted() {
     this.getcardInfo();
-    this.checkAdmin()
+    this.$store.commit('updateAuth',this.checkAdmin);
   },
   methods: {
     getcardInfo() {
@@ -70,18 +70,15 @@ export default {
           console.log(err);
         });
     },
-    checkAdmin(){
-            if(this.$store.state.auth.member_id !== 'admin'){
-              this.$router.push('/')
-              alert('관리자만 접속 가능합니다!');
-            }
-            else{
-              this.$router.push('/admin/card')
-            }
-        },
     setDialog(bool){
       this.dialog=bool
-    }
+    },
+    checkAdmin(){
+      if(this.$store.getters.getAuth === null || this.$store.state.auth.member_id !== 'admin'){
+          this.$router.push('/')
+          alert('관리자만 접속 가능합니다!');
+      }
+    },
   },
 
 };

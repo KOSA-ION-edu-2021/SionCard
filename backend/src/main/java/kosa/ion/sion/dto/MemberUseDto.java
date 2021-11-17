@@ -27,13 +27,13 @@ public class MemberUseDto {
 	private long id;
 	private String cardNum;
 	private String memberId;
-	private String usePrice;
+	private Integer usePrice;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	@CreationTimestamp
 	private LocalDateTime useDate;
 	private String useLocation;
-	private String useDiscount;
-	private String useStack;
-	private String usePoint;
-	private String useMileage;
+	private Integer useDiscount;
+	private Integer useStack;
+	private Integer usePoint;
+	private Integer useMileage;
 }
