@@ -70,8 +70,16 @@
                 <v-list-item-content>
                   <v-list-item-title  >
                         <v-list-item-action class="ma-0">
+                          <v-text-field
+                            style="width: 30%"
+                            label="EMAIL"
+                            v-model="mail"
+                            required
+                            dense
+                            hide-details="auto"
+                            outlined
+                          ></v-text-field>
                         </v-list-item-action>
-                    기대돼?
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
@@ -89,8 +97,16 @@
                 <v-list-item-content>
                   <v-list-item-title  >
                         <v-list-item-action class="ma-0">
+                          <v-text-field
+                            style="width: 30%"
+                            label="Bday"
+                            v-model="bday"
+                            required
+                            dense
+                            hide-details="auto"
+                            outlined
+                          ></v-text-field>
                         </v-list-item-action>
-                    비밀이야
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
@@ -108,8 +124,16 @@
                 <v-list-item-content>
                   <v-list-item-title  >
                         <v-list-item-action class="ma-0">
+                          <v-text-field
+                            style="width: 30%"
+                            label="PhoneNumber"
+                            v-model="pnumber"
+                            required
+                            dense
+                            hide-details="auto"
+                            outlined
+                          ></v-text-field>
                         </v-list-item-action>
-                    ㅋㅋ
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
@@ -127,8 +151,16 @@
                 <v-list-item-content>
                   <v-list-item-title  >
                         <v-list-item-action class="ma-0">
+                          <v-text-field
+                            style="width: 30%"
+                            label="EMAIL"
+                            v-model="address"
+                            required
+                            dense
+                            hide-details="auto"
+                            outlined
+                          ></v-text-field>
                         </v-list-item-action>
-                    살려줘 ㅠ
                   </v-list-item-title>
                 </v-list-item-content>
               </v-col>
