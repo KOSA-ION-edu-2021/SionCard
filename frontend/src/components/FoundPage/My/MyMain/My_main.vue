@@ -1,5 +1,5 @@
 <template>
-  <v-conatainer>
+  <v-conatainer v-if="!!this.$store.getters.getAuth">
     <Myuserinfo/>
     <v-row>
       <v-col cols="1"></v-col>
@@ -25,15 +25,13 @@ import Mycardinfo from './My_cardinfo.vue'
 
 export default {
   data: () =>({
-    
-    
   }),
   components:{
       Myuserinfo,
       Mycardinfo,
-    },
-  mounted() {
-        this.$store.commit('updateAuth',this.loginCheck_myMain)
+  },
+  mounted(){
+    this.$store.commit('updateAuth',this.loginCheck_myMain)
   },
   methods: {
     loginCheck_myMain(){

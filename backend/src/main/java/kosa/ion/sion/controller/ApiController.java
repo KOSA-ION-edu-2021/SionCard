@@ -1,29 +1,5 @@
 package kosa.ion.sion.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import kosa.ion.sion.dto.CardsDto;
 import kosa.ion.sion.dto.MembersDto;
 import kosa.ion.sion.repository.CardsRepository;
@@ -31,6 +7,24 @@ import kosa.ion.sion.repository.MembersRepository;
 import kosa.ion.sion.security.JwtProvider;
 import kosa.ion.sion.service.MailService;
 import net.bytebuddy.utility.RandomString;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -52,22 +46,23 @@ public class ApiController {
 	public String Test() {
 		return "success";
 	}
+	
 	//jwt 부분
 	@PostMapping("/login")
 	@ResponseBody
-	public ResponseEntity<HashMap<String, String>> login(HttpServletResponse response, @RequestBody HashMap<String,String> auth) {
+	public ResponseEntity<Map<String,String>> login(@RequestBody Map<String,String> Auth) {
 		Authentication authentication = authenticationManager
-				.authenticate(new UsernamePasswordAuthenticationToken(auth.get("id"),auth.get("password")));
-		auth.put("jwt",jwtProvider.generateJwtToken(authentication));
-		auth.remove("password");
-		auth.remove("id");
-		return ResponseEntity.ok(auth);
+				.authenticate(new UsernamePasswordAuthenticationToken(Auth.get("id"),Auth.get("password")));
+		String jwt = jwtProvider.generateJwtToken(authentication);
+		Auth.clear();
+		Auth.put("jwt", jwt);
+		return ResponseEntity.ok(Auth);
 	}
 	
 	//회원가입 부분
 	@PostMapping("/signup")
 	@ResponseBody
-	public ResponseEntity<MembersDto> signup(HttpServletResponse response, @RequestBody MembersDto member) {
+	public ResponseEntity<MembersDto> signup(@RequestBody MembersDto member) {
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
 		return ResponseEntity.ok(membersRepository.save(member));
 	}
@@ -140,9 +135,16 @@ public class ApiController {
 	}
 	
 	//관리자 페이지 멤버 DB 전송
-		@GetMapping("/member_info")
-		public List<MembersDto> MemberdInfo() {
-			return membersRepository.findAll();
-		}
-	
+	@GetMapping("/member_info")
+	public List<MembersDto> MemberdInfo() {
+		return membersRepository.findAll();
+	}
+	@GetMapping("/image/{imagename}")
+	public ResponseEntity<Resource> getImage(@PathVariable("imagename") String imagename) throws IOException {
+		String path = System.getProperty("user.home")+"/sion_images/"+imagename;
+		Resource resource = new FileSystemResource(path);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Type", Files.probeContentType(Paths.get(path)));
+		return new ResponseEntity<Resource>(resource,headers, HttpStatus.OK);
+	}
 }

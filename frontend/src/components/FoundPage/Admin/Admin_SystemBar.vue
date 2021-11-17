@@ -11,7 +11,7 @@
             <!-- <span class="mr-2 ml-2 white--text">|</span> -->
             <button @click="logout" class="white--text text-caption ml-2 mr-16" tag="button">로그아웃</button>
         </div>
-        <v-app-bar-nav-icon @click="changeDraw"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click="changeDraw(true)"></v-app-bar-nav-icon>
     </v-system-bar>
 </template>
 

@@ -4,7 +4,15 @@
     <v-col cols="10">
       
       <v-sheet class="mt-5 mb-5 text-h3 grey lighten-2"> 고객 정보 관리 </v-sheet>
-
+      <v-row>
+        <v-col class="d-flex justify-end" cols="11">
+          <v-btn @click="dialog=true">
+            카드 추가하기
+          </v-btn>
+          <AdminCreateCard :dialog="dialog" :setDialog="setDialog"/>
+        </v-col>
+        <v-col cols="1"></v-col>
+      </v-row>
       <v-row justify="center">
         <v-col align-self="center">
           <table>
@@ -37,11 +45,15 @@
 
 <script>
 import axios from "axios";
-
+import AdminCreateCard from './AdminCreateCard'
 export default {
   data: () => ({
     cardInfo: null,
+    dialog:false,
   }),
+  components:{
+    AdminCreateCard
+  },
   mounted() {
     this.getcardInfo();
     this.checkAdmin()
@@ -59,7 +71,7 @@ export default {
         });
     },
     checkAdmin(){
-            if(this.$store.state.auth.id !== 119){
+            if(this.$store.state.auth.member_id !== 'admin'){
               this.$router.push('/')
               alert('관리자만 접속 가능합니다!');
             }
@@ -67,7 +79,11 @@ export default {
               this.$router.push('/admin/card')
             }
         },
+    setDialog(bool){
+      this.dialog=bool
+    }
   },
+
 };
 </script>
 
@@ -95,7 +111,7 @@ th:first-child{
   width: 250px;
 }
 th:nth-child(2){
-  widht: 300px;
+  width: 300px;
 }
 table {
   width: 90%;

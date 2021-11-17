@@ -1,21 +1,14 @@
 package kosa.ion.sion.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import kosa.ion.sion.dto.CardsDto;
 import kosa.ion.sion.repository.CardsRepository;
+import kosa.ion.sion.vo.CardVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.File;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/admin")
@@ -28,10 +21,28 @@ public class AdminController{
 	public String Test() {
 		return "success";
 	}
-	@PostMapping("/card_info")
-	@ResponseBody
-	public ResponseEntity<CardsDto> signup(HttpServletResponse response, @RequestBody CardsDto card_info) {
-		return ResponseEntity.ok(cardsRepository.save(card_info));
+
+	@PostMapping("/create_card")
+	public CardsDto createCard(CardVo cardVo) throws Exception{
+
+		//if(cardVo.getImg() == null) return cardsDto;
+		String newName = UUID.randomUUID()+cardVo.getImg().getOriginalFilename();
+		cardVo.getImg().transferTo(new File(newName));
+		CardsDto cardsDto=new CardsDto();
+
+		cardsDto.setImg("http://si-on.net:8080/api/image/"+newName);
+		cardsDto.setTitle(cardVo.getTitle());
+		cardsDto.setContent(cardVo.getContent());
+		cardsDto.setCardType(cardVo.getCardType());
+//		cardsDto.setCardCheck(cardVo.getCardCheck());
+//		cardsDto.setCardCredit(cardVo.getCardCredit());
+		cardsDto.setBenefitType(cardVo.getBenefitType());
+		cardsDto.setBenefitContent(cardVo.getBenefitContent());
+//		cardsDto.setMastercard(cardVo.getMastercard());
+//		cardsDto.setTraficcard(cardVo.getTraficcard());
+
+
+		return cardsRepository.save(cardsDto);
 	}
 	
 	@GetMapping("/card")

@@ -7,13 +7,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,11 +22,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import kosa.ion.sion.dto.CardsDto;
 import kosa.ion.sion.dto.MemberUseDto;
 import kosa.ion.sion.dto.MembersCardDto;
 import kosa.ion.sion.dto.MembersDto;
@@ -34,6 +32,7 @@ import kosa.ion.sion.repository.MemberUseRepository;
 import kosa.ion.sion.repository.MembersCardRepository;
 import kosa.ion.sion.repository.MembersRepository;
 import kosa.ion.sion.security.JwtProvider;
+import kosa.ion.sion.vo.AuthVo;
 
 @RestController
 @RequestMapping("/member")
@@ -43,21 +42,40 @@ public class MemberController {
 	JwtProvider jwtProvider;
 	@Autowired
 	MembersRepository membersRepository;
+	@Autowired
+	private AuthenticationManager authenticationManager;
 	
 	
 	@GetMapping("/test")
 	public String Test() {
 		return "success";
 	}
-	
+
+	//jwt 부분
+	@GetMapping("/refresh_jwt")
+	public ResponseEntity<Map<String,String>> refreshJwt(@RequestHeader HashMap<String,String> headers) {
+		String[] token = headers.get("authorization").split(" ");
+		String jwt = jwtProvider.getRefreshJwtToken(token[1]);
+		headers.clear();
+		headers.put("jwt", jwt);
+		return ResponseEntity.ok(headers);
+	}
 	
 	@GetMapping("/get_auth")
-	public MembersDto GetAuth(@RequestHeader HashMap<String,String> header) {
-		String[] token = header.get("authorization").split(" ");
-		String member_id = jwtProvider.getUserNameFromJwtToken(token[0].equals("Bearer")?token[1]:"");
+	public AuthVo GetAuth(@RequestHeader HashMap<String,String> headers) {
+		String[] token = headers.get("authorization").split(" ");
+		String member_id = jwtProvider.getUserNameFromJwtToken(token[1]);
 		MembersDto member = membersRepository.findByMemberId(member_id).orElseThrow(() -> new NoSuchElementException());
-		member.setPassword(null);
-		return member;
+		
+		return AuthVo.builder()
+				.name(member.getName())
+				.memberId(member.getMemberId())
+				.address(member.getAddress())
+				.birth(member.getBirth())
+				.email(member.getEmail())
+				.phone(member.getPhone())
+				.expire(jwtProvider.getExpirationaFromJwtToken(token[1]))
+				.build();
 	}
 	
 	//MembersCardRepository
@@ -73,7 +91,7 @@ public class MemberController {
 	//카드 신청 부분
 	@PostMapping("/application")
 	@ResponseBody
-	public ResponseEntity<MembersCardDto> application(HttpServletResponse response, @RequestBody MembersCardDto memberscard) {
+	public ResponseEntity<MembersCardDto> application( @RequestBody MembersCardDto memberscard) {
 		
 		// 유효기간 설정 START	
 		Calendar cal = Calendar.getInstance();
@@ -106,8 +124,10 @@ public class MemberController {
 	
 	//고객이 카드 사용한 정보 가져오기
 	@GetMapping("/get_use_card")
-	public List<MemberUseDto> getMembersUse() {
-		return memberUseRepository.findAll();
+	public List<MemberUseDto> getMembersUse(@RequestHeader HashMap<String,String> headers) {
+		String[] token = headers.get("authorization").split(" ");
+		String member_id = jwtProvider.getUserNameFromJwtToken(token[0].equals("Bearer")?token[1]:"");
+		return memberUseRepository.findTop5ByMemberIdOrderByUseDateDesc(member_id);
 	}
 	
 	//관리자 페이지 멤버 DB 전송
@@ -115,5 +135,6 @@ public class MemberController {
 	public List<MembersDto> MemberdInfo() {
 		return membersRepository.findAll();
 	}
-	
+
+
 }

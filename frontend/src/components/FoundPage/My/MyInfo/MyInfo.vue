@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="!!this.$store.getters.getAuth">
       <v-row >
         <v-col cols="1"/>
         <v-col cols="10" class="text-h3 font-weight-bold ">  
