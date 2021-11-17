@@ -42,7 +42,7 @@ export default {
             .catch(err=>{
                 console.log(err);
             })
-        }
+        },
     },
     data:()=>({
         preTime : new Date(),
