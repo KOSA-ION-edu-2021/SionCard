@@ -3,13 +3,25 @@
       <v-col cols="1"></v-col>
       <v-col cols="10" align-self="center" class="text-center text-h3">
           관라지 페이지 입니다
+
+
+          <v-container>
+            <pie-chart :data="[['윤지훈', 150], ['이윤건', 300]]" />
+          </v-container>
       </v-col>
       <v-col cols="1"></v-col>
   </v-row>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
+  data() {
+    return {
+      cardInfo: [],
+    }
+  },
   methods:{
     checkAdmin(){
       if(this.$store.getters.getAuth === null || this.$store.state.auth.member_id !== 'admin'){
@@ -17,9 +29,23 @@ export default {
           alert('관리자만 접속 가능합니다!');
       }
     },
+    loadGraph(){
+      axios.get(this.$store.state.apihost+'/admin/kind_of_card')
+      .then((res)=>{
+        console.log(res.data);
+        this.cardInfo = res.data.map(obj=>{
+                              const key = Object.keys(obj)[0];
+                              return [key, obj[key]];
+                          })
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+    }
   },
   mounted(){
     this.$store.commit('updateAuth',this.checkAdmin);
+    this.loadGraph();
   }
 }
 </script>

@@ -11,6 +11,7 @@
           <Mycardinfo/>
 
           <!-- 하단 최근 거래 내역 -->
+          <Graph/>
       </v-col>
       <v-col cols="1"></v-col>
     </v-row>
@@ -22,6 +23,7 @@
 
 import Myuserinfo from './My_userinfo.vue'
 import Mycardinfo from './My_cardinfo.vue'
+import Graph from './My_graph.vue'
 
 export default {
   data: () =>({
@@ -29,6 +31,7 @@ export default {
   components:{
       Myuserinfo,
       Mycardinfo,
+      Graph,
   },
   mounted(){
     this.$store.commit('updateAuth',this.loginCheck_myMain)
