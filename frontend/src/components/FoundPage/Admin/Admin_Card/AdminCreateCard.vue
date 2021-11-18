@@ -91,7 +91,6 @@
         </v-btn>
       </v-card-actions>
     </v-card>
-    <v-btn @click="check"> 확인</v-btn>
   </v-dialog>
 </template>
 
@@ -123,7 +122,8 @@ export default {
       for (const key in this.card) {
         formData.append(key, this.card[key]);
       }
-      console.log(this.card);
+      formData.append('card_credit', !this.card.card_check);
+
 
       axios
         .post(this.$store.state.apihost + "/admin/create_card", formData, {
