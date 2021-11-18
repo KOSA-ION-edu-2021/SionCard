@@ -1,26 +1,23 @@
 package kosa.ion.sion.controller;
 
+import kosa.ion.sion.dto.CardsDto;
+import kosa.ion.sion.repository.CardsRepository;
+import kosa.ion.sion.repository.MembersRepository;
+import kosa.ion.sion.vo.CardVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import java.io.File;
 import java.util.List;
 import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import kosa.ion.sion.dto.CardsDto;
-import kosa.ion.sion.repository.CardsRepository;
-import kosa.ion.sion.vo.CardVo;
 
 @RestController
 @RequestMapping("/admin")
 @CrossOrigin("*")
 public class AdminController{
+
+	@Autowired
+	MembersRepository membersRepository;
 	@Autowired
 	CardsRepository cardsRepository;
 
@@ -63,5 +60,11 @@ public class AdminController{
 			cardsRepository.deleteById(id);
 			return true;
 	}
-	
+
+	@DeleteMapping("/members/{memberId}")
+	public Boolean deleteMember(@PathVariable String memberId) {
+		if(!membersRepository.existsByMemberId(memberId)) return false;
+		membersRepository.deleteByMemberId(memberId);
+		return true;
+	}
 }

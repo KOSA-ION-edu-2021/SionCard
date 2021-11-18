@@ -1,12 +1,15 @@
 package kosa.ion.sion.controller;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
-
+import kosa.ion.sion.dto.CardsDto;
+import kosa.ion.sion.dto.MembersDto;
+import kosa.ion.sion.getter.SumUseGetter;
+import kosa.ion.sion.repository.CardsRepository;
+import kosa.ion.sion.repository.MemberUseRepository;
+import kosa.ion.sion.repository.MembersRepository;
+import kosa.ion.sion.security.JwtProvider;
+import kosa.ion.sion.service.MailService;
+import kosa.ion.sion.vo.SEDateVo;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -18,27 +21,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import kosa.ion.sion.dto.CardsDto;
-import kosa.ion.sion.dto.MembersDto;
-import kosa.ion.sion.getter.SumUseGetter;
-import kosa.ion.sion.repository.CardsRepository;
-import kosa.ion.sion.repository.MemberUseRepository;
-import kosa.ion.sion.repository.MembersRepository;
-import kosa.ion.sion.security.JwtProvider;
-import kosa.ion.sion.service.MailService;
-import kosa.ion.sion.vo.SEDateVo;
-import net.bytebuddy.utility.RandomString;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -113,9 +102,6 @@ public class ApiController {
 			//임시 비밀번호 생성
 			RandomString randomString = new RandomString();
 			String pw=randomString.nextString();
-			System.out.println(pw);
-			
-			
 			mailService.sendMail(membersDto.getEmail(), "임시 비밀번호 안내", "임시 비밀번호는 "+pw+"입니다.");
 			//임시 비밀번호 설정
 			membersDto.setPassword(passwordEncoder.encode(pw));

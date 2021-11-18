@@ -1,38 +1,6 @@
 
 package kosa.ion.sion.controller;
 
-import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Random;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import kosa.ion.sion.dto.MemberUseDto;
 import kosa.ion.sion.dto.MembersCardDto;
 import kosa.ion.sion.dto.MembersDto;
@@ -41,7 +9,19 @@ import kosa.ion.sion.repository.MemberUseRepository;
 import kosa.ion.sion.repository.MembersCardRepository;
 import kosa.ion.sion.repository.MembersRepository;
 import kosa.ion.sion.security.JwtProvider;
+import kosa.ion.sion.service.MailService;
 import kosa.ion.sion.vo.AuthVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @RestController
 @RequestMapping("/member")
@@ -53,8 +33,11 @@ public class MemberController {
 	MembersRepository membersRepository;
 	@Autowired
 	private AuthenticationManager authenticationManager;
-	
-	
+	@Autowired
+	private MailService mailService;
+
+	private BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+
 	@GetMapping("/test")
 	public String Test() {
 		return "success";
@@ -87,18 +70,23 @@ public class MemberController {
 				.build();
 	}
 
-	@DeleteMapping("/members/{memberId}")
-	public Boolean deleteMember(@PathVariable String memberId) {
-		if(!membersRepository.existsByMemberId(memberId)) return false;
-		membersRepository.deleteByMemberId(memberId);
-		return true;
-	}
 
 	@DeleteMapping("/members")
-	public Boolean deleteMember2(@RequestHeader HashMap<String,String> headers) {
+	public Boolean deleteMember(@RequestHeader HashMap<String,String> headers) {
 		String[] token = headers.get("authorization").split(" ");
 		String member_id = jwtProvider.getUserNameFromJwtToken(token[1]);
-		if(!membersRepository.existsByMemberId(member_id)) return false;
+
+		MembersDto member = membersRepository.findByMemberId(member_id).orElseThrow(()->	new ResourceNotFoundException());
+
+		String memberId = headers.get("id");
+		String email = headers.get("email");
+		String pw = headers.get("password");
+
+		if(!(member.getMemberId().equals(memberId) &&
+				member.getEmail().equals(email) &&
+				passwordEncoder.matches(member.getPassword(), passwordEncoder.encode(pw))
+				))
+			return false;
 		return true;
 	}
 	//MembersCardRepository
