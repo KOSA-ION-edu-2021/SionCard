@@ -126,7 +126,7 @@ export default {
 
 
       axios
-        .post(this.$store.state.apihost + "/admin/createCard", formData, {
+        .post(this.$store.state.apihost + "/admin/create_card", formData, {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("JSESSIONID")}`,
           },
