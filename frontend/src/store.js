@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         auth:null,
-        apihost: "https://localhost:8443",
+        apihost: "https://si-on.net:8443",
     },
     getters: {
         getAuth:state=>state.auth,
