@@ -181,7 +181,7 @@
                         <v-btn color="primary" text @click="checkbox1 = true; checkbox=(checkbox1 && checkbox2); dialog2 = false">
                           Agree
                         </v-btn>
-                        <v-btn color="primary" text @click="dialog2 = false">
+                        <v-btn color="primary" text @click="dialog2 = false; ">
                           Disagree
                         </v-btn>
                       </v-card-actions>
@@ -367,7 +367,7 @@ export default {
           return;
         }
       }
-      if(!this.dialog2 || !this.dalog2){
+      if(!this.dialog1 || !this.dialog2){
         alert("개인정보동의를 전부 체크해 주세요.");
         return;
       }
