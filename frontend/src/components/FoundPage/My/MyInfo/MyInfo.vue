@@ -61,9 +61,9 @@
 </template>
 
 <script>
-import myinfo_account from './MyInfo_account.vue'
-import myinfo_webpw from './MyInfo_webpw.vue'
-import myinfo_delete from './MyInfo_delete.vue'
+import myinfo_account from './Account_Change/MyInfo_account.vue'
+import myinfo_webpw from './PW_Change/MyInfo_webpw.vue'
+import myinfo_delete from './Account_Delete/MyInfo_delete.vue'
 /* import axios from 'axios' */
 
 export default {
