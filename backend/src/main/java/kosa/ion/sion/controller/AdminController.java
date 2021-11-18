@@ -1,6 +1,7 @@
 package kosa.ion.sion.controller;
 
 import kosa.ion.sion.dto.CardsDto;
+import kosa.ion.sion.getter.KindOfCardGetter;
 import kosa.ion.sion.repository.CardsRepository;
 import kosa.ion.sion.vo.CardVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +56,9 @@ public class AdminController{
 			cardsRepository.deleteById(id);
 			return true;
 	}
-	
+
+	@GetMapping("kind_of_card")
+	public List<KindOfCardGetter> kindOfCard(){
+		return cardsRepository.kindOfCard();
+	}
 }
