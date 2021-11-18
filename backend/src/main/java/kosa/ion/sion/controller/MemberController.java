@@ -91,7 +91,14 @@ public class MemberController {
 		membersRepository.deleteByMemberId(memberId);
 		return true;
 	}
-	
+
+	@DeleteMapping("/members")
+	public Boolean deleteMember2(@RequestHeader HashMap<String,String> headers) {
+		String[] token = headers.get("authorization").split(" ");
+		String member_id = jwtProvider.getUserNameFromJwtToken(token[1]);
+		if(!membersRepository.existsByMemberId(member_id)) return false;
+		return true;
+	}
 	//MembersCardRepository
 	@Autowired
 	MembersCardRepository membersCardRepository;
