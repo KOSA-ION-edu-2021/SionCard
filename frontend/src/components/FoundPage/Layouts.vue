@@ -16,11 +16,13 @@
 <script>
 import SystemBar from './SystemBar.vue'
 import Bar from './Bar.vue';
+import SideBar from './SideBar.vue';
 import Footer from './Footer.vue';
 
 export default {
     components:{
         Bar,
+        SideBar,
         Footer,
         SystemBar
     },
