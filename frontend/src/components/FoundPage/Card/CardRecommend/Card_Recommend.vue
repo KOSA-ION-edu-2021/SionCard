@@ -72,19 +72,31 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Card_Modal from './Card_Modal.vue';
-import cardInfo from '@/assets/cardInfo.js'
+/* import cardInfo from '@/assets/cardInfo.js' */
 
 export default {
   components: { Card_Modal },
   data: () => ({
     /* V-SHOW / V-IF */
-    cardInfo: cardInfo,
+    cardInfo: null,
     check1: new RegExp('.+'),
     check2: new RegExp('.+'),
     check3: new RegExp('.+'),
   }),
   methods: {
+    //card DB 받아오기
+    getCardInfo(){
+        axios.get(this.$store.state.apihost + '/api/card_info')
+        .then(res=>{
+            console.log(res.data)
+            this.cardInfo = res.data
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    },
     card_check(card,a,b,c){
           return !!a.exec(card.card_type) && !!b.exec(card.benefit_type) && !!c.exec(card.benefit_content) ;
       },

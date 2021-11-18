@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <v-sheet>
+        <v-sheet class="grey lighten-4 text-h4 font-weight-bold">
           새 비밀번호 입력
         </v-sheet>
       </v-col>
