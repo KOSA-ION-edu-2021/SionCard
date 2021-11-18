@@ -147,11 +147,13 @@
             </v-col>
           </v-row>
         </v-row>
+        <swipers/>
         </v-container>
       </v-col>
+
+      
       <v-col cols="1"></v-col>
     </v-row>
-    <swipers/>
   </v-container>
 </template>
 
