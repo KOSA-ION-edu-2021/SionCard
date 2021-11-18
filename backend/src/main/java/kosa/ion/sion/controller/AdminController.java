@@ -30,7 +30,7 @@ public class AdminController{
 		cardVo.getImg().transferTo(new File(newName));
 		CardsDto cardsDto=new CardsDto();
 
-		cardsDto.setImg("http://localhost:8080/api/image/"+newName);
+		cardsDto.setImg("https://si-on.net:8443/api/image/"+newName);
 		cardsDto.setTitle(cardVo.getTitle());
 		cardsDto.setContent(cardVo.getContent());
 		cardsDto.setCardType(cardVo.getCardType());
