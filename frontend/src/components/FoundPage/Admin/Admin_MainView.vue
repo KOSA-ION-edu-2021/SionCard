@@ -6,7 +6,7 @@
 
 
           <v-container>
-            <pie-chart :data="[['윤지훈', 150], ['이윤건', 300]]" />
+            <pie-chart :data=cardInfo />
           </v-container>
       </v-col>
       <v-col cols="1"></v-col>
@@ -30,13 +30,17 @@ export default {
       }
     },
     loadGraph(){
-      axios.get(this.$store.state.apihost+'/admin/kind_of_card')
+      axios.get(this.$store.state.apihost+'/admin/kind_of_card',
+      {
+        headers:{
+                  Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`
+                },
+      })
       .then((res)=>{
-        console.log(res.data);
-        this.cardInfo = res.data.map(obj=>{
-                              const key = Object.keys(obj)[0];
-                              return [key, obj[key]];
-                          })
+        console.log(res.data[0]);
+        this.cardInfo=Object.entries(res.data[0])
+       
+                          console.log(this.cardInfo)
       })
       .catch((err)=>{
         console.log(err);
