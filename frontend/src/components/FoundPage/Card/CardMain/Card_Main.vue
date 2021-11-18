@@ -151,17 +151,20 @@
       </v-col>
       <v-col cols="1"></v-col>
     </v-row>
+    <swipers/>
   </v-container>
 </template>
 
 <script>
 /* import cardInfo from "@/assets/cardInfo.js"; */
 import axios from 'axios'
+import swipers from './swiper.vue'
 
 export default {
   data: () => ({
     cardInfo : null,
   }),
+  components:{swipers},
   mounted() {
     this.getcardInfo()
   },
