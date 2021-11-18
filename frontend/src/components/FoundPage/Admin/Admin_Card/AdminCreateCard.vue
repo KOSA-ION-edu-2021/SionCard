@@ -64,7 +64,7 @@
 
               <v-list-item-title><b>후불 교통 기능</b></v-list-item-title>
 
-              <v-radio-group v-model="card.trafficcard" row>
+              <v-radio-group v-model="card.traficcard" row>
                 
                 <v-radio label="신청" value=true> </v-radio>
                 <v-radio label="신청안함" value=false> </v-radio>
@@ -110,7 +110,7 @@ export default {
       card_check: "",
       benefit_content: "",
       mastercard: "",
-      trafficcard: "",
+      traficcard: "",
     },
     rules: [
       (value) => !value || value.size < 30000000 || "30MB 이하로 올려주세요",
@@ -126,7 +126,7 @@ export default {
 
 
       axios
-        .post(this.$store.state.apihost + "/admin/create_card", formData, {
+        .post(this.$store.state.apihost + "/admin/createCard", formData, {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("JSESSIONID")}`,
           },
