@@ -33,38 +33,38 @@
               ></v-textarea>
             </v-col>
 
-            <v-col cols="12" sm="12" md="12" align="center">
+            <v-col cols="12" sm="12" md="12">
               <v-list-item-title><b>카드 종류</b></v-list-item-title>
-            <v-col align="center">
-              <v-radio-group v-model="radios" row>
+            
+              <v-radio-group v-model="card.type" row gravity="center">
                 <v-radio label="신용카드" value="credit"> </v-radio>
                 <v-radio label="체크카드" value="check"> </v-radio>
               </v-radio-group>
-           </v-col>
+           
               <v-list-item-title><b>카드 유형</b></v-list-item-title>
 
-              <v-radio-group v-model="radios" row class="ma-">
+              <v-radio-group v-model="card.point" row class="ma-">
                 <v-radio label="Point" value="point"> </v-radio>
-                <v-radio label="Mileage" value="Mileage"> </v-radio>
+                <v-radio label="Mileage" value="mileage"> </v-radio>
               </v-radio-group>
 
               <v-list-item-title><b>카드 혜택</b></v-list-item-title>
 
-              <v-radio-group v-model="radios" row>
+              <v-radio-group v-model="card.sale" row>
                 <v-radio label="즉시 할인" value="sale"> </v-radio>
                 <v-radio label="Point / Mileage 적립" value="save"> </v-radio>
               </v-radio-group>
 
               <v-list-item-title><b>해외 결제 기능</b></v-list-item-title>
 
-              <v-radio-group v-model="radios" row>
+              <v-radio-group v-model="card.master" row>
                 <v-radio label="MASTER" value="master"> </v-radio>
                 <v-radio label="국내 전용" value="internal"> </v-radio>
               </v-radio-group>
 
               <v-list-item-title><b>후불 교통 기능</b></v-list-item-title>
 
-              <v-radio-group v-model="radios" row>
+              <v-radio-group v-model="card.traffic" row>
                 
                 <v-radio label="신청" value="ok"> </v-radio>
                 <v-radio label="신청안함" value="notok"> </v-radio>
@@ -91,6 +91,7 @@
         </v-btn>
       </v-card-actions>
     </v-card>
+    <v-btn @click="check"> 확인</v-btn>
   </v-dialog>
 </template>
 
@@ -108,6 +109,11 @@ export default {
       content: "",
       card_type: "",
       card_check: "",
+      point: "",
+      type: "",
+      sale: "",
+      master: "",
+      traffic: "",
     },
     rules: [
       (value) => !value || value.size < 30000000 || "30MB 이하로 올려주세요",

@@ -23,11 +23,12 @@
               <th>카드 종류</th>
               <th>카드 유형</th>
               <th>카드 혜택</th>
-              <th></th>
+              <th>해외 결제 기능</th>
+              <th>후불 교통 기능</th>
             </tr>
             <tr
             v-for="(card, i) in cardInfo" :key="i">
-              <td> {{card.title}}</td>
+              <td> {{card.name}}</td>
               <td> <v-img :src=card.img contain aspect-ratio="1"/></td>
               <td> {{card.content}}</td>
               <td> {{card.card_type}}</td>

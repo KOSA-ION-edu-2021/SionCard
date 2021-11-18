@@ -39,12 +39,12 @@ public class AdminController{
 		cardsDto.setTitle(cardVo.getTitle());
 		cardsDto.setContent(cardVo.getContent());
 		cardsDto.setCardType(cardVo.getCardType());
-//		cardsDto.setCardCheck(cardVo.getCardCheck());
-//		cardsDto.setCardCredit(cardVo.getCardCredit());
+		//cardsDto.setCardCheck(cardVo.getCardCheck());
+		//cardsDto.setCardCredit(cardVo.getCardCredit());
 		cardsDto.setBenefitType(cardVo.getBenefitType());
 		cardsDto.setBenefitContent(cardVo.getBenefitContent());
-//		cardsDto.setMastercard(cardVo.getMastercard());
-//		cardsDto.setTraficcard(cardVo.getTraficcard());
+		//cardsDto.setMastercard(cardVo.getMastercard());
+		//cardsDto.setTraficcard(cardVo.getTraficcard());
 
 
 		return cardsRepository.save(cardsDto);
