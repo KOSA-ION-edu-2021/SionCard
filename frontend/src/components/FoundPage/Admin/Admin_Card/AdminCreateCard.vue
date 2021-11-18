@@ -122,7 +122,7 @@ export default {
         formData.append(key, this.card[key]);
       }
       formData.append('cardCredit', this.card.cardType==='credit');
-      formData.append('cardCheck', !this.card.cardType==='check');
+      formData.append('cardCheck', this.card.cardType==='check');
       
       for(let entry of formData.entries()){
         console.log(entry)
