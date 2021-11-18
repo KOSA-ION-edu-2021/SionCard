@@ -17,5 +17,5 @@ public class CardVo {
     private String benefitType;
     private String benefitContent;
     private Boolean mastercard;
-    private Boolean trafficcard;
+    private Boolean traficcard;
 }
