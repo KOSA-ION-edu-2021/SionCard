@@ -20,7 +20,7 @@
               <th>성명</th>
               <td>
                 <v-text-field
-                  style="width: 100%"
+                  style="width: 40%"
                   v-model="user_nm"
                   label="이름을 입력해 주세요."
                   :rules="user_nm_rule"
@@ -36,7 +36,7 @@
               <td>
                 <!-- <v-card class="d-flex" width="40%" flat tile> -->
                   <v-text-field
-                      style="width: 100%"
+                      style="width: 40%"
                       v-model="user_id"
                       label="아이디를 입력해 주세요."
                       @blur="id_check"
@@ -57,7 +57,7 @@
               <th>비밀번호</th>
               <td>
                 <v-text-field
-                        style="width: 100%"
+                        style="width: 40%"
                         v-model="user_pw"
                         type="password"
                         label="비밀번호를 입력해 주세요."
@@ -70,13 +70,14 @@
               </td>
               <td>  
                 <!------------ 비민번호 설정 기준 버튼 / 모달창--------------- -->
-                      <v-dialog v-model="dialog1" width="30%">
+                      <!-- <v-dialog v-model="dialog1" width="30%">
                         <template v-slot:activator="{ on, attrs }">
                           <v-btn
-                            class="ml-3"
+                            class="ml"
                             color="secondary"
                             v-bind="attrs"
                             v-on="on"
+                            
                           >
                             비밀번호 설정 기준
                           </v-btn>
@@ -100,7 +101,7 @@
                             </v-btn>
                           </v-card-actions>
                         </v-card>
-                      </v-dialog>
+                      </v-dialog> -->
               </td>
             </tr>
             <!-- =================여기까지 비밀번호 설정 기준 ============ -->
@@ -109,7 +110,7 @@
               <th>비밀번호 확인</th>
               <td>
                 <v-text-field
-                  style="width: 100%; text-align: center"
+                  style="width: 40%; text-align: center"
                   v-model="user_pw_chk"
                   type="password"
                   label="비밀번호를 입력해 주세요."
@@ -126,7 +127,7 @@
               <th>이메일</th>
               <td>
                 <v-text-field
-                  style="width: 100%"
+                  style="width: 40%"
                   v-model="user_email"
                   type="email"
                   label="이메일주소를 입력해주세요."
@@ -181,7 +182,7 @@
                         <v-btn color="primary" text @click="checkbox1 = true; checkbox=(checkbox1 && checkbox2); dialog2 = false">
                           Agree
                         </v-btn>
-                        <v-btn color="primary" text @click="dialog2 = false">
+                        <v-btn color="primary" text @click="dialog2 = false; ">
                           Disagree
                         </v-btn>
                       </v-card-actions>
@@ -367,7 +368,7 @@ export default {
           return;
         }
       }
-      if(!this.dialog2 || !this.dalog2){
+      if(!this.checkbox1 || !this.checkbox2){
         alert("개인정보동의를 전부 체크해 주세요.");
         return;
       }

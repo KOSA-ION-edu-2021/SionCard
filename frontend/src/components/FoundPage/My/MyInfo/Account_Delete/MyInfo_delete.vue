@@ -13,6 +13,7 @@
                         <th>ID</th>
                         <td>
                           <v-text-field
+                            v-model="id"
                             style="width: 30%"
                             label="ID"
                             required
@@ -26,6 +27,7 @@
                         <th>이메일</th>
                         <td>
                           <v-text-field
+                            v-model="email"
                             style="width: 30%"
                             label="E-MAIL"
                             required
@@ -40,6 +42,7 @@
                         <th>비밀번호</th>
                         <td>
                           <v-text-field
+                            v-model="pw"
                             style="width: 30%"
                             label="PW"
                             required
@@ -50,18 +53,32 @@
                         </td>
                     </tr>
                 </table>
+          </v-col> 
+        </v-row>
 
-            </v-col> 
+        
+
+        <v-row class="ma-5">
+          <v-col>
+            <delete_alert :id="id" :pw="pw" :email="email"/>    
+          </v-col>
         </v-row>
     </v-container>
 </template>
 
 <script>
+import delete_alert from './delete_alert.vue'
+
 export default {
     name: 'myinfo_delete',
     data:() => ({
-      
+      id:"",
+      pw:"",
+      email:"",
     }),
+    components:{
+      delete_alert,
+    }
 }
 </script>
 

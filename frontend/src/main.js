@@ -6,7 +6,12 @@ import VueRouter from 'vue-router'
 import routes from './routes'
 import store from './store'
 
-Vue.use(VueRouter);
+import Chart from 'chart.js'
+import Chartkick from 'vue-chartkick'
+
+Vue.use(Chartkick.use(Chart))
+
+Vue.use(VueRouter) ;
 const router=new VueRouter({
   mode: 'history',
   routes,

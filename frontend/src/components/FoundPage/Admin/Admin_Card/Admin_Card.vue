@@ -3,7 +3,7 @@
     <v-col cols="1"></v-col>
     <v-col cols="10">
       
-      <v-sheet class="mt-5 mb-5 text-h3 grey lighten-2"> 고객 정보 관리 </v-sheet>
+      <v-sheet class="mt-5 mb-5 text-h3 grey lighten-2"> 카드 정보 관리 </v-sheet>
       <v-row>
         <v-col class="d-flex justify-end" cols="11">
           <v-btn @click="dialog=true">
@@ -23,7 +23,8 @@
               <th>카드 종류</th>
               <th>카드 유형</th>
               <th>카드 혜택</th>
-              <th></th>
+              <th>해외 결제 기능</th>
+              <th>후불 교통 기능</th>
             </tr>
             <tr
             v-for="(card, i) in cardInfo" :key="i">
