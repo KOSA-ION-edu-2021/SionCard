@@ -31,11 +31,11 @@
     <!-- 인증 정보 입력 -->
 
     <!-- 이메일 인증 정보 -->
-    <v-row class="mt-10" v-if="radioValues == 'email'">
+    <!-- <v-row class="mt-10" v-if="radioValues == 'email'">
       <v-col class="text-h4 font-weight-bold"> 인증 정보 입력 </v-col>
-    </v-row>
+    </v-row> -->
 
-    <v-row class="text-h6 font-weight-regular" v-if="radioValues == 'email'">
+    <v-row class="text-h6 font-weight-regular mb-3" v-if="radioValues == 'email'">
       <v-col cols="">
         <table>
           <tr>
@@ -82,11 +82,11 @@
     </v-row>
 
     <!-- SI-ON Card 인증 정보 -->
-    <v-row class="mt-10" v-if="radioValues == 'card'">
+    <!-- <v-row class="mt-10" v-if="radioValues == 'card'">
       <v-col class="text-h4 font-weight-bold"> 인증 정보 입력 </v-col>
-    </v-row>
+    </v-row> -->
 
-    <v-row class="text-h6 font-weight-regular" v-if="radioValues == 'card'">
+    <v-row class="text-h6 font-weight-regular mb-3" v-if="radioValues == 'card'">
       <v-col cols="">
         <table>
           <tr>
@@ -104,19 +104,28 @@
           </tr>
           <tr>
             <th>카드 번호</th>
-            <td>03470@naver.com</td>
+            <td>
+              <v-text-field
+                style="width: 30%"
+                label="CARD NUMBER"
+                required
+                dense
+                hide-details="auto"
+                outlined
+              ></v-text-field>
+            </td>
           </tr>
           <tr>
             <th>카드 비밀번호</th>
-            <td>010-9699-9378</td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <v-row justify="center">
-                <v-col>
-                  <v-btn>다음</v-btn>
-                </v-col>
-              </v-row>
+            <td>
+              <v-text-field
+                style="width: 30%"
+                label="CARD PW"
+                required
+                dense
+                hide-details="auto"
+                outlined
+              ></v-text-field>
             </td>
           </tr>
         </table>
@@ -127,7 +136,7 @@
 
 <script>
 export default {
-    name: "webpw_table",
+    name: "webpw_1step",
     data: () => ({
       radioValues: 'email',
     }),
