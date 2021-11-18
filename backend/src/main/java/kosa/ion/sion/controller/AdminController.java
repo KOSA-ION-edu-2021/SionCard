@@ -37,16 +37,16 @@ public class AdminController{
 		cardVo.getImg().transferTo(new File(newName));
 		CardsDto cardsDto=new CardsDto();
 
-		cardsDto.setImg("http://si-on.net:8080/api/image/"+newName);
+		cardsDto.setImg("http://localhost:8080/api/image/"+newName);
 		cardsDto.setTitle(cardVo.getTitle());
 		cardsDto.setContent(cardVo.getContent());
 		cardsDto.setCardType(cardVo.getCardType());
-//		cardsDto.setCardCheck(cardVo.getCardCheck());
-//		cardsDto.setCardCredit(cardVo.getCardCredit());
+		//cardsDto.setCardCheck(cardVo.getCardCheck());
+		//cardsDto.setCardCredit(cardVo.getCardCredit());
 		cardsDto.setBenefitType(cardVo.getBenefitType());
 		cardsDto.setBenefitContent(cardVo.getBenefitContent());
-//		cardsDto.setMastercard(cardVo.getMastercard());
-//		cardsDto.setTraficcard(cardVo.getTraficcard());
+		//cardsDto.setMastercard(cardVo.getMastercard());
+		//cardsDto.setTraficcard(cardVo.getTraficcard());
 
 
 		return cardsRepository.save(cardsDto);
