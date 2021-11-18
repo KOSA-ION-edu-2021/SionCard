@@ -48,6 +48,7 @@ public class ApiController {
 	@Autowired
 	MemberUseRepository memberUseRepository;
 	
+
 	@GetMapping("/test")
 	@ResponseBody
 	public List<SumUseGetter> sumUse(@RequestHeader Map<String,String> headers, SEDateVo seDateVo) {

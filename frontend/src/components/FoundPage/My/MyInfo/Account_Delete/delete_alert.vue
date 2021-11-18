@@ -36,7 +36,7 @@
             <v-list-item-content>      
                 <v-row justify="center">
                     <v-col cols="auto">
-                        <v-btn large outlined> 예 </v-btn>
+                        <v-btn large outlined @click="deleteId(); dialog=false"> 예 </v-btn>
                     </v-col>
                     <v-col cols="auto">
                         <v-btn large outlined @click="dialog=false"> 아니오 </v-btn>
@@ -51,11 +51,35 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name: "delete_alert",
     data:()=> ({
         dialog: false,
     }),
+    props:{
+        id:String,
+        pw:String,
+        email:String
+    },
+    methods:{
+      deleteId(){
+        axios.delete(this.$store.state.apihost + "/member/members", {
+          headers:{
+            Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`,
+            Id : this.id,
+            Password : this.pw,
+            Email : this.email
+          }
+        })
+        .then(res=>{
+          console.log(res.data);
+        })
+        .catch(err=>{
+          console.log(err);
+        })
+      }
+    }
 }
 </script>
 

@@ -73,21 +73,27 @@ public class MemberController {
 
 	@DeleteMapping("/members")
 	public Boolean deleteMember(@RequestHeader HashMap<String,String> headers) {
-		String[] token = headers.get("authorization").split(" ");
-		String member_id = jwtProvider.getUserNameFromJwtToken(token[1]);
+		try {
+			String[] token = headers.get("authorization").split(" ");
+			String member_id = jwtProvider.getUserNameFromJwtToken(token[1]);
 
-		MembersDto member = membersRepository.findByMemberId(member_id).orElseThrow(()->	new ResourceNotFoundException());
+			MembersDto member = membersRepository.findByMemberId(member_id).orElseThrow(() -> new ResourceNotFoundException());
 
-		String memberId = headers.get("id");
-		String email = headers.get("email");
-		String pw = headers.get("password");
-
-		if(!(member.getMemberId().equals(memberId) &&
-				member.getEmail().equals(email) &&
-				passwordEncoder.matches(member.getPassword(), passwordEncoder.encode(pw))
-				))
-			return false;
-		return true;
+			String memberId = headers.get("id");
+			String email = headers.get("email");
+			String pw = headers.get("password");
+			if (!(member.getMemberId().equals(memberId) &&
+					member.getEmail().equals(email) &&
+					passwordEncoder.matches(pw, member.getPassword())
+			))
+				return false;
+			membersRepository.delete(member);
+			return true;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	//MembersCardRepository
 	@Autowired

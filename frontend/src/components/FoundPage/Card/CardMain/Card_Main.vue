@@ -8,7 +8,7 @@
         <!-- 신상 카드 이미지 슬라이드 -->
         <v-carousel
           cycle
-          height="200"
+          height="230"
           hide-delimiters
           hide-delimiter-background
           class="mt-10 mb-10"
@@ -19,7 +19,7 @@
           <v-carousel-item class="mt-5 mb-5"
             v-for="(card, i) in cardInfo" :key="i">
             <v-card  class="grey lighten-3">
-              <v-row justify="center" align="center">
+              <v-row justify="center" align="center" class="ma-1">
                   <v-col cols="4">
                       <v-card-title class="text-subtitle-1 font-weight-bold">
                           {{card.title}}
