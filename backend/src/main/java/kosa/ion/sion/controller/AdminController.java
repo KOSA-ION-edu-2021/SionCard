@@ -1,6 +1,7 @@
 package kosa.ion.sion.controller;
 
 import kosa.ion.sion.dto.CardsDto;
+import kosa.ion.sion.getter.KindOfCardGetter;
 import kosa.ion.sion.repository.CardsRepository;
 import kosa.ion.sion.repository.MembersRepository;
 import kosa.ion.sion.vo.CardVo;
@@ -34,7 +35,7 @@ public class AdminController{
 		cardVo.getImg().transferTo(new File(newName));
 		CardsDto cardsDto=new CardsDto();
 
-		cardsDto.setImg("http://si-on.net:8080/api/image/"+newName);
+		cardsDto.setImg("http://localhost:8080/api/image/"+newName);
 		cardsDto.setTitle(cardVo.getTitle());
 		cardsDto.setContent(cardVo.getContent());
 		cardsDto.setCardType(cardVo.getCardType());
@@ -66,5 +67,10 @@ public class AdminController{
 		if(!membersRepository.existsByMemberId(memberId)) return false;
 		membersRepository.deleteByMemberId(memberId);
 		return true;
+	}
+
+	@GetMapping("kind_of_card")
+	public List<KindOfCardGetter> kindOfCard(){
+		return cardsRepository.kindOfCard();
 	}
 }

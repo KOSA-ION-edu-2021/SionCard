@@ -56,13 +56,15 @@ export default {
     name: "delete_alert",
     data:()=> ({
         dialog: false,
-        id:"",
-        pw:"",
-        email:""
     }),
+    props:{
+        id:String,
+        pw:String,
+        email:String
+    },
     methods:{
       deleteId(){
-        axios.delete(this.$store.state.apihost + "/members", {
+        axios.delete(this.$store.state.apihost + "/member/members", {
           headers:{
             Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`,
             Id : this.id,
