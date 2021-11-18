@@ -39,7 +39,7 @@ public class AdminController{
 		cardsDto.setBenefitType(cardVo.getBenefitType());
 		cardsDto.setBenefitContent(cardVo.getBenefitContent());
 		cardsDto.setMastercard(cardVo.getMastercard());
-		cardsDto.setTraficcard(cardVo.getTraficcard());
+		cardsDto.setTrafficcard(cardVo.getTrafficcard());
 
 
 		return cardsRepository.save(cardsDto);

@@ -24,5 +24,5 @@ public class CardsDto {
 	private String benefitType;
 	private String benefitContent;
 	private Boolean mastercard;
-	private Boolean traficcard;
+	private Boolean trafficcard;
 }
