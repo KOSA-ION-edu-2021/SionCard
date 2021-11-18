@@ -18,6 +18,6 @@ COPY ./cert.key /etc/nginx/cert.key
 
 COPY --from=node_build /app/dist /usr/share/nginx/html
 
-EXPOSE 80
+EXPOSE 443
 
 CMD ["nginx", "-g", "daemon off;"]
