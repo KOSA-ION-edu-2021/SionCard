@@ -54,26 +54,26 @@
                         
                         <v-row class="mb-12" >
                             <v-col cols="3" v-for="(card,i) in cardInfo" :key="i">
-                                <v-hover v-slot="{ hover }">
+                                <!-- <v-hover v-slot="{ hover }"> -->
                                     <v-container class="text-center">
                                       {{card.title}} 
                                         <v-img
                                         class="ma-5"
                                         :src=card.img
                                         contain
-                                        :aspect-ratio=cardsize
+                                        :aspect-ratio="cardsize[i]||3"
                                         @click="cardpick(i)"
                                         >
-                                            <v-expand-transition>
+                                            <!-- <v-expand-transition>
                                                     <v-img
                                                     v-if="hover"
                                                     :src=card.img
                                                     contain
                                                     />
-                                            </v-expand-transition>
+                                            </v-expand-transition> -->
                                         </v-img>
                                     </v-container>
-                                </v-hover>
+                                <!-- </v-hover> -->
                                 <!-- </v-card>  -->   
                             </v-col>
                         </v-row>
@@ -270,7 +270,7 @@ export default {
         e1: 1,
         wantedcardID:0,
         wantedcard:null,
-        cardsize: 2,
+        cardsize: [],
         bgcolor1:'blue',
         bgcolor2:'',
         bgcolor3:'blue',
@@ -299,7 +299,8 @@ export default {
             this.wantedcard=this.cardInfo[num].img
             // application에서 쓸 id 값.
             this.selected_card_id = num
-            this.cardsize = 1
+            this.cardsize = []
+            this.cardsize[num] = 2
         },
         nextStep(){
             if(this.wantedcard == null){
