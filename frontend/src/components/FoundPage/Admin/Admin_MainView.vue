@@ -6,7 +6,7 @@
 
 
           <v-container>
-            <pie-chart :data=cardInfo />
+            <pie-chart :color="['green','black']" :data=cardInfo />
           </v-container>
       </v-col>
       <v-col cols="1"></v-col>

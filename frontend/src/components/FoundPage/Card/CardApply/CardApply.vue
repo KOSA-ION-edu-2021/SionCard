@@ -262,11 +262,11 @@
 </template>
 
 <script>
-import cardInfo from '@/assets/cardInfo.js'
+/* import cardInfo from '@/assets/cardInfo.js' */
 import axios from "axios";
 export default {
     data: ()=>({
-        cardInfo,
+        cardInfo : null,
         e1: 1,
         wantedcardID:0,
         wantedcard:null,
@@ -283,6 +283,7 @@ export default {
     }),
     mounted() {
         this.$store.commit('updateAuth',this.loginCheck_cardApply);
+        this.getCardInfo()
     },
     methods: {
         
@@ -329,6 +330,18 @@ export default {
             this.bgcolor4 = 'blue'
             this.traficcard = false
         },
+        //card DB 받아오기
+        getCardInfo(){
+            axios.get(this.$store.state.apihost + '/api/card_info')
+            .then(res=>{
+                console.log(res.data)
+                this.cardInfo = res.data
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+        },
+
         // 개인 정보 인증 패스워드 인증
         PwdCheck_cardApply(){
             axios.post(this.$store.state.apihost + '/api/pwd_check',{
