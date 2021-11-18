@@ -2,7 +2,6 @@ package kosa.ion.sion.controller;
 
 import kosa.ion.sion.dto.CardsDto;
 import kosa.ion.sion.dto.MembersDto;
-import kosa.ion.sion.getter.KindOfCardGetter;
 import kosa.ion.sion.getter.SumUseGetter;
 import kosa.ion.sion.repository.CardsRepository;
 import kosa.ion.sion.repository.MemberUseRepository;
@@ -48,12 +47,7 @@ public class ApiController {
 	
 	@Autowired
 	MemberUseRepository memberUseRepository;
-
-
-	@GetMapping("kind_of_card")
-	public List<KindOfCardGetter> kindOfCard(){
-		return cardsRepository.kindOfCard();
-	}
+	
 
 	@GetMapping("/test")
 	@ResponseBody
