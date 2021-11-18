@@ -58,16 +58,16 @@
               <v-list-item-title><b>해외 결제 기능</b></v-list-item-title>
 
               <v-radio-group v-model="card.mastercard" row>
-                <v-radio label="MASTER" value=true> </v-radio>
-                <v-radio label="국내 전용" value=false> </v-radio>
+                <v-radio label="MASTER" :value="true"> </v-radio>
+                <v-radio label="국내 전용" :value="false"> </v-radio>
               </v-radio-group>
 
               <v-list-item-title><b>후불 교통 기능</b></v-list-item-title>
 
               <v-radio-group v-model="card.traficcard" row>
                 
-                <v-radio label="신청" value=true> </v-radio>
-                <v-radio label="신청안함" value=false> </v-radio>
+                <v-radio label="신청" :value="true"> </v-radio>
+                <v-radio label="신청안함" :value="false"> </v-radio>
               </v-radio-group>
             </v-col>
           </v-row>
@@ -107,10 +107,9 @@ export default {
       title: "",
       content: "",
       cardType: "",
-      cardCheck: "",
       benefitContent: "",
-      mastercard: "",
-      traficcard: "",
+      mastercard: false,
+      traficcard: false,
     },
     rules: [
       (value) => !value || value.size < 30000000 || "30MB 이하로 올려주세요",
@@ -122,7 +121,12 @@ export default {
       for (const key in this.card) {
         formData.append(key, this.card[key]);
       }
-      formData.append('cardCredit', !this.card.cardCheck);
+      formData.append('cardCredit', this.card.cardType==='credit');
+      formData.append('cardCheck', !this.card.cardType==='check');
+      
+      for(let entry of formData.entries()){
+        console.log(entry)
+      }
 
 
       axios
