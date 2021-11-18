@@ -3,6 +3,7 @@ package kosa.ion.sion.controller;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -22,18 +23,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.annotation.JsonValueInstantiator;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.*;
 import kosa.ion.sion.dto.CardsDto;
 import kosa.ion.sion.dto.MembersDto;
 import kosa.ion.sion.getter.SumUseGetter;
@@ -42,6 +37,7 @@ import kosa.ion.sion.repository.MemberUseRepository;
 import kosa.ion.sion.repository.MembersRepository;
 import kosa.ion.sion.security.JwtProvider;
 import kosa.ion.sion.service.MailService;
+import kosa.ion.sion.vo.SEDateVo;
 import net.bytebuddy.utility.RandomString;
 
 @RestController
@@ -64,10 +60,13 @@ public class ApiController {
 	MemberUseRepository memberUseRepository;
 	
 	@GetMapping("/test")
-	public List<SumUseGetter> Test() {
-		return memberUseRepository.sumUseByMemberId("admin");
+	@ResponseBody
+	public List<SumUseGetter> sumUse(@RequestHeader Map<String,String> headers, SEDateVo seDateVo) {
+//		String[] token = headers.get("authorization").split(" ");
+//		String member_id = jwtProvider.getUserNameFromJwtToken(token[1]);
+		String member_id = "admin";
+		return memberUseRepository.sumUseByMemberId(member_id,seDateVo.getStartDate(), seDateVo.getEndDate());
 	}
-	
 	//jwt 부분
 	@PostMapping("/login")
 	@ResponseBody

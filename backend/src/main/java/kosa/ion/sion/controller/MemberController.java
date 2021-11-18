@@ -1,6 +1,7 @@
 
 package kosa.ion.sion.controller;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -202,10 +204,10 @@ public class MemberController {
 			return changeinfo;	
 		}
 	@GetMapping("/sum_use")
-	public List<SumUseGetter> sumUse(@RequestHeader Map<String,String> headers) {
+	public List<SumUseGetter> sumUse(@RequestHeader Map<String,String> headers,@RequestParam LocalDateTime start_date, LocalDateTime end_date) {
 		String[] token = headers.get("authorization").split(" ");
 		String member_id = jwtProvider.getUserNameFromJwtToken(token[1]);
-		return memberUseRepository.sumUseByMemberId(member_id);
+		return memberUseRepository.sumUseByMemberId(member_id,start_date, end_date);
 	}
 
 }
