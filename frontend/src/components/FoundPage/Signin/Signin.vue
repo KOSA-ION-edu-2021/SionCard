@@ -367,7 +367,7 @@ export default {
           return;
         }
       }
-      if(!this.dialog2 || !this.dalog2){
+      if(!this.dialog1 || !this.dialog2){
         alert("개인정보동의를 전부 체크해 주세요.");
         return;
       }
