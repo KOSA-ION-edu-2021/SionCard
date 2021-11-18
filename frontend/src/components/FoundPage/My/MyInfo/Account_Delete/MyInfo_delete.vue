@@ -50,18 +50,30 @@
                         </td>
                     </tr>
                 </table>
+          </v-col> 
+        </v-row>
 
-            </v-col> 
+        
+
+        <v-row class="ma-5">
+          <v-col>
+            <delete_alert />    
+          </v-col>
         </v-row>
     </v-container>
 </template>
 
 <script>
+import delete_alert from './delete_alert.vue'
+
 export default {
     name: 'myinfo_delete',
     data:() => ({
       
     }),
+    components:{
+      delete_alert,
+    }
 }
 </script>
 

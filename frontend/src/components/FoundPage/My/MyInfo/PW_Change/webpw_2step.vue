@@ -1,40 +1,13 @@
 <template>
   <v-container>
-    <v-row class="mb-0 text-h6 font-weight-regular">
+    <v-row>
       <v-col>
-        <table style="height: 60px">
-          <tr>
-            <th style="width: 144px">인증 방법</th>
-            <td style="">
-              <v-radio-group row mandatory>
-                <v-radio
-                  label="이메일"
-                  value="email"
-                  color="black"
-                  aira-checked
-                  @click="emailCheck"
-                ></v-radio>
-                <v-radio
-                  label="SI-ON Card"
-                  value="card"
-                  color="black"
-                  @click="cardCheck"
-                ></v-radio>
-              </v-radio-group>
-              <!-- {{radioValues}} -->
-            </td>
-          </tr>
-        </table>
+        <v-sheet>
+          새 비밀번호 입력
+        </v-sheet>
       </v-col>
     </v-row>
-
-    <!-- 인증 정보 입력 -->
-
-    <!-- 이메일 인증 정보 -->
-    <!-- <v-row class="mt-10" v-if="radioValues == 'email'">
-      <v-col class="text-h4 font-weight-bold"> 인증 정보 입력 </v-col>
-    </v-row> -->
-
+    
     <v-row class="text-h6 font-weight-regular mb-3" v-if="radioValues == 'email'">
       <v-col cols="">
         <table>
