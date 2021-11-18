@@ -153,7 +153,6 @@ public class MemberController {
 	// My 정보 변경
 	// 이메일 변경
 	@PutMapping("/member_info/email/{memberId}")
-	@Transactional
 	public MembersDto changeemail(@PathVariable(value = "memberId") String memberId,@Valid @RequestBody MembersDto membersDto){
 				
 			MembersDto member = membersRepository.findByMemberId(memberId).orElseThrow(()->	new ResourceNotFoundException());
@@ -163,34 +162,28 @@ public class MemberController {
 		}
 	// 주소 변경
 	@PutMapping("/member_info/address/{memberId}")
-	@Transactional
 	public MembersDto changeaddress(@PathVariable(value = "memberId") String memberId,@Valid @RequestBody MembersDto membersDto){
 						
 			MembersDto member = membersRepository.findByMemberId(memberId).orElseThrow(()->	new ResourceNotFoundException());
 			member.setAddress(membersDto.getAddress());
-
 			MembersDto changeinfo = membersRepository.save(member);
 			return changeinfo;	
 		}
 	// 전화번호 변경
 	@PutMapping("/member_info/phone/{memberId}")
-	@Transactional
 	public MembersDto changephone(@PathVariable(value = "memberId") String memberId,@Valid @RequestBody MembersDto membersDto){
 							
 			MembersDto member = membersRepository.findByMemberId(memberId).orElseThrow(()->	new ResourceNotFoundException());
 			member.setPhone(membersDto.getPhone());
-
 			MembersDto changeinfo = membersRepository.save(member);
 			return changeinfo;	
 		}
 	// 생일 변경
 	@PutMapping("/member_info/birth/{memberId}")
-	@Transactional
 	public MembersDto changebirth(@PathVariable(value = "memberId") String memberId,@Valid @RequestBody MembersDto membersDto){
 			
 		MembersDto member = membersRepository.findByMemberId(memberId).orElseThrow(()->	new ResourceNotFoundException());
 			member.setBirth(membersDto.getBirth());
-			
 			MembersDto changeinfo = membersRepository.save(member);
 			return changeinfo;	
 		}
