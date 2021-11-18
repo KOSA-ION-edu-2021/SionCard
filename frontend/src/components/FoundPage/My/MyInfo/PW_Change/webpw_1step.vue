@@ -1,5 +1,13 @@
 <template>
   <v-container>
+    <v-row>
+      <v-col>
+        <v-sheet class="grey lighten-4 text-h4 font-weight-bold">
+          본인 인증
+        </v-sheet>
+      </v-col>
+    </v-row>
+
     <v-row class="mb-0 text-h6 font-weight-regular">
       <v-col>
         <table style="height: 60px">
