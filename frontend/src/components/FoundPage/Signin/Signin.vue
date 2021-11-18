@@ -181,7 +181,7 @@
                         <v-btn color="primary" text @click="checkbox1 = true; checkbox=(checkbox1 && checkbox2); dialog2 = false">
                           Agree
                         </v-btn>
-                        <v-btn color="primary" text @click="dialog2 = false">
+                        <v-btn color="primary" text @click="dialog2 = false; ">
                           Disagree
                         </v-btn>
                       </v-card-actions>
