@@ -22,6 +22,7 @@
         range
         color="grey darken-3"
         locale="ko"
+        @click="dateOut()"
       ></v-date-picker>
     </v-dialog>
   </div>
@@ -35,11 +36,21 @@ export default {
     data: ()=>({
         dialog: false,
         dates: [dayjs().subtract(30, 'day').format("YYYY-MM-DD"), dayjs().format("YYYY-MM-DD") ], //[ 30일 전 날짜 , 오늘 날짜 ]
+         date:[],
     }),
     computed: {
       dateRangeText () {
         return this.dates.join(' ~ ')
       },
+    },
+    mounted() {
+      this.dateOut()
+    },
+    methods: {
+      dateOut(){
+        this.date = this.dates;
+        this.$emit('date', this.date)
+      }
     },
     component: { 
         dayjs,
