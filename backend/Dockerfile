@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY . .
 
-EXPOSE 8443
+EXPOSE 443
 
-CMD ["./mvnw", "spring-boot:run"]
+RUN ./mvnw install
+
+CMD ["java","-jar", "target/backend-0,0,1-SNAPSHOT.jar"]
