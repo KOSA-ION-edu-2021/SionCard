@@ -65,6 +65,7 @@
               <v-text-field
                 style="width: 30%"
                 label="EMAIL"
+                v-model="email"
                 required
                 dense
                 hide-details="auto"
@@ -78,10 +79,13 @@
               <v-text-field
                 style="width: 30%"
                 label="PW"
+                v-model="pw"
                 required
                 dense
                 hide-details="auto"
                 outlined
+                type="password"
+                @blur="CheckEmailPassword"
               ></v-text-field>
             </td>
           </tr>
@@ -147,6 +151,8 @@ export default {
     name: "webpw_1step",
     data: () => ({
       radioValues: 'email',
+      email : "",
+      pw : "",
     }),
     methods:{
       emailCheck(){
@@ -156,8 +162,10 @@ export default {
         this.radioValues = 'card'
       }
 
-    }
-
+    },
+    props:[
+      'CheckEmailPassword'
+    ]
 };
 </script>
 
