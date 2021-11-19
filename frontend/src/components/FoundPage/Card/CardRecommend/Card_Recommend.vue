@@ -85,6 +85,9 @@ export default {
     check2: new RegExp('.+'),
     check3: new RegExp('.+'),
   }),
+  mounted() {
+    this.getCardInfo()
+  },
   methods: {
     //card DB 받아오기
     getCardInfo(){

@@ -117,6 +117,7 @@ public class ApiController {
 	@Autowired
 	CardsRepository cardsRepository;
 	
+	//카드 정보 전송
 	@GetMapping("/card_info")
 	public List<CardsDto> CardInfo() {
 		return cardsRepository.findAll();
