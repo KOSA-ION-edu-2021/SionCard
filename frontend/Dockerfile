@@ -1,20 +1,23 @@
-FROM node:14
+FROM node:14 as node_build
 
 WORKDIR /app
 
 COPY package*.json ./
 
-#RUN npm install -g http-server
 RUN npm install
 
 COPY . .
 
 RUN npm run build
 
-EXPOSE 8080
+# nginx
+FROM nginx:latest
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./cert.crt /etc/nginx/cert.crt
+COPY ./cert.key /etc/nginx/cert.key
 
-CMD ["npm" ,"run", "serve"]
+COPY --from=node_build /app/dist /usr/share/nginx/html
 
+EXPOSE 443
 
-# sudo docker build -t front-image
-# sudo docker run -p 8080:8080 -v /app/dist -v /app/node_modules -v $(pwd):/app front-image
+CMD ["nginx", "-g", "daemon off;"]

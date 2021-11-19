@@ -7,6 +7,7 @@
             <router-link to="/signin" class="white--text text-caption ml-2 mr-16" tag="button">회원가입</router-link>
         </div>
         <div v-else class="mr-16">
+            <router-link class="mr-2" to="/admin" tag="button" v-if="this.$store.getters.getAuth.member_id === 'admin'"> 관리자 페이지로 이동 </router-link>
             <router-link to="/my_main" ><button class="white--text text-caption mr-2">{{this.$store.state.auth.name}}</button></router-link>
             <button disabled  class="white--text text-caption mr-2"> 님 반갑습니다. </button>
             <!-- <span class="mr-2 ml-2 white--text">|</span> -->

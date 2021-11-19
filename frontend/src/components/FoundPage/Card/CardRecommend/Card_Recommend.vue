@@ -49,7 +49,7 @@
                 <router-link style="text-decoration: none;"
                                   :to="{
                                     name: 'card',
-                                    params: { id: card.id-1 },
+                                    params: { id: index },
                                   }"
                                 >
                 <v-hover v-slot="{hover}">

@@ -40,8 +40,7 @@
                                 받은 혜택
                                 </v-col>
                                 <v-col cols="" class="text-subtitle-2">
-                                    <!-- 21.10.04 ~ 21.11.04 기준 -->
-                                    <Calendar/>
+                                    <Calendar @date="date" />
                                 </v-col>
                         </v-row>  
               <v-row><v-divider></v-divider></v-row>
@@ -150,7 +149,11 @@ export default {
   mounted() {
     this.$store.commit("updateAuth", this.loginCheck_myMain);
     this.carduse();
-    this.sumUse();
+    this.sumUse(); 
+
+  },
+  computed(){
+
   },
   methods: {
     carduse() {
@@ -174,7 +177,7 @@ export default {
         });
     },
     sumUse(){
-      axios.get(this.$store.state.apihost + "/member/sum_use", {
+      axios.get(this.$store.state.apihost + "/member/sum_use",{
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("JSESSIONID")}`,
           },
@@ -193,7 +196,8 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-    }
+    },
+
   },
 };
 </script>

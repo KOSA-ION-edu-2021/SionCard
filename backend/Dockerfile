@@ -4,4 +4,6 @@ WORKDIR /app
 
 COPY . .
 
+EXPOSE 8443
+
 CMD ["./mvnw", "spring-boot:run"]
