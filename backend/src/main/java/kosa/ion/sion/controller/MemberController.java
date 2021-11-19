@@ -191,6 +191,12 @@ public class MemberController {
 			return changeinfo;	
 		}
 	@GetMapping("/sum_use")
+	public List<SumUseGetter> sumUse(@RequestHeader Map<String,String> headers) {
+		String[] token = headers.get("authorization").split(" ");
+		String member_id = jwtProvider.getUserNameFromJwtToken(token[1]);
+		return memberUseRepository.sumUseByMemberId(member_id);
+	}
+	@GetMapping("/sum_use1")
 	public List<SumUseGetter> sumUse(@RequestHeader Map<String,String> headers,@RequestParam LocalDateTime start_date, LocalDateTime end_date) {
 		String[] token = headers.get("authorization").split(" ");
 		String member_id = jwtProvider.getUserNameFromJwtToken(token[1]);
