@@ -36,21 +36,21 @@
             <v-col cols="12" sm="12" md="12">
               <v-list-item-title><b>카드 종류</b></v-list-item-title>
             
-              <v-radio-group v-model="card.card_type" row gravity="center">
+              <v-radio-group v-model="card.cardType" row gravity="center">
                 <v-radio label="신용카드" value="credit"> </v-radio>
                 <v-radio label="체크카드" value="check"> </v-radio>
               </v-radio-group>
            
               <v-list-item-title><b>카드 유형</b></v-list-item-title>
 
-              <v-radio-group v-model="card.card_check" row class="ma-">
+              <v-radio-group v-model="card.cardCheck" row class="ma-">
                 <v-radio label="Point" value=true> </v-radio>
                 <v-radio label="Mileage" value=false> </v-radio>
               </v-radio-group>
 
               <v-list-item-title><b>카드 혜택</b></v-list-item-title>
 
-              <v-radio-group v-model="card.benefit_content" row>
+              <v-radio-group v-model="card.benefitContent" row>
                 <v-radio label="즉시 할인" value="sale"> </v-radio>
                 <v-radio label="Point / Mileage 적립" value="save"> </v-radio>
               </v-radio-group>
@@ -64,7 +64,7 @@
 
               <v-list-item-title><b>후불 교통 기능</b></v-list-item-title>
 
-              <v-radio-group v-model="card.trafficcard" row>
+              <v-radio-group v-model="card.traficcard" row>
                 
                 <v-radio label="신청" value=true> </v-radio>
                 <v-radio label="신청안함" value=false> </v-radio>
@@ -106,11 +106,11 @@ export default {
       img: null,
       title: "",
       content: "",
-      card_type: "",
-      card_check: "",
-      benefit_content: "",
+      cardType: "",
+      cardCheck: "",
+      benefitContent: "",
       mastercard: "",
-      trafficcard: "",
+      traficcard: "",
     },
     rules: [
       (value) => !value || value.size < 30000000 || "30MB 이하로 올려주세요",
@@ -122,7 +122,7 @@ export default {
       for (const key in this.card) {
         formData.append(key, this.card[key]);
       }
-      formData.append('card_credit', !this.card.card_check);
+      formData.append('cardCredit', !this.card.cardCheck);
 
 
       axios
