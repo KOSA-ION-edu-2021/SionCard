@@ -11,6 +11,8 @@ import kosa.ion.sion.repository.MembersRepository;
 import kosa.ion.sion.security.JwtProvider;
 import kosa.ion.sion.service.MailService;
 import kosa.ion.sion.vo.AuthVo;
+import net.bytebuddy.utility.RandomString;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
@@ -154,6 +156,45 @@ public class MemberController {
 	}
 	
 	// My 정보 변경
+	// 이메일 비번 인증
+	@PostMapping("/checkemailpassword")
+	public Boolean CheckEmailPassword(@RequestHeader HashMap<String,String> headers,@RequestBody HashMap<String,String> param) {
+		try {
+			String[] token = headers.get("authorization").split(" ");
+			String member_id = jwtProvider.getUserNameFromJwtToken(token[1]);
+
+			MembersDto member = membersRepository.findByMemberId(member_id).orElseThrow(() -> new ResourceNotFoundException());
+			
+			
+			String email = headers.get("email");
+			String pw = headers.get("password");
+			if (member.getEmail().equals(email) &&	passwordEncoder.matches(pw, member.getPassword())) {
+				System.out.println("인증성공");
+				return true;
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("인증실패");
+		return false;
+	}
+	// 비밀번호 변경
+	@PostMapping("/changepw")
+	public MembersDto changepw(@RequestHeader HashMap<String,String> headers,@RequestBody HashMap<String,String> param){
+
+			String[] token = headers.get("authorization").split(" ");
+			String member_id = jwtProvider.getUserNameFromJwtToken(token[1]);
+
+			MembersDto member = membersRepository.findByMemberId(member_id).orElseThrow(() -> new ResourceNotFoundException());
+			
+				String pw = headers.get("password");
+				member.setPassword(passwordEncoder.encode(pw));
+				MembersDto changeinfo = membersRepository.save(member);
+				return changeinfo;
+			}
+		
+	
 	// 이메일 변경
 	@PutMapping("/member_info/email/{memberId}")
 	public MembersDto changeemail(@PathVariable(value = "memberId") String memberId,@Valid @RequestBody MembersDto membersDto){
