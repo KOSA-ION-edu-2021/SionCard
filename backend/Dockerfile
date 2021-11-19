@@ -8,4 +8,4 @@ EXPOSE 443
 
 RUN ./mvnw install
 
-CMD ["java","-jar", "target/backend-0,0,1-SNAPSHOT.jar"]
+CMD ["java","-jar", "target/backend-0.0.1-SNAPSHOT.jar"]
