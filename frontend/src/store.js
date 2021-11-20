@@ -8,6 +8,7 @@ export default new Vuex.Store({
     state: {
         auth:null,
         apihost: "http://localhost:8080",
+        // apihost: "https://si-on.net:8443",
     },
     getters: {
         getAuth:state=>state.auth,
@@ -32,7 +33,7 @@ export default new Vuex.Store({
                 console.log(res.data)
                 state.auth=res.data
                 state.auth.expire = new Date(state.auth.expire);
-                callback && callback();
+                callback && callback(); //평가식 + 콜백함수
             })
             .catch(err=>{
                 console.log("로그인이 되어 있지 않습니다.");

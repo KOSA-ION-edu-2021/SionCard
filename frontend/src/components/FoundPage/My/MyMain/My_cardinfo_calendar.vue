@@ -41,6 +41,11 @@ export default {
         return this.dates.join(' ~ ')
       },
     },
+    mounted() {
+      this.dateOut()
+    },
+    methods: {
+    },
     component: { 
         dayjs,
     },

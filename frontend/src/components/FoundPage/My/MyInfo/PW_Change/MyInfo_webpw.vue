@@ -25,13 +25,13 @@
         <v-stepper-content step="1">
           <v-row>
             <v-col>
-              <webpw_1step />
+              <webpw_1step :CheckEmailPassword="CheckEmailPassword" />
             </v-col>
           </v-row>
 
           <v-btn 
           color="grey lighten-2" 
-          @click="e1 = 2"
+          @click="CheckEmailPassword"
           > 
           Continue 
           </v-btn>
@@ -74,6 +74,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import webpw_1step from "./webpw_1step.vue";
 import webpw_2step from "./webpw_2step.vue";
 import webpw_3step from "./webpw_3step.vue";
@@ -89,7 +90,31 @@ export default {
     webpw_3step,
   },
   methods: {
-   
+    CheckEmailPassword() {
+       axios.post(this.$store.state.apihost + '/member/checkemailpassword',{},{
+                headers:{
+                        Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`,
+                        // member_id : this.$store.state.auth.member_id,
+                        email : this.email,
+                        pw : this.pw,
+                    },
+            })
+            .then((res)=>{
+              console.log(this.email)
+              console.log(this.pw)
+              console.log(res)
+                if(res.data === true){
+                    alert('본인 인증 되었습니다!');
+                    this.el = 2;
+                }else{
+                    alert('본인 인증 실패하였습니다!')
+                }
+            })
+            .catch(err=>{
+                console.log(err);
+                alert('시스템 문제가 발생하였습니다.')
+            })
+        },
   },
 };
 </script>

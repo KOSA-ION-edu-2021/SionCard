@@ -49,7 +49,7 @@
                 <router-link style="text-decoration: none;"
                                   :to="{
                                     name: 'card',
-                                    params: { id: card.id-1 },
+                                    params: { id: index },
                                   }"
                                 >
                 <v-hover v-slot="{hover}">
@@ -85,6 +85,10 @@ export default {
     check2: new RegExp('.+'),
     check3: new RegExp('.+'),
   }),
+  mounted() {
+    this.getCardInfo()
+  },
+  
   methods: {
     //card DB 받아오기
     getCardInfo(){

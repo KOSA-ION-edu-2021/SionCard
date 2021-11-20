@@ -1,6 +1,7 @@
 package kosa.ion.sion.controller;
 
 import kosa.ion.sion.dto.CardsDto;
+import kosa.ion.sion.getter.KindOfCardGetter;
 import kosa.ion.sion.repository.CardsRepository;
 import kosa.ion.sion.vo.CardVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class AdminController{
 		cardVo.getImg().transferTo(new File(newName));
 		CardsDto cardsDto=new CardsDto();
 
-		cardsDto.setImg("http://localhost:8080/api/image/"+newName);
+		cardsDto.setImg("https://manage.si-on.net/api/image/"+newName);
 		cardsDto.setTitle(cardVo.getTitle());
 		cardsDto.setContent(cardVo.getContent());
 		cardsDto.setCardType(cardVo.getCardType());
@@ -55,5 +56,9 @@ public class AdminController{
 			cardsRepository.deleteById(id);
 			return true;
 	}
-	
+
+	@GetMapping("kind_of_card")
+	public List<KindOfCardGetter> kindOfCard(){
+		return cardsRepository.kindOfCard();
+	}
 }
