@@ -25,7 +25,7 @@
         <v-stepper-content step="1">
           <v-row>
             <v-col>
-              <webpw_1step :CheckPassword="CheckPassword" />
+              <webpw_1step @getPW="getPW" />
             </v-col>
           </v-row>
 
@@ -83,13 +83,21 @@ export default {
   name: "myinfo_webpw",
   data: () => ({
     e1: 1,
+    pw:"",
   }),
   components: {
     webpw_1step,
     webpw_2step,
     webpw_3step,
   },
+  updated() {
+    console.log('updated')
+  },
   methods: {
+    getPW(val){
+      this.pw = val
+      //console.log('pw 변경값:', this.pw)
+    },
     CheckPassword() {
        axios.post(this.$store.state.apihost + '/member/checkemailpassword',{},{
                 headers:{

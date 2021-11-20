@@ -39,7 +39,6 @@
               <v-text-field
                 style="width: 30%"
                 label="EMAIL"
-                v-model="email"
                 required
                 dense
                 hide-details="auto"
@@ -53,13 +52,12 @@
               <v-text-field
                 style="width: 30%"
                 label="PW"
-                v-model="pw"
+                v-model="inputpw"
                 required
                 dense
                 hide-details="auto"
                 outlined
                 type="password"
-                @blur="CheckEmailPassword"
               ></v-text-field>
             </td>
           </tr>
@@ -81,20 +79,21 @@ export default {
     name: "webpw_1step",
     data: () => ({
       //radioValues: 'email',
-      email : "",
-      pw : "",
+      inputpw : "",
+      
     }),
+    updated() {
+      this.emitpw()
+    },
     methods:{
-      /* emailCheck(){
-        this.radioValues = 'email'
-      },
-      cardCheck(){
-        this.radioValues = 'card'
-      } */
-
+      emitpw(){
+        this.$emit("getPW",this.inputpw)
+        //console.log(this.inputpw);
+      }
     },
     props:[
-      'CheckEmailPassword'
+      'CheckEmailPassword',
+      'pw'
     ]
 };
 </script>
