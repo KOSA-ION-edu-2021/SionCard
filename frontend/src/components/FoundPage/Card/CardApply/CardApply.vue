@@ -176,7 +176,7 @@
                                                 ></v-text-field>
                                                 </td>
                                             </tr>
-                                            <tr>
+<!--                                             <tr>
                                                 <th>이메일</th>
                                                 <td>
                                                 <v-text-field
@@ -189,7 +189,7 @@
                                                 ></v-text-field>
                                                 </td>
                                             </tr>
-                                            
+                                             -->
                                             <tr>
                                                 <th>비밀번호</th>
                                                 <td>
