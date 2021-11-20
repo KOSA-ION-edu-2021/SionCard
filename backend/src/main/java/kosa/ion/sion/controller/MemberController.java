@@ -157,18 +157,16 @@ public class MemberController {
 	
 	// My 정보 변경
 	// 이메일 비번 인증
-	@PostMapping("/checkemailpassword")
-	public Boolean CheckEmailPassword(@RequestHeader HashMap<String,String> headers,@RequestBody HashMap<String,String> param) {
+	@PostMapping("/checkpassword")
+	public Boolean CheckPassword(@RequestHeader HashMap<String,String> headers,@RequestBody HashMap<String,String> param) {
 		try {
 			String[] token = headers.get("authorization").split(" ");
 			String member_id = jwtProvider.getUserNameFromJwtToken(token[1]);
 
 			MembersDto member = membersRepository.findByMemberId(member_id).orElseThrow(() -> new ResourceNotFoundException());
 			
-			
-			String email = headers.get("email");
 			String pw = headers.get("password");
-			if (member.getEmail().equals(email) &&	passwordEncoder.matches(pw, member.getPassword())) {
+			if (passwordEncoder.matches(pw, member.getPassword())) {
 				System.out.println("인증성공");
 				return true;
 			}
