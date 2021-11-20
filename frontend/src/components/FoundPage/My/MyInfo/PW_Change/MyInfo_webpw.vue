@@ -25,13 +25,13 @@
         <v-stepper-content step="1">
           <v-row>
             <v-col>
-              <webpw_1step :CheckEmailPassword="CheckEmailPassword" />
+              <webpw_1step :CheckPassword="CheckPassword" />
             </v-col>
           </v-row>
 
           <v-btn 
           color="grey lighten-2" 
-          @click="CheckEmailPassword"
+          @click="CheckPassword"
           > 
           Continue 
           </v-btn>
@@ -90,17 +90,14 @@ export default {
     webpw_3step,
   },
   methods: {
-    CheckEmailPassword() {
+    CheckPassword() {
        axios.post(this.$store.state.apihost + '/member/checkemailpassword',{},{
                 headers:{
                         Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`,
-                        // member_id : this.$store.state.auth.member_id,
-                        email : this.email,
                         pw : this.pw,
                     },
             })
             .then((res)=>{
-              console.log(this.email)
               console.log(this.pw)
               console.log(res)
                 if(res.data === true){
