@@ -31,7 +31,7 @@
 
           <v-btn 
           color="grey lighten-2" 
-          @click="CheckPassword"
+          @click="IDPWCheck"
           > 
           Continue 
           </v-btn>
@@ -83,6 +83,7 @@ export default {
   name: "myinfo_webpw",
   data: () => ({
     e1: 1,
+    id:"",
     pw:"",
   }),
   components: {
@@ -90,14 +91,15 @@ export default {
     webpw_2step,
     webpw_3step,
   },
-  updated() {
-    console.log('updated')
-  },
   methods: {
-    getPW(val){
-      this.pw = val
+    // 1단계에서 pw 입력갑 받아오기
+    getPW(val1, val2){
+      this.pw = val1
+      this.id = val2
+      //console.log('id 변경값:', this.id)
       //console.log('pw 변경값:', this.pw)
     },
+    // 1단계 본인인증
     CheckPassword() {
        axios.post(this.$store.state.apihost + '/member/checkemailpassword',{},{
                 headers:{
@@ -110,7 +112,32 @@ export default {
               console.log(res)
                 if(res.data === true){
                     alert('본인 인증 되었습니다!');
-                    this.el = 2;
+                    this.e1 = 2;
+                }else{
+                    alert('본인 인증 실패하였습니다!')
+                }
+            })
+            .catch(err=>{
+                console.log(err);
+                alert('시스템 문제가 발생하였습니다.')
+            })
+        },
+    // 1단계 인증 (지훈 연습)
+    IDPWCheck(){
+            axios.post(this.$store.state.apihost + '/member/pwd_check',{},{
+                headers:{
+                        Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`,
+                        id : this.id,
+                        pw : this.pw,
+                    },
+                    
+            })
+            .then((res)=>{
+                console.log(res.data);
+                if(res.data != null && res.data != '' && res.data != undefined && res.data){
+                  //if(res.data == true){
+                    alert('본인 인증 되었습니다!');
+                    this.e1=2
                 }else{
                     alert('본인 인증 실패하였습니다!')
                 }

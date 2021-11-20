@@ -26,6 +26,7 @@
               <v-text-field
                 style="width: 30%"
                 label="ID"
+                v-model="inputid"
                 required
                 dense
                 hide-details="auto"
@@ -80,6 +81,7 @@ export default {
     data: () => ({
       //radioValues: 'email',
       inputpw : "",
+      inputid : "",
       
     }),
     updated() {
@@ -87,7 +89,7 @@ export default {
     },
     methods:{
       emitpw(){
-        this.$emit("getPW",this.inputpw)
+        this.$emit("getPW",this.inputid,this.inputpw)
         //console.log(this.inputpw);
       }
     },
