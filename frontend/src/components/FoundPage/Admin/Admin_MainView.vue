@@ -2,7 +2,7 @@
   <v-row justify="center" v-if="!!this.$store.getters.getAuth">
       <v-col cols="1"></v-col>
       <v-col cols="10" align-self="center" class="text-center text-h3">
-          관라지 페이지 입니다
+          관리자 페이지 입니다
 
 
           <v-container>

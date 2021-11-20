@@ -43,6 +43,7 @@
                         <td>
                           <v-text-field
                             v-model="pw"
+                            type="password"
                             style="width: 30%"
                             label="PW"
                             required

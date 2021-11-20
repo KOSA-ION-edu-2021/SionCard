@@ -25,11 +25,11 @@
                 <v-col cols="auto"> {{usesum[0].sum_price}} </v-col>
               </v-row>
               <!-- 좌측 하단 버튼 -->
-              <v-row justify="center">
+              <!-- <v-row justify="center">
                 <v-col cols="auto">
                   <v-btn elevation="2">상세 내역</v-btn>
                 </v-col>
-              </v-row>
+              </v-row> -->
             </v-col>
 
             <!-- 우측 -->
