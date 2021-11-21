@@ -3,9 +3,9 @@
     <v-col cols="1"></v-col>
     <v-col cols="10">
       
-      <v-sheet class="mt-5 mb-5 text-h3 grey lighten-2"> 카드 정보 관리 </v-sheet>
-      <v-row>
-        <v-col class="d-flex justify-end" cols="11">
+      <v-sheet class="mt-10 text-h3 grey lighten-2"> 카드 정보 관리 </v-sheet>
+      <v-row justify="end">
+        <v-col cols="auto" class="mr-5">
           <v-btn @click="dialog=true">
             카드 추가하기
           </v-btn>
@@ -34,8 +34,8 @@
               <td class="px-2"> <v-select v-model="card.benefit_type" :items="['point','mileage']"/></td>
               <td class="px-2"> <v-select v-model="card.benefit_content" :items="['stack','discount']"/></td>
               <td>
-                <v-btn @click="editCard(i)" class="mx-2 my-1" small color="primary">저장</v-btn>
-                <v-btn @click="deleteCard(i)" class="mx-2 my-1" small color="error">삭제</v-btn>
+                <v-btn @click="editCard(i)" class="mx-2 my-1 white--text" small color="grey darken-2" flat>저장</v-btn>
+                <v-btn @click="deleteCard(i)" class="mx-2 my-1" small color="error" flat>삭제</v-btn>
               </td>
             </tr>
           </table>
