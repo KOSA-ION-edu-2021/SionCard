@@ -29,7 +29,7 @@
             <tr
             v-for="(card, i) in cardInfo" :key="i">
               <td> {{card.title}}</td>
-              <td> <v-img :src=card.img contain aspect-ratio="1"/></td>
+              <td> <v-img :src=card.img contain aspect-ratio="3"/></td>
               <td> {{card.content}}</td>
               <td> {{card.card_type}}</td>
               <td> {{card.benefit_type}}</td>

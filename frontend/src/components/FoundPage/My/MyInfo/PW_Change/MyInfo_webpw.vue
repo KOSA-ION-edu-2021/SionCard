@@ -84,7 +84,7 @@ export default {
   data: () => ({
     e1: 1,
     id:"",
-    pw:"",
+    pwd:"",
   }),
   components: {
     webpw_1step,
@@ -94,17 +94,17 @@ export default {
   methods: {
     // 1단계에서 pw 입력갑 받아오기
     getPW(val1, val2){
-      this.pw = val1
-      this.id = val2
-      //console.log('id 변경값:', this.id)
-      //console.log('pw 변경값:', this.pw)
+      this.id = val1
+      this.pwd = val2
+      console.log('id 변경값:', this.id)
+      console.log('pw 변경값:', this.pw)
     },
     // 1단계 본인인증
     CheckPassword() {
        axios.post(this.$store.state.apihost + '/member/checkemailpassword',{},{
                 headers:{
                         Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`,
-                        pw : this.pw,
+                        pwd : this.pwd,
                     },
             })
             .then((res)=>{
@@ -124,11 +124,12 @@ export default {
         },
     // 1단계 인증 (지훈 연습)
     IDPWCheck(){
-            axios.post(this.$store.state.apihost + '/member/pwd_check',{},{
+            axios.post(this.$store.state.apihost + '/member/pwd_check',{
+                        id : this.id,
+                        pwd : this.pwd,},{
                 headers:{
                         Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`,
-                        id : this.id,
-                        pw : this.pw,
+                        
                     },
                     
             })

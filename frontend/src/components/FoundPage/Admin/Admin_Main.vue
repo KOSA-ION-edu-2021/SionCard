@@ -36,4 +36,7 @@ export default {
 </script>
 
 <style>
+.v-navigation-drawer--absolute{
+  position: fixed;
+}
 </style>

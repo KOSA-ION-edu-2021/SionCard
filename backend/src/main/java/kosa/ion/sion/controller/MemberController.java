@@ -159,7 +159,7 @@ public class MemberController {
 	// My 정보 변경
 	// ID 비번 인증 ( 지훈 연습)
 	@PostMapping("/pwd_check")
-	public Boolean pwdCheck(@RequestBody Map<String, Object> param) {
+	public Boolean pwdCheck(@RequestBody Map<String, String> param) {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(param.get("id"), param.get("pwd")));
 			System.out.println("인증성공");
