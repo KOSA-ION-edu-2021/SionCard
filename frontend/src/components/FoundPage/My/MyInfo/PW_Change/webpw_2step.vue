@@ -36,7 +36,7 @@
                 style="width: 30%"
                 label="PW Check"
                 type="password"
-                :rules="user_pw_rule2"
+                :rules="user_pw_rule2.concat([(v) => v === this.newpw || '패스워드가 일치하지 않습니다.'])"
                 required
                 dense
                 hide-details="auto"
@@ -57,7 +57,6 @@ export default {
       newpw:"",
       checkpw:"",
       user_pw_rule: [
-        (v) => console.log(v),
         (v) => 
           !!v || "패스워드는 필수 입력사항입니다.",
         (v) =>
@@ -68,7 +67,7 @@ export default {
           !!v || "패스워드는 필수 입력사항입니다.",
         (v) =>
           !(v && v.length >= 30) || "패스워드는 30자 이상 입력할 수 없습니다.",
-        (v) => v === this.newpwd || "패스워드가 일치하지 않습니다.",
+        
       ],
 
 
