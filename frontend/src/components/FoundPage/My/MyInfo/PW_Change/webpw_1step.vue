@@ -8,33 +8,7 @@
       </v-col>
     </v-row>
 
-    <v-row class="mb-0 text-h6 font-weight-regular">
-      <v-col>
-        <table style="height: 60px">
-          <tr>
-            <th style="width: 144px">인증 방법</th>
-            <td style="">
-              <v-radio-group row mandatory>
-                <v-radio
-                  label="이메일"
-                  value="email"
-                  color="black"
-                  aira-checked
-                  @click="emailCheck"
-                ></v-radio>
-                <v-radio
-                  label="SI-ON Card"
-                  value="card"
-                  color="black"
-                  @click="cardCheck"
-                ></v-radio>
-              </v-radio-group>
-              <!-- {{radioValues}} -->
-            </td>
-          </tr>
-        </table>
-      </v-col>
-    </v-row>
+    
 
     <!-- 인증 정보 입력 -->
 
@@ -43,7 +17,7 @@
       <v-col class="text-h4 font-weight-bold"> 인증 정보 입력 </v-col>
     </v-row> -->
 
-    <v-row class="text-h6 font-weight-regular mb-3" v-if="radioValues == 'email'">
+    <v-row class="text-h6 font-weight-regular mb-3">
       <v-col cols="">
         <table>
           <tr>
@@ -52,6 +26,7 @@
               <v-text-field
                 style="width: 30%"
                 label="ID"
+                v-model="inputid"
                 required
                 dense
                 hide-details="auto"
@@ -78,10 +53,12 @@
               <v-text-field
                 style="width: 30%"
                 label="PW"
+                v-model="inputpw"
                 required
                 dense
                 hide-details="auto"
                 outlined
+                type="password"
               ></v-text-field>
             </td>
           </tr>
@@ -94,51 +71,7 @@
       <v-col class="text-h4 font-weight-bold"> 인증 정보 입력 </v-col>
     </v-row> -->
 
-    <v-row class="text-h6 font-weight-regular mb-3" v-if="radioValues == 'card'">
-      <v-col cols="">
-        <table>
-          <tr>
-            <th>ID</th>
-            <td>
-              <v-text-field
-                style="width: 30%"
-                label="ID"
-                required
-                dense
-                hide-details="auto"
-                outlined
-              ></v-text-field>
-            </td>
-          </tr>
-          <tr>
-            <th>카드 번호</th>
-            <td>
-              <v-text-field
-                style="width: 30%"
-                label="CARD NUMBER"
-                required
-                dense
-                hide-details="auto"
-                outlined
-              ></v-text-field>
-            </td>
-          </tr>
-          <tr>
-            <th>카드 비밀번호</th>
-            <td>
-              <v-text-field
-                style="width: 30%"
-                label="CARD PW"
-                required
-                dense
-                hide-details="auto"
-                outlined
-              ></v-text-field>
-            </td>
-          </tr>
-        </table>
-      </v-col>
-    </v-row>
+    
   </v-container>
 </template>
 
@@ -146,18 +79,24 @@
 export default {
     name: "webpw_1step",
     data: () => ({
-      radioValues: 'email',
+      //radioValues: 'email',
+      inputpw : "",
+      inputid : "",
+      
     }),
+    updated() {
+      this.emitpw()
+    },
     methods:{
-      emailCheck(){
-        this.radioValues = 'email'
-      },
-      cardCheck(){
-        this.radioValues = 'card'
+      emitpw(){
+        this.$emit("getPW",this.inputid,this.inputpw)
+        //console.log(this.inputpw);
       }
-
-    }
-
+    },
+    props:[
+      'CheckEmailPassword',
+      'pw'
+    ]
 };
 </script>
 

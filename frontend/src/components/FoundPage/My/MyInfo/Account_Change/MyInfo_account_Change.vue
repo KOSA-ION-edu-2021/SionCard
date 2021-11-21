@@ -237,7 +237,7 @@
             <v-row justify="end">
               <v-col cols="auto" dense align-self="center">
                 <v-list-item-content>
-                  <v-btn> 기본 정보 변경 </v-btn>
+                  <v-btn @click="reload"> 기본 정보 변경 </v-btn>
                 </v-list-item-content>
               </v-col>
             </v-row>
@@ -339,6 +339,10 @@ export default {
                 console.log(err);
             })
         },
+        //기본정보 변경 후 새로고침 버튼
+        reload(){
+          this.$router.go()
+        }
     },
 }
 </script>

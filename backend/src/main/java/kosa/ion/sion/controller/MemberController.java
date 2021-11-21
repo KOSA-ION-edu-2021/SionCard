@@ -1,20 +1,56 @@
 
 package kosa.ion.sion.controller;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Random;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import kosa.ion.sion.dto.CardsDto;
 import kosa.ion.sion.dto.MemberUseDto;
 import kosa.ion.sion.dto.MembersCardDto;
 import kosa.ion.sion.dto.MembersDto;
 import kosa.ion.sion.getter.SumUseGetter;
+import kosa.ion.sion.repository.CardsRepository;
 import kosa.ion.sion.repository.MemberUseRepository;
 import kosa.ion.sion.repository.MembersCardRepository;
 import kosa.ion.sion.repository.MembersRepository;
 import kosa.ion.sion.security.JwtProvider;
 import kosa.ion.sion.service.MailService;
 import kosa.ion.sion.vo.AuthVo;
+
+import net.bytebuddy.utility.RandomString;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +58,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.*;
+import kosa.ion.sion.vo.MembersCardVo;
 
 @RestController
 @RequestMapping("/member")
@@ -32,10 +69,13 @@ public class MemberController {
 	@Autowired
 	MembersRepository membersRepository;
 	@Autowired
+	CardsRepository cardsRepository;
+	
+	@Autowired
 	private AuthenticationManager authenticationManager;
 	@Autowired
 	private MailService mailService;
-
+	
 	private BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
 
 	@GetMapping("/test")
@@ -100,6 +140,32 @@ public class MemberController {
 	MembersCardRepository membersCardRepository;
 	
 	//멤버별 카드 정보 가져오기
+	@GetMapping("/get_card")
+	public List<MembersCardVo> MembersCard(@RequestHeader HashMap<String,String> headers) {
+		String[] token = headers.get("authorization").split(" ");
+		String member_id = jwtProvider.getUserNameFromJwtToken(token[0].equals("Bearer")?token[1]:"");
+		
+		List<MembersCardDto> membersCardDtoList = membersCardRepository.findByMemberId(member_id);
+		
+		List<MembersCardVo> result = new ArrayList<MembersCardVo>();
+		
+		for(MembersCardDto membersCardDto : membersCardDtoList) {
+			System.out.println(membersCardDto.getCardId());
+			CardsDto cardsDto = cardsRepository.findById(new Long(membersCardDto.getCardId())).orElseThrow(()->new NoSuchElementException());
+			result.add(MembersCardVo.builder()
+					.id(new Long(membersCardDto.getCardId()))
+					.cardId(membersCardDto.getCardId())
+					.cardEdate(membersCardDto.getCardEdate())
+					.memberId(membersCardDto.getMemberId())
+					.cardNum(membersCardDto.getCardNum())
+					.cardTitle(membersCardDto.getCardTitle())
+					.img(cardsDto.getImg())
+					.build()
+					);
+		}
+		return result;
+	}
+	
 	@PostMapping("/get_members_card")
 	public List<MembersCardDto> getMembersCard(@RequestBody Map<String, Object> param) {
 		return membersCardRepository.findAll();
@@ -154,6 +220,57 @@ public class MemberController {
 	}
 	
 	// My 정보 변경
+	// ID 비번 인증 ( 지훈 연습)
+	@PostMapping("/pwd_check")
+	public Boolean pwdCheck(@RequestBody Map<String, String> param) {
+		try {
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(param.get("id"), param.get("pwd")));
+			System.out.println("인증성공");
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("인증실패");
+			return false;
+		}
+	}
+	
+	// 이메일 비번 인증
+	@PostMapping("/checkpassword")
+	public Boolean CheckPassword(@RequestHeader HashMap<String,String> headers,@RequestBody HashMap<String,String> param) {
+		try {
+			String[] token = headers.get("authorization").split(" ");
+			String member_id = jwtProvider.getUserNameFromJwtToken(token[1]);
+
+			MembersDto member = membersRepository.findByMemberId(member_id).orElseThrow(() -> new ResourceNotFoundException());
+			
+			String pw = headers.get("password");
+			if (passwordEncoder.matches(pw, member.getPassword())) {
+				System.out.println("인증성공");
+				return true;
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("인증실패");
+		return false;
+	}
+	// 비밀번호 변경
+	@PostMapping("/changepw")
+	public MembersDto changepw(@RequestHeader HashMap<String,String> headers,@RequestBody HashMap<String,String> param){
+
+			String[] token = headers.get("authorization").split(" ");
+			String member_id = jwtProvider.getUserNameFromJwtToken(token[1]);
+
+			MembersDto member = membersRepository.findByMemberId(member_id).orElseThrow(() -> new ResourceNotFoundException());
+			
+				String pw = param.get("password");
+				member.setPassword(passwordEncoder.encode(pw));
+				MembersDto changeinfo = membersRepository.save(member);
+				return changeinfo;
+			}
+		
+	
 	// 이메일 변경
 	@PutMapping("/member_info/email/{memberId}")
 	public MembersDto changeemail(@PathVariable(value = "memberId") String memberId,@Valid @RequestBody MembersDto membersDto){
