@@ -7,6 +7,11 @@
 
       <v-row justify="center">
         <v-col align-self="center">
+          <v-row>
+            <v-col>
+              <v-text-field v-model="username" label="고객명 검색"></v-text-field>
+            </v-col>
+          </v-row>
           <table>
             <tr>
               <th style="padding-left:20px; padding-right:20px">고객명</th>
@@ -17,7 +22,7 @@
               <th style="padding-left:20px; padding-right:20px">번호</th>
             </tr>
             <tr
-            v-for="(member, i) in memberInfo" :key="i">
+            v-for="(member, i) in memberInfo" :key="i" v-show="member.name.includes(username)">
               <td> {{member.name}}</td>
               <td> {{member.member_id}}</td>
               <td> **** </td>
@@ -40,10 +45,14 @@ import axios from "axios";
 export default {
   data: () => ({
     memberInfo: null,
+    username: '',
   }),
   mounted() {
     this.getmemberInfo();
     this.$store.commit('updateAuth',this.checkAdmin);
+  },
+  beforeUpdate(){
+    this.nameSort();
   },
   methods: {
     getmemberInfo() {
@@ -62,6 +71,12 @@ export default {
           alert('관리자만 접속 가능합니다!');
       }
     },
+    // 이름순 정렬
+      nameSort(){
+        this.memberInfo.sort(function(a,b){
+          return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+        });
+      },
   },
 };
 </script>
@@ -90,7 +105,7 @@ th {
 table {
   width: 100%;
   font-size: 18px;
-  display: block;
+  /* display: block; */
 }
 td{
   height: 150px;

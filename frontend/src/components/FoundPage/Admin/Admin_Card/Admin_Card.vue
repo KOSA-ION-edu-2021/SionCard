@@ -15,6 +15,7 @@
       </v-row>
       <v-row justify="center">
         <v-col align-self="center">
+          <v-text-field v-model="cardname" label="카드명 검색"></v-text-field>
           <table>
             <tr>
               <th class="mr-1">카드명</th>
@@ -26,7 +27,7 @@
               <th> 기능 </th>
             </tr>
             <tr
-            v-for="(card, i) in cardInfo" :key="i">
+            v-for="(card, i) in cardInfo" :key="i" v-show="card.title.includes(cardname)">
               <td class="px-2"> <v-text-field flat single-line width="150px" v-model="cardInfo[i].title"></v-text-field></td>
               <td class="px-2"> <v-img :src=card.img contain aspect-ratio="" max-width="200px" /></td>
               <td class="px-2"> <v-btn @click="dialog2.idx=i;dialog2.text=card.content;dialog2.isOpen=true">내용</v-btn></td>
@@ -71,6 +72,7 @@ export default {
       isOpen : false,
       text :"",
     },
+    cardname:'',
   }),
   components:{
     AdminCreateCard
