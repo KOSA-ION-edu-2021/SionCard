@@ -78,16 +78,13 @@ export default {
   },
   mounted() {
     //this.loginCheck_myInfo()
-    //this.$store.commit('updateAuth',this.loginCheck_myMain)
+    this.$store.commit('updateAuth',this.loginCheck_myInfo)
   },
   methods: {
     loginCheck_myInfo(){
       if(this.$store.state.auth == null){
         this.$router.push('login')
         alert('로그인을 해야 접속 가능합니다!');
-      }
-      else{
-        this.$router.push('myinfo')
       }
     },
   },
