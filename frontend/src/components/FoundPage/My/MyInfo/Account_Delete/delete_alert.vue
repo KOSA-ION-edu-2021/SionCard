@@ -74,9 +74,12 @@ export default {
         })
         .then(res=>{
           console.log(res.data);
+          if(res.data) alert("탈퇴가 완료되었습니다.");
+          else alert("탈퇴에 실패하였습니다. 다시 시도해주세요.")
         })
         .catch(err=>{
           console.log(err);
+          alert("탈퇴에 실패하였습니다. 다시 시도해주세요.")
         })
       }
     }
