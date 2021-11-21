@@ -67,12 +67,9 @@ export default {
     name: "Myuserinfo",
     data:()=>({
         icons: {
-        mdiAccount,
+          mdiAccount,
         },
     }),
-    mounted() {
-        this.$store.commit('updateAuth',this.loginCheck_myMain)
-  },
 }
 </script>
 

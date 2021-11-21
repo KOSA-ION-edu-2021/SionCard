@@ -292,9 +292,6 @@ export default {
         this.$router.push('login')
         alert('로그인을 해야 접속 가능합니다!');
       }
-      else{
-        this.$router.push('cardapply')
-      }
     },
         cardpick(num){
             this.wantedcard=this.cardInfo[num].img
