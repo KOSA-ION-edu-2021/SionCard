@@ -27,18 +27,32 @@
             </tr>
             <tr
             v-for="(card, i) in cardInfo" :key="i">
-              <td class="px-2"> {{card.title}}</td>
+              <td class="px-2"> <v-text-field solo v-model="cardInfo[i].title"></v-text-field></td>
               <td class="px-2"> <v-img :src=card.img contain aspect-ratio=3 /></td>
-              <td class="px-2"> {{card.content}}</td>
-              <td class="px-2"> {{card.card_type}}</td>
-              <td class="px-2"> {{card.benefit_type}}</td>
-              <td class="px-2"> {{card.benefit_content}}</td>
+              <td class="px-2"> <v-btn @click="dialog2.idx=i;dialog2.text=card.content;dialog2.isOpen=true">내용</v-btn></td>
+              <td class="px-2"> <v-select v-model="card.card_type" :items="['check','credit']"/> </td>
+              <td class="px-2"> <v-select v-model="card.benefit_type" :items="['point','mileage']"/></td>
+              <td class="px-2"> <v-select v-model="card.benefit_content" :items="['stack','discount']"/></td>
               <td>
-                <v-btn class="mx-2 my-1" small color="primary">편집</v-btn>
-                <v-btn class="mx-2 my-1" small color="error">삭제</v-btn>
+                <v-btn @click="editCard(i)" class="mx-2 my-1" small color="primary">저장</v-btn>
+                <v-btn @click="deleteCard(i)" class="mx-2 my-1" small color="error">삭제</v-btn>
               </td>
             </tr>
           </table>
+
+          <v-dialog v-model="dialog2.isOpen">
+            <v-card class="ma-0" flat tile>
+              <v-row class="ma-2">
+                <v-col cols="12">
+                  <v-textarea solo v-model="dialog2.text"></v-textarea>
+                </v-col>
+                <v-col class="d-flex justify-end" cols="12">
+                  <v-btn class="mx-2" @click="cardInfo[dialog2.idx].content=dialog2.text;dialog2.isOpen=false" color="primary">저장</v-btn>
+                  <v-btn @click="dialog2.isOpen=false" color="error">닫기</v-btn>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-dialog>
         </v-col>
       </v-row>
     </v-col>
@@ -52,6 +66,11 @@ export default {
   data: () => ({
     cardInfo: null,
     dialog:false,
+    dialog2: {
+      idx : 0,
+      isOpen : false,
+      text :"",
+    },
   }),
   components:{
     AdminCreateCard
@@ -61,6 +80,36 @@ export default {
     this.$store.commit('updateAuth',this.checkAdmin);
   },
   methods: {
+    editCard(idx){
+      axios
+        .put(`${this.$store.state.apihost}/admin/card/${this.cardInfo[idx].id}`,this.cardInfo[idx],{
+          headers:{
+            Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`
+          }
+        })
+        .then(res=>{
+          alert("수정에 "+ res.data?"성공하였습니다.":"실패하였습니다.");
+          this.$router.go();
+        })
+        .catch(err=>{
+          console.log(err);
+        })
+    },
+    deleteCard(idx){
+      axios
+        .delete(`${this.$store.state.apihost}/admin/card/${this.cardInfo[idx].id}`,{
+          headers:{
+            Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`
+          }
+        })
+        .then(res=>{
+          alert("삭제에 "+ res.data?"성공하였습니다.":"실패하였습니다.");
+          this.$router.go();
+        })
+        .catch(err=>{
+          console.log(err);
+        })
+    },
     getcardInfo() {
       axios
         .get(this.$store.state.apihost + "/api/card_info")

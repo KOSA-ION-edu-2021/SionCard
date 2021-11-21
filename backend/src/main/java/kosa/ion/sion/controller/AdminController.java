@@ -5,11 +5,11 @@ import kosa.ion.sion.getter.KindOfCardGetter;
 import kosa.ion.sion.repository.CardsRepository;
 import kosa.ion.sion.vo.CardVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequestMapping("/admin")
@@ -56,9 +56,33 @@ public class AdminController{
 			cardsRepository.deleteById(id);
 			return true;
 	}
+	@PutMapping("/card/{id}")
+	@Transactional
+	public Boolean editCard(@PathVariable("id") Long id, @RequestBody Map<String, String> body) {
+		if(!cardsRepository.existsById(id)) return false;
+		CardsDto cardsDto = cardsRepository.findById(id).orElseThrow(()->new NoSuchElementException());
+		cardsDto.setTitle(body.get("title"));
+		cardsDto.setContent(body.get("content"));
+		cardsDto.setCardType(body.get("card_type"));
+		cardsDto.setCardCheck(body.get("card_type").equals("check"));
+		cardsDto.setCardCredit(body.get("card_type").equals("credit"));
+		cardsDto.setBenefitType(body.get("benefit_type"));
+		cardsDto.setBenefitContent(body.get("benefit_content"));
+		return true;
+	}
+
 
 	@GetMapping("kind_of_card")
-	public List<KindOfCardGetter> kindOfCard(){
-		return cardsRepository.kindOfCard();
+	public List<Map<String, String>> kindOfCard(){
+		List<KindOfCardGetter> kindOfCards= cardsRepository.kindOfCard();
+		List<Map<String,String>> result=new ArrayList<>();
+
+		for(KindOfCardGetter kindOfCard : kindOfCards){
+			Map<String, String> temp = new HashMap<>();
+			temp.put("체크카드",kindOfCard.getCntCheck());
+			temp.put("신용카드",kindOfCard.getCntCheck());
+			result.add(temp);
+		}
+		return result;
 	}
 }

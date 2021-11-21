@@ -55,7 +55,7 @@
 
               <v-radio-group v-model="card.benefitContent" row>
                 <v-radio label="즉시 할인" value="sale"> </v-radio>
-                <v-radio label="Point / Mileage 적립" value="save"> </v-radio>
+                <v-radio label="Point / Mileage 적립" value="stack"> </v-radio>
               </v-radio-group>
 
               <v-list-item-title><b>해외 결제 기능</b></v-list-item-title>
