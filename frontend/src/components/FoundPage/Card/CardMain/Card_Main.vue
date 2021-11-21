@@ -30,7 +30,7 @@
                     <router-link
                                   :to="{
                                     name: 'card',
-                                    params: { id: i },
+                                    params: { id: card.id-1 },
                                   }"
                                 >
                       <v-img
@@ -95,7 +95,7 @@
                 <router-link style="text-decoration: none;"
                                       :to="{
                                         name: 'card',
-                                        params: { id: i },
+                                        params: { id: card.id-1 },
                                       }"
                                     >
                   <v-card flat class="grey lighten-2">
@@ -123,7 +123,7 @@
           </v-row>
           <v-row>
             <v-col
-              v-for="(card,i) in cardInfo"
+              v-for="card in cardInfo"
               :key="card.id"
               cols="3"
               v-show="card.card_check"
@@ -131,7 +131,7 @@
             <router-link style="text-decoration: none;"
                                   :to="{
                                     name: 'card',
-                                    params: { id: i },
+                                    params: { id: card.id-1 },
                                   }"
                                 >
               <v-card flat class="grey lighten-2">
