@@ -80,7 +80,7 @@ public class AdminController{
 		for(KindOfCardGetter kindOfCard : kindOfCards){
 			Map<String, String> temp = new HashMap<>();
 			temp.put("체크카드",kindOfCard.getCntCheck());
-			temp.put("신용카드",kindOfCard.getCntCheck());
+			temp.put("신용카드",kindOfCard.getCntCredit());
 			result.add(temp);
 		}
 		return result;
