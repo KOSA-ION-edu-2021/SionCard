@@ -1,16 +1,49 @@
 
 package kosa.ion.sion.controller;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Random;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import kosa.ion.sion.dto.CardsDto;
 import kosa.ion.sion.dto.MemberUseDto;
 import kosa.ion.sion.dto.MembersCardDto;
 import kosa.ion.sion.dto.MembersDto;
 import kosa.ion.sion.getter.SumUseGetter;
+import kosa.ion.sion.repository.CardsRepository;
 import kosa.ion.sion.repository.MemberUseRepository;
 import kosa.ion.sion.repository.MembersCardRepository;
 import kosa.ion.sion.repository.MembersRepository;
 import kosa.ion.sion.security.JwtProvider;
 import kosa.ion.sion.service.MailService;
 import kosa.ion.sion.vo.AuthVo;
+
 import net.bytebuddy.utility.RandomString;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +58,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.*;
+import kosa.ion.sion.vo.MembersCardVo;
 
 @RestController
 @RequestMapping("/member")
@@ -35,10 +69,13 @@ public class MemberController {
 	@Autowired
 	MembersRepository membersRepository;
 	@Autowired
+	CardsRepository cardsRepository;
+	
+	@Autowired
 	private AuthenticationManager authenticationManager;
 	@Autowired
 	private MailService mailService;
-
+	
 	private BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
 
 	@GetMapping("/test")
@@ -103,6 +140,32 @@ public class MemberController {
 	MembersCardRepository membersCardRepository;
 	
 	//멤버별 카드 정보 가져오기
+	@GetMapping("/get_card")
+	public List<MembersCardVo> MembersCard(@RequestHeader HashMap<String,String> headers) {
+		String[] token = headers.get("authorization").split(" ");
+		String member_id = jwtProvider.getUserNameFromJwtToken(token[0].equals("Bearer")?token[1]:"");
+		
+		List<MembersCardDto> membersCardDtoList = membersCardRepository.findByMemberId(member_id);
+		
+		List<MembersCardVo> result = new ArrayList<MembersCardVo>();
+		
+		for(MembersCardDto membersCardDto : membersCardDtoList) {
+			System.out.println(membersCardDto.getCardId());
+			CardsDto cardsDto = cardsRepository.findById(new Long(membersCardDto.getCardId())).orElseThrow(()->new NoSuchElementException());
+			result.add(MembersCardVo.builder()
+					.id(new Long(membersCardDto.getCardId()))
+					.cardId(membersCardDto.getCardId())
+					.cardEdate(membersCardDto.getCardEdate())
+					.memberId(membersCardDto.getMemberId())
+					.cardNum(membersCardDto.getCardNum())
+					.cardTitle(membersCardDto.getCardTitle())
+					.img(cardsDto.getImg())
+					.build()
+					);
+		}
+		return result;
+	}
+	
 	@PostMapping("/get_members_card")
 	public List<MembersCardDto> getMembersCard(@RequestBody Map<String, Object> param) {
 		return membersCardRepository.findAll();

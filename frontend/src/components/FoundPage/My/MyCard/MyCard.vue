@@ -10,29 +10,25 @@
             </v-col>
           </v-row>
           
-          <!-- 카드 이미지 슬라이드 -->
+          <!-- 자기 카드 표시 -->
           <v-row>
             <v-col align-self="center">
-              <v-carousel
-                height="300"
-                hide-delimiters
-                hide-delimiter-background
-                class="mt-10 mb-10"
-                max-width="800px"
-                >
-                <v-carousel-item v-for="(card) in cardInfo" :key="card.id" class="align-center">
-                  
                     <v-row justify="center">
-                        <v-col cols="6" align-self="center">
-                            <v-img
-                            contain
-                            aspect-ratio="2"
-                            :src=card.img />
+                        <v-col cols="12" align-self="center"
+                        v-for="(card,k) in getinfo" :key="k"
+                        > 
+                          <ul>
+                           <li>
+                            유효기간 : {{getinfo[k].cardEdate}}
+                            카드번호 : {{getinfo[k].cardNum}}
+                            카드명 : {{getinfo[k].cardTitle}}
+                           </li>
+                          </ul>
+                        </v-col>
+                        <v-col v-if="getinfo.length===0">
+                          <li>가지고 있는 카드가 없습니다.</li>
                         </v-col>
                     </v-row>
-                  
-                </v-carousel-item>
-              </v-carousel>
             </v-col>
           </v-row>
           <!-- 상단 끝 -->
@@ -48,16 +44,20 @@
 
 <script>
 import cardInfo from '@/assets/cardInfo.js'
+import axios from "axios";
 export default {
   name: "mycard",
   data: () => ({
-    cardInfo
+    cardInfo,
+    getinfo:[],
+    // headers 
   }),
   components: {
       
   },
   mounted() {
     this.$store.commit('updateAuth',this.loginCheck_myCard);
+    this.GetCard();
     //this.loginCheck_myCard()
   },
   methods: {
@@ -69,6 +69,19 @@ export default {
       else{
         this.$router.push('mycard')
       }
+    },
+    GetCard(){
+      axios.get(this.$store.state.apihost + "/member/get_card",{
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("JSESSIONID")}`,
+          },
+        })
+        .then((res) => {
+            this.getinfo = res.data
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };
