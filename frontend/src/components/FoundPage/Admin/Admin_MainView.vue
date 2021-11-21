@@ -37,10 +37,9 @@ export default {
                 },
       })
       .then((res)=>{
-        console.log(res.data[0]);
         this.cardInfo=Object.entries(res.data[0])
-       
-                          console.log(this.cardInfo)
+        //[{key1:value1, key2:value2}] 
+        //-> [[key1,value1], [key2,value2]]
       })
       .catch((err)=>{
         console.log(err);
