@@ -22,4 +22,7 @@ public interface CardsRepository extends JpaRepository<CardsDto, Long> {
 			"    Cards "
 	,nativeQuery = true)
 	List<KindOfCardGetter> kindOfCard();
+
+
+	CardsDto findById(String cardId);
 }
