@@ -47,9 +47,10 @@ export default {
     },
     data:()=>({
         preTime : new Date(),
+        timer : null
     }),
     mounted(){
-        setInterval(this.setExpire,1000);
+        this.timer=setInterval(this.setExpire,1000);
     },
     computed:{
         minutes: function(){ 
@@ -58,6 +59,7 @@ export default {
         seconds: function(){
             const num = Number.parseInt((this.$store.state.auth.expire-this.preTime)/1000%60);
             if(this.minutes==0 && num<=0){
+                clearInterval(this.timer);
                 sessionStorage.removeItem('JSESSIONID');
                 this.$store.commit('updateAuth');
                 return null;

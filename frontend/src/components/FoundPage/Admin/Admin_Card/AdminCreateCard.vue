@@ -54,7 +54,7 @@
            
               <v-list-item-title><b>카드 유형</b></v-list-item-title>
 
-              <v-radio-group v-model="card.cardCheck" row class="ma-">
+              <v-radio-group v-model="card.benefitType" row class="ma-">
                 <v-radio label="Point" value=true> </v-radio>
                 <v-radio label="Mileage" value=false> </v-radio>
               </v-radio-group>
@@ -62,7 +62,7 @@
               <v-list-item-title><b>카드 혜택</b></v-list-item-title>
 
               <v-radio-group v-model="card.benefitContent" row>
-                <v-radio label="즉시 할인" value="sale"> </v-radio>
+                <v-radio label="즉시 할인" value="discount"> </v-radio>
                 <v-radio label="Point / Mileage 적립" value="stack"> </v-radio>
               </v-radio-group>
 
@@ -119,6 +119,7 @@ export default {
       title: "",
       content: "",
       cardType: "",
+      benefitType: "",
       benefitContent: "",
       mastercard: false,
       traficcard: false,
