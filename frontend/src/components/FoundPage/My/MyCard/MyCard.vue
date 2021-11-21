@@ -67,8 +67,6 @@ export default {
       if (this.$store.state.auth == null) {
         this.$router.push("login");
         alert("로그인을 해야 접속 가능합니다!");
-      } else {
-        this.$router.push("mycard");
       }
     },
     GetCard() {

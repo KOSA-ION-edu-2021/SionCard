@@ -47,9 +47,10 @@ export default {
     },
     data:()=>({
         preTime : new Date(),
+        timer : null
     }),
     mounted(){
-        setInterval(this.setExpire,1000);
+        this.timer=setInterval(this.setExpire,1000);
     },
     destoryed(){
         clearInterval(this.timer);
