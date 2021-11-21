@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center" v-if="!!this.$store.getters.getAuth">
-    <v-col cols="1"></v-col>
-    <v-col cols="10">
+    <!-- <v-col cols="1"></v-col> -->
+    <v-col cols="">
       
       <v-sheet class="mt-5 mb-5 text-h3 grey lighten-2"> 고객 정보 관리 </v-sheet>
 
@@ -25,13 +25,13 @@
               <td> {{member.email}}</td>
               <td> {{member.address}}</td>
               <td> {{member.phone}}</td>
-              <td><v-btn>변경</v-btn></td>
+              <!-- <td><v-btn>변경</v-btn></td> -->
             </tr>
           </table>
         </v-col>
       </v-row>
     </v-col>
-    <v-col cols="1"></v-col>
+    <!-- <v-col cols="1"></v-col> -->
   </v-row>
 </template>
 
@@ -78,7 +78,7 @@ tr {
   border-collapse: collapse;
   border-left: none;
   border-right: none;
-  border-top-color: black;
+  border-top-color: rgb(180, 169, 169);
   text-align: center;
 }
 th {
@@ -91,6 +91,7 @@ th {
 table {
   width: 90%;
   font-size: 18px;
+  display: block;
 }
 td{
   height: 150px;
