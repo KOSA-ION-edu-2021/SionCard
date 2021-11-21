@@ -1,9 +1,17 @@
 <template>
   <v-dialog v-model="dialog" persistent max-width="600px">
     <v-card>
-      <v-card-title>
+      <!-- <v-card-title>
         <span class="text-h5">User Profile</span>
-      </v-card-title>
+      </v-card-title> -->
+      <v-toolbar dark color="grey darken-3">
+          <v-toolbar-title>카드 선택</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn icon dark @click="dialog = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-toolbar>
+
       <v-card-text>
         <v-container>
           <v-row>
@@ -75,22 +83,23 @@
             </v-col>
           </v-row>
         </v-container>
-        <small>*indicates required field</small>
+        <!-- <small>*indicates required field</small> -->
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" text @click="setDialog(false)">
-          Close
-        </v-btn>
         <v-btn
-          color="blue darken-1"
-          text
+          color="black"
+          class="white--text"
+          flat
           @click="
             submit();
             setDialog(false);
           "
         >
           Save
+        </v-btn>
+        <v-btn color="black" text @click="setDialog(false)">
+          Close
         </v-btn>
       </v-card-actions>
     </v-card>

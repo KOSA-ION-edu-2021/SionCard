@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center" v-if="!!this.$store.getters.getAuth">
-    <!-- <v-col cols="1"></v-col> -->
-    <v-col cols="">
+    <v-col cols="1"></v-col>
+    <v-col cols="10">
       
       <v-sheet class="mt-5 mb-5 text-h3 grey lighten-2"> 고객 정보 관리 </v-sheet>
 
@@ -9,13 +9,12 @@
         <v-col align-self="center">
           <table>
             <tr>
-              <th>고객명</th>
-              <th>ID</th>
-              <th>Password</th>
-              <th>이메일</th>
-              <th>주소</th>
-              <th>번호</th>
-              <th></th>
+              <th style="padding-left:20px; padding-right:20px">고객명</th>
+              <th style="padding-left:20px; padding-right:20px">ID</th>
+              <th style="padding-left:20px; padding-right:20px">Password</th>
+              <th style="padding-left:20px; padding-right:20px">이메일</th>
+              <th style="padding-left:20px; padding-right:20px">주소</th>
+              <th style="padding-left:20px; padding-right:20px">번호</th>
             </tr>
             <tr
             v-for="(member, i) in memberInfo" :key="i">
@@ -31,7 +30,7 @@
         </v-col>
       </v-row>
     </v-col>
-    <!-- <v-col cols="1"></v-col> -->
+    <v-col cols="1"></v-col>
   </v-row>
 </template>
 
@@ -78,7 +77,7 @@ tr {
   border-collapse: collapse;
   border-left: none;
   border-right: none;
-  border-top-color: rgb(180, 169, 169);
+  /* border-top-color: rgb(180, 169, 169); */
   text-align: center;
 }
 th {
@@ -89,7 +88,7 @@ th {
 }
 
 table {
-  width: 90%;
+  width: 100%;
   font-size: 18px;
   display: block;
 }

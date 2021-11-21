@@ -3,9 +3,9 @@
     <v-col cols="1"></v-col>
     <v-col cols="10">
       
-      <v-sheet class="mt-5 mb-5 text-h3 grey lighten-2"> 카드 정보 관리 </v-sheet>
-      <v-row>
-        <v-col class="d-flex justify-end" cols="11">
+      <v-sheet class="mt-10 text-h3 grey lighten-2"> 카드 정보 관리 </v-sheet>
+      <v-row justify="end">
+        <v-col cols="auto" class="mr-5">
           <v-btn @click="dialog=true">
             카드 추가하기
           </v-btn>
@@ -27,15 +27,15 @@
             </tr>
             <tr
             v-for="(card, i) in cardInfo" :key="i">
-              <td class="px-2"> <v-text-field solo v-model="cardInfo[i].title"></v-text-field></td>
-              <td class="px-2"> <v-img :src=card.img contain aspect-ratio=3 /></td>
+              <td class="px-2"> <v-text-field flat single-line width="150px" v-model="cardInfo[i].title"></v-text-field></td>
+              <td class="px-2"> <v-img :src=card.img contain aspect-ratio="" max-width="200px" /></td>
               <td class="px-2"> <v-btn @click="dialog2.idx=i;dialog2.text=card.content;dialog2.isOpen=true">내용</v-btn></td>
               <td class="px-2"> <v-select v-model="card.card_type" :items="['check','credit']"/> </td>
               <td class="px-2"> <v-select v-model="card.benefit_type" :items="['point','mileage']"/></td>
               <td class="px-2"> <v-select v-model="card.benefit_content" :items="['stack','discount']"/></td>
               <td>
-                <v-btn @click="editCard(i)" class="mx-2 my-1" small color="primary">저장</v-btn>
-                <v-btn @click="deleteCard(i)" class="mx-2 my-1" small color="error">삭제</v-btn>
+                <v-btn @click="editCard(i)" class="mx-2 my-1 white--text" small color="grey darken-2" flat>저장</v-btn>
+                <v-btn @click="deleteCard(i)" class="mx-2 my-1" small color="error" flat>삭제</v-btn>
               </td>
             </tr>
           </table>
@@ -158,9 +158,7 @@ th {
 th:first-child{
   width: 250px;
 }
-th:nth-child(2){
-  width: 300px;
-}
+
 table {
   width: 90%;
   font-size: 18px;
@@ -168,7 +166,5 @@ table {
 td{
   height: 150px;
 }
-td:nth-child(2){
-  width: 250px;
-}
+
 </style>

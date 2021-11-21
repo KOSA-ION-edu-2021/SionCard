@@ -5,7 +5,10 @@
           관리자 페이지 입니다
 
 
-          <v-container>
+          <v-container class="mt-10">
+            <v-sheet class="grey lighten-2 text-h5 mb-5">
+              카드 보유 현황
+            </v-sheet>
             <pie-chart :color="['green','black']" :data=cardInfo />
           </v-container>
       </v-col>
