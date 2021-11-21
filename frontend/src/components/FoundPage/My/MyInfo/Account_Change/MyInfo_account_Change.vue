@@ -230,10 +230,10 @@
               <v-spacer />
             </v-row>
           </v-list-item>
-          <v-divider></v-divider>
+
 
           <!-- 완료 버튼 -->
-          <v-list-item>
+          <!-- <v-list-item>
             <v-row justify="end">
               <v-col cols="auto" dense align-self="center">
                 <v-list-item-content>
@@ -241,7 +241,7 @@
                 </v-list-item-content>
               </v-col>
             </v-row>
-          </v-list-item>
+          </v-list-item> -->
 
         </v-list>
       </v-card>
@@ -274,6 +274,7 @@ export default {
             .then(res => {
                 alert('이메일 변경이 완료되었습니다')
                 console.log(res);
+                this.$router.go()
             })
             .catch((err)=>{
                 alert('변경에 실패하였습니다. 다시 시도해주세요')
@@ -293,6 +294,7 @@ export default {
             .then(res => {
                 alert('주소 변경이 완료되었습니다')
                 console.log(res);
+                this.$router.go()
             })
             .catch((err)=>{
                 alert('변경에 실패하였습니다. 다시 시도해주세요')
@@ -312,7 +314,7 @@ export default {
             .then(res => {
                 alert('생년월일 변경이 완료되었습니다')
                 console.log(res);
-
+                this.$router.go()
             })
             .catch((err)=>{
                 alert('변경에 실패하였습니다. 다시 시도해주세요')
@@ -332,17 +334,13 @@ export default {
             .then(res => {
                 alert('전화번호 변경이 완료되었습니다')
                 console.log(res);
-
+                this.$router.go()
             })
             .catch((err)=>{
                 alert('변경에 실패하였습니다. 다시 시도해주세요')
                 console.log(err);
             })
         },
-        //기본정보 변경 후 새로고침 버튼
-        reload(){
-          this.$router.go()
-        }
     },
 }
 </script>

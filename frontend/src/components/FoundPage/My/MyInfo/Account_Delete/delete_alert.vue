@@ -74,8 +74,11 @@ export default {
         })
         .then(res=>{
           console.log(res.data);
-          if(res.data) alert("탈퇴가 완료되었습니다.");
-          else alert("탈퇴에 실패하였습니다. 다시 시도해주세요.")
+          if(res.data) {
+            alert("탈퇴가 완료되었습니다.");
+            this.$router.go()
+            }
+          else alert("계정 정보가 일치하지 않습니다.")
         })
         .catch(err=>{
           console.log(err);

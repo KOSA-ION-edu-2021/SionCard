@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center" v-if="!!this.$store.getters.getAuth">
-    <!-- <v-col cols="1"></v-col> -->
-    <v-col cols="">
+    <v-col cols="1"></v-col>
+    <v-col cols="10">
       
       <v-sheet class="mt-5 mb-5 text-h3 grey lighten-2"> 고객 정보 관리 </v-sheet>
 
@@ -15,7 +15,6 @@
               <th>이메일</th>
               <th>주소</th>
               <th>번호</th>
-              <th></th>
             </tr>
             <tr
             v-for="(member, i) in memberInfo" :key="i">
@@ -31,7 +30,7 @@
         </v-col>
       </v-row>
     </v-col>
-    <!-- <v-col cols="1"></v-col> -->
+    <v-col cols="1"></v-col>
   </v-row>
 </template>
 

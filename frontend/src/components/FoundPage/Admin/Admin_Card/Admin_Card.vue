@@ -27,8 +27,8 @@
             </tr>
             <tr
             v-for="(card, i) in cardInfo" :key="i">
-              <td class="px-2"> <v-text-field solo v-model="cardInfo[i].title"></v-text-field></td>
-              <td class="px-2"> <v-img :src=card.img contain aspect-ratio=3 /></td>
+              <td class="px-2"> <v-text-field flat single-line width="150px" v-model="cardInfo[i].title"></v-text-field></td>
+              <td class="px-2"> <v-img :src=card.img contain aspect-ratio="" max-width="200px" /></td>
               <td class="px-2"> <v-btn @click="dialog2.idx=i;dialog2.text=card.content;dialog2.isOpen=true">내용</v-btn></td>
               <td class="px-2"> <v-select v-model="card.card_type" :items="['check','credit']"/> </td>
               <td class="px-2"> <v-select v-model="card.benefit_type" :items="['point','mileage']"/></td>
@@ -158,9 +158,7 @@ th {
 th:first-child{
   width: 250px;
 }
-th:nth-child(2){
-  width: 300px;
-}
+
 table {
   width: 90%;
   font-size: 18px;
@@ -168,7 +166,5 @@ table {
 td{
   height: 150px;
 }
-td:nth-child(2){
-  width: 250px;
-}
+
 </style>
