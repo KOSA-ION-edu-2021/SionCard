@@ -47,11 +47,11 @@
         <v-stepper-content step="2">
           <v-row>
             <v-col>
-              <webpw_2step />
+              <webpw_2step @getnewPW="getnewPW" />
             </v-col>
           </v-row>
 
-          <v-btn color="grey lighten-1" @click="e1 = 3"> Continue </v-btn>
+          <v-btn color="grey lighten-1" @click="changePW"> Continue </v-btn>
 
           <v-btn text @click="e1 = 1"> Cancel </v-btn>
         </v-stepper-content>
@@ -85,6 +85,7 @@ export default {
     e1: 1,
     id:"",
     pwd:"",
+    newpwd:"",
   }),
   components: {
     webpw_1step,
@@ -142,6 +143,27 @@ export default {
                 }else{
                     alert('본인 인증 실패하였습니다!')
                 }
+            })
+            .catch(err=>{
+                console.log(err);
+                alert('시스템 문제가 발생하였습니다.')
+            })
+        },
+      //2 단계 : 비밀번호 변경
+      getnewPW(val){
+        this.newpwd = val
+        console.log(this.newpwd);
+      },
+      changePW() {
+       axios.post(this.$store.state.apihost + '/member/changepw',{password : this.newpwd},{
+                headers:{
+                        Authorization : `Bearer ${sessionStorage.getItem('JSESSIONID')}`,
+                    },
+            })
+            .then((res)=>{
+              console.log(res)
+              alert('비밀번호 변경이 완료되었습니다!');
+              this.e1 = 3;
             })
             .catch(err=>{
                 console.log(err);

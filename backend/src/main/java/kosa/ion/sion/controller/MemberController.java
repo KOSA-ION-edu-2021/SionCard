@@ -201,7 +201,7 @@ public class MemberController {
 
 			MembersDto member = membersRepository.findByMemberId(member_id).orElseThrow(() -> new ResourceNotFoundException());
 			
-				String pw = headers.get("password");
+				String pw = param.get("password");
 				member.setPassword(passwordEncoder.encode(pw));
 				MembersDto changeinfo = membersRepository.save(member);
 				return changeinfo;

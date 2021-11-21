@@ -18,6 +18,9 @@
               <v-text-field
                 style="width: 30%"
                 label="PW"
+                v-model="newpw"
+                type="password"
+                :rules="user_pw_rule"
                 required
                 dense
                 hide-details="auto"
@@ -29,8 +32,11 @@
             <th>비밀번호 확인</th>
             <td>
               <v-text-field
+                v-model="checkpw"
                 style="width: 30%"
                 label="PW Check"
+                type="password"
+                :rules="user_pw_rule2"
                 required
                 dense
                 hide-details="auto"
@@ -48,9 +54,32 @@
 export default {
     name: "webpw_2step",
     data: () => ({
-    }),
-    methods:{
+      newpw:"",
+      checkpw:"",
+      user_pw_rule: [
+        (v) => console.log(v),
+        (v) => 
+          !!v || "패스워드는 필수 입력사항입니다.",
+        (v) =>
+          !(v && v.length >= 30) || "패스워드는 30자 이상 입력할 수 없습니다.",
+      ],
+      user_pw_rule2: [
+        (v) =>
+          !!v || "패스워드는 필수 입력사항입니다.",
+        (v) =>
+          !(v && v.length >= 30) || "패스워드는 30자 이상 입력할 수 없습니다.",
+        (v) => v === this.newpwd || "패스워드가 일치하지 않습니다.",
+      ],
 
+
+    }),
+    updated() {
+      this.emitnewPW()
+    },
+    methods:{
+      emitnewPW(){
+        this.$emit('getnewPW',this.newpw)
+      }
     }
 
 };
