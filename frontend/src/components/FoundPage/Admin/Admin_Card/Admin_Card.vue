@@ -17,30 +17,31 @@
         <v-col align-self="center">
           <table>
             <tr>
-              <th>카드명</th>
-              <th>이미지</th>
-              <th>카드 설명</th>
-              <th>카드 종류</th>
-              <th>카드 유형</th>
-              <th>카드 혜택</th>
-              <th>해외 결제 기능</th>
-              <th>후불 교통 기능</th>
+              <th class="mr-1">카드명</th>
+              <th class="mr-1">이미지</th>
+              <th class="mr-1">설명</th>
+              <th class="mr-1">종류</th>
+              <th class="mr-1">유형</th>
+              <th class="mr-1">혜택</th>
+              <th> 기능 </th>
             </tr>
             <tr
             v-for="(card, i) in cardInfo" :key="i">
-              <td> {{card.title}}</td>
-              <td> <v-img :src=card.img contain aspect-ratio="1"/></td>
-              <td> {{card.content}}</td>
-              <td> {{card.card_type}}</td>
-              <td> {{card.benefit_type}}</td>
-              <td> {{card.benefit_content}}</td>
-              <td><v-btn>변경</v-btn></td>
+              <td class="px-2"> {{card.title}}</td>
+              <td class="px-2"> <v-img :src=card.img contain aspect-ratio=3 /></td>
+              <td class="px-2"> {{card.content}}</td>
+              <td class="px-2"> {{card.card_type}}</td>
+              <td class="px-2"> {{card.benefit_type}}</td>
+              <td class="px-2"> {{card.benefit_content}}</td>
+              <td>
+                <v-btn class="mx-2 my-1" small color="primary">편집</v-btn>
+                <v-btn class="mx-2 my-1" small color="error">삭제</v-btn>
+              </td>
             </tr>
           </table>
         </v-col>
       </v-row>
     </v-col>
-    <v-col cols="1"></v-col>
   </v-row>
 </template>
 

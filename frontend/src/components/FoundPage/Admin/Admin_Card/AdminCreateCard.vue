@@ -7,6 +7,9 @@
       <v-card-text>
         <v-container>
           <v-row>
+            <v-col cols="12">
+              <v-img :src="imgURL"></v-img>
+            </v-col>
             <v-col cols="12" sm="12" md="12">
               <v-file-input
                 v-model="card.img"
@@ -58,16 +61,16 @@
               <v-list-item-title><b>해외 결제 기능</b></v-list-item-title>
 
               <v-radio-group v-model="card.mastercard" row>
-                <v-radio label="MASTER" :value="true"> </v-radio>
-                <v-radio label="국내 전용" :value="false"> </v-radio>
+                <v-radio label="MASTER" value=true> </v-radio>
+                <v-radio label="국내 전용" value=false> </v-radio>
               </v-radio-group>
 
               <v-list-item-title><b>후불 교통 기능</b></v-list-item-title>
 
               <v-radio-group v-model="card.traficcard" row>
                 
-                <v-radio label="신청" :value="true"> </v-radio>
-                <v-radio label="신청안함" :value="false"> </v-radio>
+                <v-radio label="신청" value=true> </v-radio>
+                <v-radio label="신청안함" value=false> </v-radio>
               </v-radio-group>
             </v-col>
           </v-row>
@@ -117,16 +120,13 @@ export default {
   }),
   methods: {
     submit() {
+      console.log(this.card.img);
       const formData = new FormData();
       for (const key in this.card) {
         formData.append(key, this.card[key]);
       }
       formData.append('cardCredit', this.card.cardType==='credit');
       formData.append('cardCheck', this.card.cardType==='check');
-      
-      for(let entry of formData.entries()){
-        console.log(entry)
-      }
 
 
       axios
@@ -136,12 +136,21 @@ export default {
           },
         })
         .then((res) => {
-          console.log(res);
+          console.log(res.data);
+          if(res.data) alert('카드 등록에 성공하였습니다.');
+          else alert('카드 등록에 실패하였습니다.')
+          this.$router.go();
         })
         .catch((err) => {
           console.log(err);
+          alert('카드 등록에 실패하였습니다.')
         });
     },
   },
+  computed:{
+    imgURL:function(){
+      return this.card.img && URL.createObjectURL(this.card.img);
+    }
+  }
 };
 </script>
