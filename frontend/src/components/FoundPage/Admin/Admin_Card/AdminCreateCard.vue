@@ -5,7 +5,7 @@
         <span class="text-h5">User Profile</span>
       </v-card-title> -->
       <v-toolbar dark color="grey darken-3">
-          <v-toolbar-title>카드 선택</v-toolbar-title>
+          <v-toolbar-title>카드 추가</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon dark @click="dialog = false">
             <v-icon>mdi-close</v-icon>
