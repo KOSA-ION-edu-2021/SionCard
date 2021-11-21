@@ -17,9 +17,7 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "members")
-@Getter
-@Setter
-@ToString
+@Data
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class MembersDto {
 	@Id

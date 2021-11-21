@@ -97,8 +97,8 @@ export default {
     getPW(val1, val2){
       this.id = val1
       this.pwd = val2
-      console.log('id 변경값:', this.id)
-      console.log('pw 변경값:', this.pw)
+      //console.log('id 변경값:', this.id)
+      //console.log('pw 변경값:', this.pw)
     },
     // 1단계 본인인증
     CheckPassword() {
@@ -152,7 +152,7 @@ export default {
       //2 단계 : 비밀번호 변경
       getnewPW(val){
         this.newpwd = val
-        console.log(this.newpwd);
+        //console.log(this.newpwd);
       },
       changePW() {
        axios.post(this.$store.state.apihost + '/member/changepw',{password : this.newpwd},{
