@@ -12,8 +12,16 @@
               <v-row justify="space-between" class="text-h6">
                 <v-col cols="auto" class="font-weight-bold"> 대표 카드 </v-col>
 
-                <v-col cols="auto" class="text-subtitle-2">
-                  (XX 카드 || 카드번호 : abcd-efgh-ijkl-mnop))
+                <v-col cols="auto" class="text-subtitle-2"
+                v-if="getinfo.length>0"
+                >
+                    <v-img 
+                    :src="getinfo[0].img">
+                    </v-img>
+                </v-col>
+                <v-col cols="12" class="text-h6"
+                  v-else>
+                     가지고 있는 카드가 없습니다.
                 </v-col>
               </v-row>
               <v-row><v-divider></v-divider></v-row>
@@ -22,7 +30,7 @@
                 <v-col cols="auto" class="text-subtitle-1 font-weight-bold">
                   총 사용 금액
                 </v-col>
-                <v-col cols="auto"> {{usesum[0].sum_price}} </v-col>
+                <v-col cols="auto"> {{usesum[0].sum_price || 0 }} </v-col>
               </v-row>
               <!-- 좌측 하단 버튼 -->
               <v-row justify="center">
@@ -128,6 +136,10 @@ import axios from "axios";
 export default {
   name: "Mycardinfo",
   data: () => ({
+    cardinfo:[],
+    getinfo:[],
+    cardinfonum:"",
+    getinfonum:"",
     cards: [
       {
         use_date: "카드 이용 내역이 없습니다.",
@@ -150,10 +162,11 @@ export default {
     this.$store.commit("updateAuth", this.loginCheck_myMain);
     this.carduse();
     this.sumUse(); 
-
+    this.GetCard();
+    this.CardInfo();
   },
   computed(){
-
+    
   },
   methods: {
     carduse() {
@@ -183,21 +196,47 @@ export default {
           },
         })
         .then((res) => {
-            this.usesum = res.data.map(res=>{
-                res.sum_price+="원";
-                res.sum_stack+="원 적립";
-                res.sum_point+="포인트";
-                res.sum_discount+="원 할인";
-                res.sum_mileage+="마일리지";
-                return res;
-            });
-            console.log(this.usesum);
+            if(res.data.length>0){ 
+              this.usesum = res.data.map(res=>{
+                  res.sum_price+="원";
+                  res.sum_stack+="원 적립";
+                  res.sum_point+="포인트";
+                  res.sum_discount+="원 할인";
+                  res.sum_mileage+="마일리지";
+                  return res;
+              });
+            }
         })
         .catch((err) => {
           console.log(err);
         });
     },
-
+    CardInfo(){
+      axios.get(this.$store.state.apihost + "/api/card_info")
+        .then((res) => {
+             this.cardinfo = res.data.map((res) => {
+              res.id += "";
+              return res;
+            });
+            })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    GetCard(){
+      axios.get(this.$store.state.apihost + "/member/get_card",{
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("JSESSIONID")}`,
+          },
+        })
+        .then((res) => {
+            this.getinfo = res.data;
+        })
+        .catch((err) => {
+          this.num = 0;
+          console.log(err);
+        });
+    },
   },
 };
 </script>
