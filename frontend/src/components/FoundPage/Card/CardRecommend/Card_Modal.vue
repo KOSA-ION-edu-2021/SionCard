@@ -3,8 +3,7 @@
     <v-dialog
       v-model="dialog"
       transition="dialog-bottom-transition"
-      max-width="600px"
-      min-width="600px"
+      width="600px"
       ><!-- fullscreen 추가하면 모달창 화면 전체 -->
       <template v-slot:activator="{ on, attrs }">
         <v-hover v-slot="{hover}">
