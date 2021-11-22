@@ -21,7 +21,7 @@
                 </v-col>
                 <v-col cols="12" class="text-h6"
                   v-else>
-                     가지고 있는 카드가 없습니다.
+                     보유 중인 카드가 없습니다.
                 </v-col>
               </v-row>
               <v-row><v-divider></v-divider></v-row>

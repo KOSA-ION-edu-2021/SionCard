@@ -12,6 +12,7 @@
           hide-delimiters
           hide-delimiter-background
           class="mt-10 mb-10"
+          v-if="getinfo.length>0"
         >
           <!-- 이미지 -->
           <v-carousel-item
@@ -40,6 +41,17 @@
             </v-card>
           </v-carousel-item>
         </v-carousel>
+        <v-container v-else justify="center">
+
+          <v-sheet class="grey lighten-2 ma-10 text-h3 text-center">보유 중인 카드가 없습니다.</v-sheet>
+
+          <v-row justify="center" class="pa-5">
+            <v-col cols="auto">
+              <v-btn to="/cardapply" color="black" x-large class="white--text" elevation="">카드 신청</v-btn>
+            </v-col>
+          </v-row>
+
+        </v-container>
       </v-col>
       <v-col cols="1"></v-col>
     </v-row>
@@ -88,4 +100,5 @@ export default {
 </script>
 
 <style>
+
 </style>
